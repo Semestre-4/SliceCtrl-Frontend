@@ -23,6 +23,7 @@ import { RegistrarSaboresComponent } from './features/cardapio/sabores/registrar
 import { ListarIngredientesComponent } from './features/cardapio/ingredientes/listar-ingredientes/listar-ingredientes.component';
 import { RegistrarIngredientesComponent } from './features/cardapio/ingredientes/registrar-ingredientes/registrar-ingredientes.component';
 import { ListarPedidoComponent } from './features/pedidos/listar-pedido/listar-pedido.component';
+import { FuncionariosComponent } from './features/funcionarios/funcionarios.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ListarPedidoComponent } from './features/pedidos/listar-pedido/listar-p
     ListarSaboresComponent,
     RegistrarSaboresComponent,
     ListarIngredientesComponent,
-    RegistrarIngredientesComponent
+    RegistrarIngredientesComponent,
+    FuncionariosComponent
   ],
   imports: [
     BrowserModule,
