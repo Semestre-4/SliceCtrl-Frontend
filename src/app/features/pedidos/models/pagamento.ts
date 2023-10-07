@@ -1,5 +1,17 @@
 import { AbstractEntity } from "src/app/shared/models/abstract-entity";
+import { Pedido } from "./pedido";
+import { FormaDePagamento } from "src/app/shared/models/enums/forma-pagamento";
 
 export class Pagamento extends AbstractEntity{
-    
+    pedido: Pedido;
+    formaDePagamento: FormaDePagamento;
+    isPago: boolean;
+
+    constructor(pedido: Pedido, formaDePagamento: FormaDePagamento, isPago: boolean){
+        super();
+        this.pedido = pedido;
+        this.formaDePagamento = formaDePagamento;
+        this.isPago = isPago;
+    }
+
 }
