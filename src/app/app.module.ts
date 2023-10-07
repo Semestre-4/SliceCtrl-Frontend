@@ -24,6 +24,7 @@ import { ListarIngredientesComponent } from './features/cardapio/ingredientes/li
 import { RegistrarIngredientesComponent } from './features/cardapio/ingredientes/registrar-ingredientes/registrar-ingredientes.component';
 import { ListarPedidoComponent } from './features/pedidos/listar-pedido/listar-pedido.component';
 import { FuncionariosComponent } from './features/funcionarios/funcionarios.component';
+import { GeneralStatsComponent } from './features/dashboard/components/general-stats/general-stats.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { FuncionariosComponent } from './features/funcionarios/funcionarios.comp
     RegistrarSaboresComponent,
     ListarIngredientesComponent,
     RegistrarIngredientesComponent,
-    FuncionariosComponent
+    FuncionariosComponent,
+    GeneralStatsComponent
   ],
   imports: [
     BrowserModule,
