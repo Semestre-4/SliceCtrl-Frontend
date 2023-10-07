@@ -1,7 +1,83 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ListarSaboresComponent } from './features/cardapio/sabores/listar-sabores/listar-sabores.component';
+import { RegistrarSaboresComponent } from './features/cardapio/sabores/registrar-sabores/registrar-sabores.component';
+import { ListarIngredientesComponent } from './features/cardapio/ingredientes/listar-ingredientes/listar-ingredientes.component';
+import { RegistrarIngredientesComponent } from './features/cardapio/ingredientes/registrar-ingredientes/registrar-ingredientes.component';
+import { ListarPizzasComponent } from './features/cardapio/pizzas/listar-pizzas/listar-pizzas.component';
+import { RegistrarPizzasComponent } from './features/cardapio/pizzas/registrar-pizzas/registrar-pizzas.component';
+import { ListarProdutosComponent } from './features/cardapio/produtos/listar-produtos/listar-produtos.component';
+import { RegistrarProdutosComponent } from './features/cardapio/produtos/registrar-produtos/registrar-produtos.component';
+import { ListarClientesComponent } from './features/clientes/listar-clientes/listar-clientes.component';
+import { RegistarClientesComponent } from './features/clientes/registar-clientes/registar-clientes.component';
+import { ListarPedidoComponent } from './features/pedidos/listar-pedido/listar-pedido.component';
+import { PrePedidoComponent } from './features/pedidos/pre-pedido/pre-pedido.component';
+import { MenuPedidoComponent } from './features/pedidos/menu-pedido/menu-pedido.component';
+import { SaboresPedidoComponent } from './features/pedidos/sabores-pedido/sabores-pedido.component';
+import { FinalizarPedidoComponent } from './features/pedidos/finalizar-pedido/finalizar-pedido.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+  path: '',
+  redirectTo: '/dashboard',
+  pathMatch: 'full'
+},
+{
+  path: 'dashboard', 
+  component: DashboardComponent
+},
+{
+  path: 'cardapio',
+  children: [
+    {
+      path: 'sabores',
+      children: [
+        { path: 'listar', component: ListarSaboresComponent },
+        { path: 'register', component: RegistrarSaboresComponent }
+      ]
+    },
+    {
+      path: 'ingredientes',
+      children: [
+        { path: 'listar', component: ListarIngredientesComponent },
+        { path: 'register', component: RegistrarIngredientesComponent }
+      ]
+    },
+    {
+      path: 'pizzas',
+      children: [
+        { path: 'listar', component: ListarPizzasComponent },
+        { path: 'register', component: RegistrarPizzasComponent }
+      ]
+    },
+    {
+      path: 'produtos',
+      children: [
+        { path: 'listar', component: ListarProdutosComponent },
+        { path: 'register', component: RegistrarProdutosComponent }
+      ]
+    }
+  ]
+},
+{
+  path: 'pedidos',
+  children: [
+    { path: 'listar-pedido', component: ListarPedidoComponent },
+    { path: 'pre-pedido', component: PrePedidoComponent },
+    { path: 'menu-pedido/:id', component: MenuPedidoComponent },
+    { path: 'sabores-pedido/:id', component: SaboresPedidoComponent },
+    { path: 'finalizar-pedido/:id', component: FinalizarPedidoComponent }
+  ]
+},
+{
+  path: 'clientes',
+  children: [
+    { path: 'listar', component: ListarClientesComponent },
+    { path: 'register', component: RegistarClientesComponent }
+  ]
+}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
