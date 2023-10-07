@@ -5,8 +5,18 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class StatusPedidoPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(status: string): string {
+    switch (status) {
+      case 'PENDENTE':
+        return 'Pendente';
+      case 'PAGO':
+        return 'Pago';
+      case 'CANCELADO':
+        return 'Cancelado';
+      case 'TODOS':
+        return 'Todos';
+      default:
+        return 'Status inválido';
+    }
   }
-
 }
