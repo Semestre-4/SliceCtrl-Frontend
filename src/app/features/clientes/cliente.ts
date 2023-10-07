@@ -10,13 +10,13 @@ export class Cliente extends AbstractEntity {
     pedidos: Pedido[];
     enderecos: Endereco[];
 
-    constructor() {
+    constructor(nome: string, cpf: string, telefone: string, email: string, pedidos: Pedido[], enderecos: Endereco[]) {
         super();
-        this.nome = '';
-        this.cpf = '';
-        this.telefone = '';
-        this.email = '';
-        this.pedidos = [];
-        this.enderecos = [];
+        this.nome = nome;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.email = email;
+        this.pedidos = pedidos;
+        this.enderecos = enderecos;
     }
 }

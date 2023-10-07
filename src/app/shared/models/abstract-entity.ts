@@ -4,11 +4,11 @@ export class AbstractEntity {
   edicao: Date;
   ativo: boolean;
 
-    constructor() {
-        this.id = 0;
-        this.cadastro = new Date();
-        this.edicao = new Date();
-        this.ativo = true;
-    }
+  constructor() {
+    this.id = 0;
+    this.cadastro = new Date();
+    this.edicao = new Date();
+    this.ativo = true;
+  }
 
 }

@@ -10,12 +10,12 @@ export class PedidoPizza extends AbstractEntity{
     qtdePedida: number;
     observacao: string;
 
-    constructor(){
+    constructor(pizza: Pizzas, sabores: Sabores[], pedido: Pedido, qtdePedida: number, observacao: string){
         super();
-        this.pizza = new Pizzas();
-        this.sabores = [];
-        this.pedido = new Pedido();
-        this.qtdePedida = 0;
-        this.observacao = '';
+        this.pizza = pizza;
+        this.sabores = sabores;
+        this.pedido = pedido;
+        this.qtdePedida = qtdePedida;
+        this.observacao = observacao;
     }
 }

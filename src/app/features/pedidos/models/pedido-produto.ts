@@ -7,10 +7,10 @@ export class PedidoProduto extends AbstractEntity{
     pedido: Pedido;
     qtdePedida: number;
 
-    constructor(){
+    constructor(produto: Produtos, pedido: Pedido, qtdePedida: number){
         super();
-        this.produto = new Produtos();
-        this.pedido = new Pedido();
-        this.qtdePedida = 0;
+        this.produto = produto;
+        this.pedido = pedido;
+        this.qtdePedida = qtdePedida;
     }
 }
