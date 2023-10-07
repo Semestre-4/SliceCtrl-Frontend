@@ -8,6 +8,21 @@ import { StatusPedidoPipe } from './shared/pipes/status-pedido/status-pedido.pip
 import { TamanhoPizzaPipe } from './shared/pipes/tamanho-pizza/tamanho-pizza.pipe';
 import { FormatarPrecoPipe } from './shared/pipes/formatar-preco/formatar-preco.pipe';
 import { FormatarDataPipe } from './shared/pipes/formatar-data/formatar-data.pipe';
+import { PrePedidoComponent } from './features/pedidos/pre-pedido/pre-pedido.component';
+import { MenuPedidoComponent } from './features/pedidos/menu-pedido/menu-pedido.component';
+import { FinalizarPedidoComponent } from './features/pedidos/finalizar-pedido/finalizar-pedido.component';
+import { SaboresPedidoComponent } from './features/pedidos/sabores-pedido/sabores-pedido.component';
+import { ListarClientesComponent } from './features/clientes/listar-clientes/listar-clientes.component';
+import { RegistarClientesComponent } from './features/clientes/registar-clientes/registar-clientes.component';
+import { ListarProdutosComponent } from './features/cardapio/produtos/listar-produtos/listar-produtos.component';
+import { RegistrarProdutosComponent } from './features/cardapio/produtos/registrar-produtos/registrar-produtos.component';
+import { ListarPizzasComponent } from './features/cardapio/pizzas/listar-pizzas/listar-pizzas.component';
+import { RegistrarPizzasComponent } from './features/cardapio/pizzas/registrar-pizzas/registrar-pizzas.component';
+import { ListarSaboresComponent } from './features/cardapio/sabores/listar-sabores/listar-sabores.component';
+import { RegistrarSaboresComponent } from './features/cardapio/sabores/registrar-sabores/registrar-sabores.component';
+import { ListarIngredientesComponent } from './features/cardapio/ingredientes/listar-ingredientes/listar-ingredientes.component';
+import { RegistrarIngredientesComponent } from './features/cardapio/ingredientes/registrar-ingredientes/registrar-ingredientes.component';
+import { ListarPedidoComponent } from './features/pedidos/listar-pedido/listar-pedido.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +31,21 @@ import { FormatarDataPipe } from './shared/pipes/formatar-data/formatar-data.pip
     TamanhoPizzaPipe,
     StatusPedidoPipe,
     FormatarPrecoPipe,
-    FormatarDataPipe
+    ListarPedidoComponent,
+    PrePedidoComponent,
+    MenuPedidoComponent,
+    FinalizarPedidoComponent,
+    SaboresPedidoComponent,
+    ListarClientesComponent,
+    RegistarClientesComponent,
+    ListarProdutosComponent,
+    RegistrarProdutosComponent,
+    ListarPizzasComponent,
+    RegistrarPizzasComponent,
+    ListarSaboresComponent,
+    RegistrarSaboresComponent,
+    ListarIngredientesComponent,
+    RegistrarIngredientesComponent
   ],
   imports: [
     BrowserModule,
