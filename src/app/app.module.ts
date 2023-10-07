@@ -25,6 +25,9 @@ import { RegistrarIngredientesComponent } from './features/cardapio/ingredientes
 import { ListarPedidoComponent } from './features/pedidos/listar-pedido/listar-pedido.component';
 import { FuncionariosComponent } from './features/funcionarios/funcionarios.component';
 import { GeneralStatsComponent } from './features/dashboard/components/general-stats/general-stats.component';
+import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -49,11 +52,13 @@ import { GeneralStatsComponent } from './features/dashboard/components/general-s
     ListarIngredientesComponent,
     RegistrarIngredientesComponent,
     FuncionariosComponent,
-    GeneralStatsComponent
+    GeneralStatsComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

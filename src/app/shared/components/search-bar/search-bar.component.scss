@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3&display=swap');
+
+.search-container {
+  position: relative;
+  width: 373px;
+  height: 46px;
+}
+
+.search-input {
+  position: relative;
+  padding: 8px 21px 8px 22px;
+  width: 373px;
+  height: 46px;
+  border-radius: 8px;
+  border: 1px solid #ebebeb;
+  background: #fafafa;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #aaa;
+}
+
+.search-input::placeholder {
+  color: #999;
+  font-family: 'Poppins', sans-serif;  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.bi-search {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: #f6725c;
+  font-size: 20px;
+  font-weight: bolder;
+  cursor: pointer;
+}
