@@ -27,6 +27,8 @@ import { FuncionariosComponent } from './features/funcionarios/funcionarios.comp
 import { GeneralStatsComponent } from './features/dashboard/components/general-stats/general-stats.component';
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MenuChipsComponent } from './features/pedidos/components/menu-chips/menu-chips.component';
+import { EntregaChipsComponent } from './features/pedidos/components/entrega-chips/entrega-chips.component';
 
 
 @NgModule({
@@ -53,7 +55,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RegistrarIngredientesComponent,
     FuncionariosComponent,
     GeneralStatsComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    MenuChipsComponent,
+    EntregaChipsComponent
   ],
   imports: [
     BrowserModule,
