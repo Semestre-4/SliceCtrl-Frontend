@@ -1,0 +1,58 @@
+.header h1{
+    color: var(--gray-800, #212B36);
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 120% */
+}
+
+.body{
+    display: flex;
+    flex-direction: column;
+}
+
+app-new-pedido{
+    align-self: flex-end;
+}
+
+.table-container {
+    width: 1088px;
+    height: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+th,
+td {
+    padding: 16px;
+    text-align: center;
+    font-weight: 300;
+    border-bottom: 1px solid #ddd;
+}
+
+thead tr{
+    background-color: #165BAA !important;
+    color: #FFF;
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-style: normal;
+    line-height: 24px;
+}
+
+thead th {
+    border-right: 1px solid white;
+}
+
+tbody{
+    border: none;
+}
+
+tbody tr:hover {
+    background-color: #f5f5f5;
+}
