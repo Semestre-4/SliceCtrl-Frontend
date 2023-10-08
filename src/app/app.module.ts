@@ -29,6 +29,12 @@ import { SearchBarComponent } from './shared/components/search-bar/search-bar.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuChipsComponent } from './features/pedidos/components/menu-chips/menu-chips.component';
 import { EntregaChipsComponent } from './features/pedidos/components/entrega-chips/entrega-chips.component';
+import { PedidoService } from './features/pedidos/service/pedido.service';
+import { HttpClientModule } from '@angular/common/http';
+import { NewPedidoComponent } from './features/pedidos/components/new-pedido/new-pedido.component';
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { ListarFuncionariosComponent } from './features/funcionarios/listar-funcionarios/listar-funcionarios.component';
+import { RegisterFuncionariosComponent } from './features/funcionarios/register-funcionarios/register-funcionarios.component';
 
 
 @NgModule({
@@ -50,6 +56,7 @@ import { EntregaChipsComponent } from './features/pedidos/components/entrega-chi
     ListarPizzasComponent,
     RegistrarPizzasComponent,
     ListarSaboresComponent,
+    FormatarDataPipe,
     RegistrarSaboresComponent,
     ListarIngredientesComponent,
     RegistrarIngredientesComponent,
@@ -57,14 +64,18 @@ import { EntregaChipsComponent } from './features/pedidos/components/entrega-chi
     GeneralStatsComponent,
     SearchBarComponent,
     MenuChipsComponent,
-    EntregaChipsComponent
-  ],
+    EntregaChipsComponent,
+    NewPedidoComponent,
+    SidebarComponent,
+    ListarFuncionariosComponent,
+    RegisterFuncionariosComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [PedidoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
