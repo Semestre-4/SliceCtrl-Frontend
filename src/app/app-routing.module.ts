@@ -16,6 +16,8 @@ import { MenuPedidoComponent } from './features/pedidos/menu-pedido/menu-pedido.
 import { SaboresPedidoComponent } from './features/pedidos/sabores-pedido/sabores-pedido.component';
 import { FinalizarPedidoComponent } from './features/pedidos/finalizar-pedido/finalizar-pedido.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { ListarFuncionariosComponent } from './features/funcionarios/listar-funcionarios/listar-funcionarios.component';
+import { RegisterFuncionariosComponent } from './features/funcionarios/register-funcionarios/register-funcionarios.component';
 
 const routes: Routes = [
   {
@@ -75,6 +77,13 @@ const routes: Routes = [
   children: [
     { path: 'listar', component: ListarClientesComponent },
     { path: 'register', component: RegistarClientesComponent }
+  ]
+},
+{
+  path: 'funcionarios',
+  children: [
+    { path: 'listar', component: ListarFuncionariosComponent },
+    { path: 'register', component: RegisterFuncionariosComponent }
   ]
 }
 ];

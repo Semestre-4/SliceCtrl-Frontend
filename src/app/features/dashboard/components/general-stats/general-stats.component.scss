@@ -1,0 +1,49 @@
+.box {
+  border-radius: 12px;
+  background: #F6F6F6;
+  width: 156px;
+  height: 136px;
+  padding: 12px;
+  gap: 15px;
+}
+
+i {
+  font-size: 23px;
+  color: #165BAA;
+  margin-left: 12px;
+  margin-top: 20px;
+}
+
+.bi::before {
+    margin-top: 12px;
+}
+
+.circle-background {
+  width: 48px;
+  height: 48px;
+  background-color: #d6e5f7;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.title {
+  color: var(--Gray-7, #2a282f);
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  margin: 0;
+}
+
+.stats {
+  color: #f6725c;
+  /* Title 1 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.64px;
+}

@@ -1,1 +1,38 @@
-<p>listar-pedido works!</p>
+<div class="header">
+    <h1>Pedidos</h1>
+    <hr>
+</div>
+
+<div class="body">
+<app-new-pedido></app-new-pedido>
+
+<div class="table table-sm">
+    <table>
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Funcionario</th>
+          <th>Data</th>
+          <th>Forma de Retirada</th>
+          <th>Status</th>
+          <th>Valor Total</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data">
+          <td>{{ item.cliente.nome }}</td>
+          <td>{{ item.funcionario.nome }}</td>
+          <td>{{ item.cadastro | formatarData }}</td>
+          <td>{{ item.formaDeEntrega }}</td>
+          <td>{{ item.status }}</td>
+          <td>{{ item.valorPedido }}</td>
+          <td class="d-flex gap-1">
+            <button class="btn btn-primary" (click)="editarPedido(item.id)">Editar</button>
+            <button class="btn btn-danger" (click)="excluirPedido(item.id)">Excluir</button>
+            <button class="btn btn-success" (click)="visualizarPedido(item.id)">Visualizar</button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> 

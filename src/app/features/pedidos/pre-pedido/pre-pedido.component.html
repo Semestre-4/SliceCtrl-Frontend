@@ -1,1 +1,85 @@
-<p>pre-pedido works!</p>
+<div class="header">
+  <h1>Iniciar Pedido</h1>
+  <hr/>
+</div>
+
+<form class="needs-validation" novalidate="">
+  <div class="row g-3">
+    <div class="col-md-4">
+      <label for="cpfCliente" class="form-label">CPF do Cliente</label>
+      <input
+        type="text"
+        class="form-control"
+        id="cpfCliente"
+        placeholder=""
+        value=""
+        required=""
+      />
+      <div class="invalid-feedback">Campo CPF é obrigatório.</div>
+    </div>
+
+    <div class="col-md-3">
+      <label for="nomeCliente" class="form-label">Nome do Cliente</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nomeCliente"
+        placeholder=""
+        value=""
+        required=""
+        disabled
+      />
+    </div>
+
+    <div class="col-md-4 d-flex flex-row align-items-end gap-1 mb-1">
+      <button class="btn btn-sm" type="submit">
+        Cadastrar Novo Cliente
+      </button>
+      <button class="btn btn-sm" type="submit">
+        Editar dados Cliente
+      </button>
+    </div>
+  </div>
+
+  <div class="row g-3 mt-2">
+    <div class="col-md-4">
+      <label for="cpfFunc" class="form-label">CPF do Funcionario</label>
+      <input
+        type="text"
+        class="form-control"
+        id="cpfFunc"
+        placeholder=""
+        value=""
+        required=""
+      />
+      <div class="invalid-feedback">Campo CPF é obrigatório.</div>
+    </div>
+
+    <div class="col-md-3">
+      <label for="nomeFunc" class="form-label">Nome do Funcionario</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nomeFunc"
+        placeholder=""
+        value=""
+        required=""
+        disabled
+      />
+    </div>
+  </div>
+
+  <div class="row g-3 mt-2">
+    <div class="col-md-3">
+        <label for="formaRetirada" class="form-label">Forma De Retirada</label>
+        <select class="form-select" id="formaRetirada" required="">
+          <option value="">Escolha ...</option>
+          <option>Retirada</option>
+        </select>
+        <div class="invalid-feedback">
+          Forma de retirada é obrigatório.
+        </div>
+      </div>
+  </div>
+
+</form>

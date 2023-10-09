@@ -24,6 +24,18 @@ import { ListarIngredientesComponent } from './features/cardapio/ingredientes/li
 import { RegistrarIngredientesComponent } from './features/cardapio/ingredientes/registrar-ingredientes/registrar-ingredientes.component';
 import { ListarPedidoComponent } from './features/pedidos/listar-pedido/listar-pedido.component';
 import { FuncionariosComponent } from './features/funcionarios/funcionarios.component';
+import { GeneralStatsComponent } from './features/dashboard/components/general-stats/general-stats.component';
+import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MenuChipsComponent } from './features/pedidos/components/menu-chips/menu-chips.component';
+import { EntregaChipsComponent } from './features/pedidos/components/entrega-chips/entrega-chips.component';
+import { PedidoService } from './features/pedidos/service/pedido.service';
+import { HttpClientModule } from '@angular/common/http';
+import { NewPedidoComponent } from './features/pedidos/components/new-pedido/new-pedido.component';
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { ListarFuncionariosComponent } from './features/funcionarios/listar-funcionarios/listar-funcionarios.component';
+import { RegisterFuncionariosComponent } from './features/funcionarios/register-funcionarios/register-funcionarios.component';
+
 
 @NgModule({
   declarations: [
@@ -44,16 +56,26 @@ import { FuncionariosComponent } from './features/funcionarios/funcionarios.comp
     ListarPizzasComponent,
     RegistrarPizzasComponent,
     ListarSaboresComponent,
+    FormatarDataPipe,
     RegistrarSaboresComponent,
     ListarIngredientesComponent,
     RegistrarIngredientesComponent,
-    FuncionariosComponent
-  ],
+    FuncionariosComponent,
+    GeneralStatsComponent,
+    SearchBarComponent,
+    MenuChipsComponent,
+    EntregaChipsComponent,
+    NewPedidoComponent,
+    SidebarComponent,
+    ListarFuncionariosComponent,
+    RegisterFuncionariosComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [PedidoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
