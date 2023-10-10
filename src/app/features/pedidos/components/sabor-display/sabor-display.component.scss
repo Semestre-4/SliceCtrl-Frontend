@@ -1,0 +1,55 @@
+.container {
+    display: flex;
+    width: 200px;
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    border-radius: 12px;
+    background: var(--Gray-2, #F7F6FA);
+    height: 150px;
+}
+
+.id {
+    border-radius: 4px;
+    background: #165BAA;
+    padding: 4px 8px;
+    color: #fff;
+}
+
+.p-name {
+    color: #2A282F;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.p-price {
+    color: #A8A6AC;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+.container .add {
+    align-self: center;
+    border-radius: 8px;
+    background: #F6725C;
+    color: #FFF;
+    text-align: center;
+    border: none;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.56px;
+    width: 161px;
+    height: 26px;
+}
