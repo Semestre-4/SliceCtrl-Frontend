@@ -7,5 +7,5 @@ import { Categoria } from 'src/app/shared/models/enums/categoria';
   styleUrls: ['./menu-pedido.component.scss']
 })
 export class MenuPedidoComponent {
-
+  @Input() options: string[] = [];
 }

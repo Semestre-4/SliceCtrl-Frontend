@@ -73,7 +73,9 @@ import { RegisterFuncionariosComponent } from './features/funcionarios/register-
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [PedidoService],
   bootstrap: [AppComponent]
