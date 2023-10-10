@@ -35,6 +35,8 @@ import { NewPedidoComponent } from './features/pedidos/components/new-pedido/new
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { ListarFuncionariosComponent } from './features/funcionarios/listar-funcionarios/listar-funcionarios.component';
 import { RegisterFuncionariosComponent } from './features/funcionarios/register-funcionarios/register-funcionarios.component';
+import { ProductDisplayComponent } from './features/pedidos/components/product-display/product-display.component';
+import { SaborDisplayComponent } from './features/pedidos/components/sabor-display/sabor-display.component';
 
 
 @NgModule({
@@ -68,12 +70,16 @@ import { RegisterFuncionariosComponent } from './features/funcionarios/register-
     NewPedidoComponent,
     SidebarComponent,
     ListarFuncionariosComponent,
-    RegisterFuncionariosComponent],
+    RegisterFuncionariosComponent,
+    ProductDisplayComponent,
+    SaborDisplayComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [PedidoService],
   bootstrap: [AppComponent]
