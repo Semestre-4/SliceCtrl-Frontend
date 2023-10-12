@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 import { PedidoService } from '../service/pedido.service';
 import { ClienteService } from '../../clientes/service/cliente.service';
 import { FuncionarioService } from '../../funcionarios/service/funcionario.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pre-pedido',
@@ -18,7 +19,7 @@ import { FuncionarioService } from '../../funcionarios/service/funcionario.servi
 export class PrePedidoComponent implements OnInit {
 
   formasDeRetirada = Object.values(FormaDeEntrega);
-  selectedFormaDeRetirada: FormaDeEntrega = FormaDeEntrega.CONSUMO_LOCAL;
+  selectedFormaDeRetirada: string = '';
 
   pedido: Pedido =
     new Pedido(
@@ -27,35 +28,56 @@ export class PrePedidoComponent implements OnInit {
       [], [],
       new Pagamento(),
       0, 0, 0, Status.PENDENTE,
-      FormaDeEntrega.CONSUMO_LOCAL);
-   nomeCLiente: string = '';
-   nomeFuncionario: string = ''; 
-   
-   constructor(private pedidoService: PedidoService,
+      FormaDeEntrega.LOCAL);
+  nomeCLiente: string = '';
+  nomeFuncionario: string = '';
+
+  constructor(private pedidoService: PedidoService,
     private clienteService: ClienteService,
-    private funcionarioService: FuncionarioService) { }
+    private funcionarioService: FuncionarioService,
+    private router: Router) { }
 
   ngOnInit(): void {
-  
+
   }
 
   getClientByCPF() {
     const cpf = this.pedido.cliente.cpf;
-      this.clienteService.getClientesByCPF(cpf).subscribe({
-        next: cliente => {
-          if (cliente) {
-            this.pedido.cliente = cliente;
-          }
-        },
-        error: erro => {
-          console.log(erro);
+    this.clienteService.getClientesByCPF(cpf).subscribe({
+      next: cliente => {
+        if (cliente) {
+          this.pedido.cliente = cliente;
         }
-      });
+      },
+      error: erro => {
+        console.log(erro);
+      }
+    });
   }
 
-  submitForm(form: NgForm) {
-    console.log(form);
+  getFuncByCPF() {
+    const cpf = this.pedido.funcionario.cpf;
+    this.funcionarioService.getFuncionarioByCPF(cpf).subscribe({
+      next: funcionario => {
+        if (funcionario) {
+          this.pedido.funcionario = funcionario;
+        }
+      },
+      error: erro => {
+        console.log(erro);
+      }
+    });
   }
 
+  submitForm(form: NgForm): void {
+    if (form.valid) {
+      this.pedidoService.abrirPedido(this.pedido.cliente.id, this.pedido.funcionario.id,this.selectedFormaDeRetirada)
+        .subscribe({
+          error: (erro) => {
+           
+          }
+        });
+    }
+  }
 }
 
