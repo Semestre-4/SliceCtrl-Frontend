@@ -50,6 +50,7 @@
         id="cpfFunc"
         name="cpfFunc"
         [(ngModel)]="pedido.funcionario.cpf"
+        (ngModelChange)="getFuncByCPF()"
         required
       />
       <div class="invalid-feedback">Campo CPF é obrigatório.</div>

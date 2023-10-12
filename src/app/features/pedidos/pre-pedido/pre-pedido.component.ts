@@ -45,12 +45,10 @@ export class PrePedidoComponent implements OnInit {
         next: cliente => {
           if (cliente) {
             this.pedido.cliente = cliente;
-          } else {
-            // Handle the case when no client is found for the given CPF
           }
         },
         error: erro => {
-          // Handle the error (e.g., display an error message)
+          console.log(erro);
         }
       });
   }
