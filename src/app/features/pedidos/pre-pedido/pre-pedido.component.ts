@@ -120,6 +120,9 @@ export class PrePedidoComponent implements OnInit {
             }
             }
         });
+    }else{
+      this.mensagem = 'Preencha todos os campos';
+      this.isErro = true;
     }
   }
 }
