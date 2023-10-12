@@ -13,11 +13,12 @@
         id="cpfCliente"
         name="cpfCliente"
         [(ngModel)]="pedido.cliente.cpf"
+        (ngModelChange)="getClientByCPF()"
         required
       />
       <div class="invalid-feedback">Campo CPF é obrigatório.</div>
     </div>
-
+    
     <div class="col-md-3">
       <label for="nomeCliente" class="form-label">Nome do Cliente</label>
       <input

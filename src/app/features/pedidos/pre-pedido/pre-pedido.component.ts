@@ -7,6 +7,8 @@ import { Status } from 'src/app/shared/models/enums/status-pedido';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 import { NgForm } from '@angular/forms';
 import { PedidoService } from '../service/pedido.service';
+import { ClienteService } from '../../clientes/service/cliente.service';
+import { FuncionarioService } from '../../funcionarios/service/funcionario.service';
 
 @Component({
   selector: 'app-pre-pedido',
@@ -29,10 +31,28 @@ export class PrePedidoComponent implements OnInit {
    nomeCLiente: string = '';
    nomeFuncionario: string = ''; 
    
-   constructor(private pedidoService: PedidoService) { }
+   constructor(private pedidoService: PedidoService,
+    private clienteService: ClienteService,
+    private funcionarioService: FuncionarioService) { }
 
   ngOnInit(): void {
-   
+  
+  }
+
+  getClientByCPF() {
+    const cpf = this.pedido.cliente.cpf;
+      this.clienteService.getClientesByCPF(cpf).subscribe({
+        next: cliente => {
+          if (cliente) {
+            this.pedido.cliente = cliente;
+          } else {
+            // Handle the case when no client is found for the given CPF
+          }
+        },
+        error: erro => {
+          // Handle the error (e.g., display an error message)
+        }
+      });
   }
 
   submitForm(form: NgForm) {
