@@ -4,6 +4,11 @@
 </div>
 
 <form class="needs-validation" #pedidoForm="ngForm" (ngSubmit)="submitForm(pedidoForm)">
+  <div [ngClass]="{
+    'alert alert-success':'!isErro',
+    'alert alert-danger':'isErro'}" *ngIf="mensagem" role="alert">
+    {{mensagem}}
+  </div>
   <div class="row g-3">
     <div class="col-md-4">
       <label for="cpfCliente" class="form-label">CPF do Cliente</label>
@@ -16,7 +21,6 @@
         (ngModelChange)="getClientByCPF()"
         required
       />
-      <div class="invalid-feedback">Campo CPF é obrigatório.</div>
     </div>
     
     <div class="col-md-3">
@@ -53,7 +57,6 @@
         (ngModelChange)="getFuncByCPF()"
         required
       />
-      <div class="invalid-feedback">Campo CPF é obrigatório.</div>
     </div>
 
     <div class="col-md-3">
@@ -76,15 +79,13 @@
         <option value="" disabled>Escolha ...</option>
         <option *ngFor="let forma of formasDeRetirada" [value]="forma">{{ forma }}</option>
       </select>
-      <div class="invalid-feedback">
-        Forma de retirada é obrigatória.
-      </div>
     </div>
   </div>
   
 
   <div class="actions d-flex flex-row gap-1">
+  
     <button class="btn btn-primary" routerLink="/pedidos/listar-pedido">Cancelar</button>
-    <button class="btn btn-secondary" type="submit">Continuar</button>
+    <button class="btn btn-secondary" type="submit" >Continuar</button>
   </div>
 </form>
