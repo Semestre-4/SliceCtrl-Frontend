@@ -1,5 +1,5 @@
 export enum FormaDeEntrega{
-    ENTREGA,
-    RETIRADA,
-    CONSUMO_LOCAL
+    ENTREGA = "Entrega",
+    RETIRADA = "Retirada",
+    CONSUMO_LOCAL = "Consumo Local"
 }
