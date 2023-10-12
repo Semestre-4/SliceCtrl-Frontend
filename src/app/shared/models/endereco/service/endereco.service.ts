@@ -31,7 +31,7 @@ export class EnderecoService {
   }
 
   edit(endereco: Endereco): Observable<HttpStatusCode>{
-    return this.http.put<HttpStatusCode>(`${this.baseURL}`, endereco);
+    return this.http.put<HttpStatusCode>(`${this.baseURL}/${endereco.id}`, endereco);
   }
 
   delete(id: number): Observable<HttpStatusCode>{
