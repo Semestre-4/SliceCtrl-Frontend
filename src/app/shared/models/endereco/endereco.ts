@@ -1,5 +1,5 @@
 import { Cliente } from "src/app/features/clientes/cliente";
-import { AbstractEntity } from "./abstract-entity";
+import { AbstractEntity } from "../abstract-entity";
 
 export class Endereco extends AbstractEntity{
 
