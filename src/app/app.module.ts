@@ -37,6 +37,7 @@ import { ListarFuncionariosComponent } from './features/funcionarios/listar-func
 import { RegisterFuncionariosComponent } from './features/funcionarios/register-funcionarios/register-funcionarios.component';
 import { ProductDisplayComponent } from './features/pedidos/components/product-display/product-display.component';
 import { SaborDisplayComponent } from './features/pedidos/components/sabor-display/sabor-display.component';
+import { FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -78,8 +79,7 @@ import { SaborDisplayComponent } from './features/pedidos/components/sabor-displ
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule
+    FormsModule
   ],
   providers: [PedidoService],
   bootstrap: [AppComponent]
