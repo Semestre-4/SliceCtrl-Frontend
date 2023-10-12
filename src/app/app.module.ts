@@ -23,7 +23,6 @@ import { RegistrarSaboresComponent } from './features/cardapio/sabores/registrar
 import { ListarIngredientesComponent } from './features/cardapio/ingredientes/listar-ingredientes/listar-ingredientes.component';
 import { RegistrarIngredientesComponent } from './features/cardapio/ingredientes/registrar-ingredientes/registrar-ingredientes.component';
 import { ListarPedidoComponent } from './features/pedidos/listar-pedido/listar-pedido.component';
-import { FuncionariosComponent } from './features/funcionarios/funcionarios.component';
 import { GeneralStatsComponent } from './features/dashboard/components/general-stats/general-stats.component';
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -63,7 +62,6 @@ import { FormsModule} from '@angular/forms';
     RegistrarSaboresComponent,
     ListarIngredientesComponent,
     RegistrarIngredientesComponent,
-    FuncionariosComponent,
     GeneralStatsComponent,
     SearchBarComponent,
     MenuChipsComponent,
