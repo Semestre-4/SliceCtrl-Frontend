@@ -37,6 +37,8 @@ import { RegisterFuncionariosComponent } from './features/funcionarios/register-
 import { ProductDisplayComponent } from './features/pedidos/components/product-display/product-display.component';
 import { SaborDisplayComponent } from './features/pedidos/components/sabor-display/sabor-display.component';
 import { FormsModule} from '@angular/forms';
+import { ProdutosService } from './features/cardapio/produtos/service/produtos.service';
+import { PizzasService } from './features/cardapio/pizzas/service/pizzas.service';
 
 
 @NgModule({
@@ -79,7 +81,7 @@ import { FormsModule} from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [PedidoService],
+  providers: [PedidoService,ProdutosService,PizzasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

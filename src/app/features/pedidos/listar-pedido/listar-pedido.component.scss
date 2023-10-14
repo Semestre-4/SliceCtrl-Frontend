@@ -20,45 +20,61 @@ padding: 10px;
 
 app-new-pedido{
     align-self: flex-end;
+    margin-bottom: 8px;
 }
 
-.table-container {
-    width: 1088px;
-    height: 100%;
-}
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      
+      th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        font-weight: 500;
+      }
+      
+      th {
+        background: #165BAA;
+        color: #fff;
+    }
+      
+      tbody tr:nth-child(even) {
+        background-color: #f5f5f5;
+      }
+    }
+    
+    .badge {
+      background-color: #5cb85c;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+    }
+    
+    .btn-link {
+      color: #007bff;
+      text-decoration: none;
+      cursor: pointer;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  
+  .text-badge-yellow{
+    background-color: #fbf0da;
+    color: #73510d;
+  }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    margin-top: 30px;
-}
+  .text-badge-green{
+    background-color: #d6f0e0;
+    color: #0d6832;
+  }
 
-th,
-td {
-    padding: 16px;
-    text-align: center;
-    font-weight: 300;
-    border-bottom: 1px solid #ddd;
-}
+  .text-badge-red{
+    background-color: #f0d6da;
+    color: #731d1d;
+  }
 
-thead tr{
-    background-color: #165BAA !important;
-    color: #FFF;
-    font-family: 'Poppins';
-    font-size: 16px;
-    font-style: normal;
-    line-height: 24px;
-}
-
-thead th {
-    border-right: 1px solid white;
-}
-
-tbody{
-    border: none;
-}
-
-tbody tr:hover {
-    background-color: #f5f5f5;
-}

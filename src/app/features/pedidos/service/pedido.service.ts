@@ -28,19 +28,19 @@ export class PedidoService {
   }
 
   getPedidosByFormaDeEntrega(formaDeEntrega: string): Observable<Pedido[]> {
-    return this.http.get<Pedido[]>(`/api/pedido/formaDeEntrega/${formaDeEntrega}`);
+    return this.http.get<Pedido[]>(`${this.baseUrl}/pedido/formaDeEntrega/${formaDeEntrega}`);
   }
 
   getPedidosByCliente(clienteId: number): Observable<Pedido[]> {
-    return this.http.get<Pedido[]>(`/api/pedido/cliente/${clienteId}`);
+    return this.http.get<Pedido[]>(`${this.baseUrl}/pedido/cliente/${clienteId}`);
   }
 
   getPedidosByFuncionario(funcionarioId: number): Observable<Pedido[]> {
-    return this.http.get<Pedido[]>(`/api/pedido/funcionario/${funcionarioId}`);
+    return this.http.get<Pedido[]>(`${this.baseUrl}/pedido/funcionario/${funcionarioId}`);
   }
 
   getPedidosWithPagamentoPending(): Observable<Pedido[]> {
-    return this.http.get<Pedido[]>('/api/pedido/pagamento-pending');
+    return this.http.get<Pedido[]>(`${this.baseUrl}/pedido/pagamento-pending`);
   }
   
   abrirPedido(clienteId: number, funcId: number, formaDeEntrega: string): Observable<string> {

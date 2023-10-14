@@ -10,10 +10,10 @@ import { Categoria } from 'src/app/shared/models/enums/categoria';
 })
 export class ProdutosService {
 
-  private baseURL: string = 'http:localhost:8080/api/produtos';
-  private http!: HttpClient;
+  private baseURL: string = 'http://localhost:8080/api/produtos';
+  
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<Produtos>{
     return this.http.get<Produtos>(`${this.baseURL}/id/${id}`);

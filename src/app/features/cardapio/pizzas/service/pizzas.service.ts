@@ -9,12 +9,10 @@ import { Tamanho } from 'src/app/shared/models/enums/tamanho-pizza';
   providedIn: 'root'
 })
 export class PizzasService {
+  private baseURL: string = 'http://localhost:8080/api/pizza';
 
-
-  private baseURL: string = 'http:localhost:8080/api/pizza'
-  private http!: HttpClient;
-
-  constructor() { }
+  
+  constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<Pizzas>{
     return this.http.get<Pizzas>(`${this.baseURL}/id/${id}`);
