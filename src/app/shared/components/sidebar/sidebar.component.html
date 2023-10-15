@@ -1,53 +1,54 @@
 <div class="sidebar">
-    <div class="title"></div>
-  <div class="principal">
-    <p class="caption">principal</p>
-    <ul class="d-flex flex-column align-items-start justify-content-center">
+  <button (click)="toggleSidebar()" class="toggle"><i class="bi bi-list"></i></button>
+  <div class="title"></div>
+<div class="principal">
+  <p class="caption">principal</p>
+  <ul class="d-flex flex-column align-items-start justify-content-center">
+    <li>
+      <a routerLink="/dashboard" class="d-flex align-items-center gap-1"
+        ><i class="bi bi-house-fill"></i>
+        <p class="sub-link">Dashboard</p></a
+      >
+    </li>
+    <li>
+      <a routerLink="/pedidos/listar-pedido" class="d-flex align-items-center gap-1"
+        ><i class="bi bi-cart3"></i>
+        <p class="sub-link">Pedidos</p></a
+      >
+    </li>
+    <li>
+      <a routerLink="/cardapio/produtos/listar" class="d-flex align-items-center gap-1"
+        ><i class="bi bi-grid-fill"></i>
+        <p class="sub-link">Cardápio</p></a
+      >
+    </li>
+    <li>
+      <a routerLink="/clientes/listar" class="d-flex align-items-center gap-1"
+        ><i class="bi bi-person-fill"></i>
+        <p class="sub-link">Cliente</p></a
+      >
+    </li>
+    <li>
+      <a routerLink="/funcionarios/listar" class="d-flex align-items-center gap-1"
+        ><i class="bi bi-person-lines-fill"></i>
+        <p class="sub-link">Funcionario</p></a
+      >
+    </li>
+  </ul>
+</div>
+<div class="config">
+  <p class="caption">Configurações</p>
+  <ul class="d-flex flex-column align-items-start justify-content-center">
       <li>
-        <a routerLink="/dashboard" class="d-flex align-items-center gap-1"
-          ><i class="bi bi-house-fill"></i>
-          <p class="sub-link">Dashboard</p></a
+        <a routerLink="/settings" class="d-flex align-items-center gap-1"
+          ><i class="bi bi-gear"></i>
+          <p class="sub-link">Configurações</p></a
         >
       </li>
-      <li>
-        <a routerLink="/pedidos/listar-pedido" class="d-flex align-items-center gap-1"
-          ><i class="bi bi-cart3"></i>
-          <p class="sub-link">Pedidos</p></a
-        >
-      </li>
-      <li>
-        <a routerLink="/cardapio/produtos/listar" class="d-flex align-items-center gap-1"
-          ><i class="bi bi-grid-fill"></i>
-          <p class="sub-link">Cardápio</p></a
-        >
-      </li>
-      <li>
-        <a routerLink="/clientes/listar" class="d-flex align-items-center gap-1"
-          ><i class="bi bi-person-fill"></i>
-          <p class="sub-link">Cliente</p></a
-        >
-      </li>
-      <li>
-        <a routerLink="/funcionarios/listar" class="d-flex align-items-center gap-1"
-          ><i class="bi bi-person-lines-fill"></i>
-          <p class="sub-link">Funcionario</p></a
-        >
-      </li>
-    </ul>
-  </div>
-  <div class="config">
-    <p class="caption">Configurações</p>
-    <ul class="d-flex flex-column align-items-start justify-content-center">
-        <li>
-          <a routerLink="/settings" class="d-flex align-items-center gap-1"
-            ><i class="bi bi-gear"></i>
-            <p class="sub-link">Configurações</p></a
-          >
-        </li>
-    </ul>
-  </div>
+  </ul>
+</div>
 </div>
 
 <div class="content">
-  <router-outlet></router-outlet>
+<router-outlet></router-outlet>
 </div>
