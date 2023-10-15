@@ -9,11 +9,11 @@
 
 
 .products {
-    margin-top: 30px;
     display: grid;
     grid-gap: 20px;
     padding: 20px;
 }
+
 
 @media (min-width: 768px) {
     .products {
@@ -23,18 +23,18 @@
 
 @media (min-width: 992px) {
     .products {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (min-width: 1200px) {
     .products {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
 .summary {
-    flex: 30%;
+    flex: 40%;
     background: #FAFAFA;
     height: 100VH;
 }
