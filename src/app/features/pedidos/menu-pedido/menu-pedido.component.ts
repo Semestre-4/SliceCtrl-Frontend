@@ -42,7 +42,7 @@ export class MenuPedidoComponent implements OnInit {
     private pizzaService: PizzasService,
     private pedidoService: PedidoService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.fetchProducts();
@@ -60,7 +60,7 @@ export class MenuPedidoComponent implements OnInit {
     }
   }
 
-    private getPedidoIdFromUrl(): number | null {
+  private getPedidoIdFromUrl(): number | null {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       return +id;
@@ -96,8 +96,8 @@ export class MenuPedidoComponent implements OnInit {
     if (this.selectedCategory === 'Todos') {
       this.filteredProducts = this.products;
     } else if (this.selectedCategory === 'Outros') {
-      this.filteredProducts = this.products.filter(product => product.isPizza === true);
-    } else {
+      this.filteredProducts = this.products.filter(product => product.categoria === Categoria.OUTROS);
+    }else {
       const categoryEnum = Categoria[this.selectedCategory.toUpperCase() as keyof typeof Categoria];
       this.filteredProducts = this.products.filter(product => product.categoria === categoryEnum);
     }

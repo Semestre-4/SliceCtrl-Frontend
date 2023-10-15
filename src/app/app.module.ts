@@ -27,7 +27,6 @@ import { GeneralStatsComponent } from './features/dashboard/components/general-s
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuChipsComponent } from './features/pedidos/components/menu-chips/menu-chips.component';
-import { EntregaChipsComponent } from './features/pedidos/components/entrega-chips/entrega-chips.component';
 import { PedidoService } from './features/pedidos/service/pedido.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NewPedidoComponent } from './features/pedidos/components/new-pedido/new-pedido.component';
@@ -39,6 +38,7 @@ import { SaborDisplayComponent } from './features/pedidos/components/sabor-displ
 import { FormsModule} from '@angular/forms';
 import { ProdutosService } from './features/cardapio/produtos/service/produtos.service';
 import { PizzasService } from './features/cardapio/pizzas/service/pizzas.service';
+import { ChosenPizzaComponent } from './features/pedidos/components/chosen-pizza/chosen-pizza.component';
 
 
 @NgModule({
@@ -67,13 +67,13 @@ import { PizzasService } from './features/cardapio/pizzas/service/pizzas.service
     GeneralStatsComponent,
     SearchBarComponent,
     MenuChipsComponent,
-    EntregaChipsComponent,
     NewPedidoComponent,
     SidebarComponent,
     ListarFuncionariosComponent,
     RegisterFuncionariosComponent,
     ProductDisplayComponent,
-    SaborDisplayComponent],
+    SaborDisplayComponent,
+    ChosenPizzaComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
