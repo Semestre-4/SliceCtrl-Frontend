@@ -3,6 +3,14 @@ import { ProdutosService } from '../../cardapio/produtos/service/produtos.servic
 import { PizzasService } from '../../cardapio/pizzas/service/pizzas.service';
 import { forkJoin } from 'rxjs';
 import { Categoria } from 'src/app/shared/models/enums/categoria';
+import { ActivatedRoute } from '@angular/router';
+import { PedidoService } from '../service/pedido.service';
+import { Pedido } from '../models/pedido';
+import { Cliente } from '../../clientes/cliente';
+import { Funcionario } from '../../funcionarios/funcionario';
+import { Pagamento } from '../models/pagamento';
+import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
+import { Status } from 'src/app/shared/models/enums/status-pedido';
 
 @Component({
   selector: 'app-menu-pedido',
@@ -16,13 +24,48 @@ export class MenuPedidoComponent implements OnInit {
   selectedCategory: string = 'Todos';
   searchTerm: string = '';
 
+  pedido: Pedido = new Pedido(
+    new Cliente('', '', '', '', [], []),
+    new Funcionario('', '', '', 0, []),
+    [],
+    [],
+    new Pagamento(),
+    0,
+    0,
+    0,
+    Status.PENDENTE,
+    FormaDeEntrega.LOCAL
+  );
+
   constructor(
     private productService: ProdutosService,
-    private pizzaService: PizzasService
+    private pizzaService: PizzasService,
+    private pedidoService: PedidoService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.fetchProducts();
+    const pedidoId = this.getPedidoIdFromUrl();
+    if (pedidoId !== null) {
+      this.pedidoService.getPedidoById(pedidoId).subscribe({
+        next: (pedido) => {
+          this.pedido = pedido;
+        },
+        error: (error) => {
+          console.error('Error fetching pedido: ', error);
+        }
+      });
+    } else {
+    }
+  }
+
+    private getPedidoIdFromUrl(): number | null {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      return +id;
+    }
+    return null;
   }
 
   fetchProducts(): void {
