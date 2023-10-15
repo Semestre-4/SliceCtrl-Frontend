@@ -1,6 +1,6 @@
 <div class="menu-pedido d-flex flex-row align-items-stretch w-100 h-100">
     <div class="menu d-flex flex-column align-items-center mt-3">
-        <app-search-bar></app-search-bar>
+        <app-search-bar (searchEvent)="filterData($event)"></app-search-bar>
         <app-menu-chips (categorySelected)="onCategorySelected($event)"></app-menu-chips>
         <div class="products">
           <app-product-display *ngFor="let product of filteredProducts" [product]="product"></app-product-display>

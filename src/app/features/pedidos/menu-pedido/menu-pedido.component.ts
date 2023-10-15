@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProdutosService } from '../../cardapio/produtos/service/produtos.service';
 import { PizzasService } from '../../cardapio/pizzas/service/pizzas.service';
 import { forkJoin } from 'rxjs';
@@ -14,6 +14,7 @@ export class MenuPedidoComponent implements OnInit {
   products: any[] = [];
   filteredProducts: any[] = [];
   selectedCategory: string = 'Todos';
+  searchTerm: string = '';
 
   constructor(
     private productService: ProdutosService,
@@ -34,7 +35,7 @@ export class MenuPedidoComponent implements OnInit {
           ...products.map(product => ({ ...product, category: 'Product', isPizza: false })),
           ...pizzas.map(pizza => ({ ...pizza, category: 'Pizza', isPizza: true }))
         ];
-        this.filteredProducts = this.products;
+        this.filterProducts();
         console.log('Products and Pizzas: ', this.products);
       },
       error: (error) => {
@@ -51,16 +52,14 @@ export class MenuPedidoComponent implements OnInit {
   filterProducts(): void {
     if (this.selectedCategory === 'Todos') {
       this.filteredProducts = this.products;
-    } else if (this.selectedCategory === 'Bebidas') {
-      this.filteredProducts = this.products.filter(product => product.categoria === Categoria.BEBIDAS);
-    } else if (this.selectedCategory === 'Acompanhamentos') {
-      this.filteredProducts = this.products.filter(product => product.categoria === Categoria.ACOMPANHAMENTOS);
-    } else if (this.selectedCategory === 'Sobremesas') {
-      this.filteredProducts = this.products.filter(product => product.categoria === Categoria.SOBREMESAS);
     } else if (this.selectedCategory === 'Outros') {
-      this.filteredProducts = this.products.filter(product => product.categoria === Categoria.OUTROS);
-    }else{
       this.filteredProducts = this.products.filter(product => product.isPizza === true);
+    } else {
+      const categoryEnum = Categoria[this.selectedCategory.toUpperCase() as keyof typeof Categoria];
+      this.filteredProducts = this.products.filter(product => product.categoria === categoryEnum);
     }
+  }
+
+  filterData(searchTerm: string): void {
   }
 }
