@@ -23,7 +23,6 @@ import { RegistrarSaboresComponent } from './features/cardapio/sabores/registrar
 import { ListarIngredientesComponent } from './features/cardapio/ingredientes/listar-ingredientes/listar-ingredientes.component';
 import { RegistrarIngredientesComponent } from './features/cardapio/ingredientes/registrar-ingredientes/registrar-ingredientes.component';
 import { ListarPedidoComponent } from './features/pedidos/listar-pedido/listar-pedido.component';
-import { FuncionariosComponent } from './features/funcionarios/funcionarios.component';
 import { GeneralStatsComponent } from './features/dashboard/components/general-stats/general-stats.component';
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,6 +34,11 @@ import { NewPedidoComponent } from './features/pedidos/components/new-pedido/new
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { ListarFuncionariosComponent } from './features/funcionarios/listar-funcionarios/listar-funcionarios.component';
 import { RegisterFuncionariosComponent } from './features/funcionarios/register-funcionarios/register-funcionarios.component';
+import { ProductDisplayComponent } from './features/pedidos/components/product-display/product-display.component';
+import { SaborDisplayComponent } from './features/pedidos/components/sabor-display/sabor-display.component';
+import { FormsModule} from '@angular/forms';
+import { ProdutosService } from './features/cardapio/produtos/service/produtos.service';
+import { PizzasService } from './features/cardapio/pizzas/service/pizzas.service';
 
 
 @NgModule({
@@ -60,7 +64,6 @@ import { RegisterFuncionariosComponent } from './features/funcionarios/register-
     RegistrarSaboresComponent,
     ListarIngredientesComponent,
     RegistrarIngredientesComponent,
-    FuncionariosComponent,
     GeneralStatsComponent,
     SearchBarComponent,
     MenuChipsComponent,
@@ -68,16 +71,17 @@ import { RegisterFuncionariosComponent } from './features/funcionarios/register-
     NewPedidoComponent,
     SidebarComponent,
     ListarFuncionariosComponent,
-    RegisterFuncionariosComponent],
+    RegisterFuncionariosComponent,
+    ProductDisplayComponent,
+    SaborDisplayComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule
+    FormsModule
   ],
-  providers: [PedidoService],
+  providers: [PedidoService,ProdutosService,PizzasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 import { AbstractEntity } from "src/app/shared/models/abstract-entity";
 import { Pedido } from "../pedidos/models/pedido";
-import { Endereco } from "src/app/shared/models/endereco";
+import { Endereco } from "src/app/shared/models/endereco/endereco";
 
 export class Cliente extends AbstractEntity {
     nome: string;

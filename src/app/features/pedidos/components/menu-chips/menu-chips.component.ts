@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Categoria } from 'src/app/shared/models/enums/categoria';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-menu-chips',
@@ -7,5 +6,12 @@ import { Categoria } from 'src/app/shared/models/enums/categoria';
   styleUrls: ['./menu-chips.component.scss']
 })
 export class MenuChipsComponent {
+  selectedItem: string = 'Todos';
+  @Output() categorySelected: EventEmitter<string> = new EventEmitter<string>();
 
+  
+  changeColor(item: string): void {
+    this.selectedItem = item;
+    this.categorySelected.emit(item);
+  }
 }

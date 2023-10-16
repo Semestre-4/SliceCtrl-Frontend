@@ -1,0 +1,9 @@
+<div class="menu-chips d-flex flex-sm-row flex-column align-items-center justify-content-center gap-3">
+    <p class="item-chip" [class.selected]="selectedItem === 'Todos'" (click)="changeColor('Todos')">Todos</p>
+    <p class="item-chip" [class.selected]="selectedItem === 'Pizzas'" (click)="changeColor('Pizzas')">Pizzas</p>
+    <p class="item-chip" [class.selected]="selectedItem === 'Bebidas'" (click)="changeColor('Bebidas')">Bebidas</p>
+    <p class="item-chip" [class.selected]="selectedItem === 'Acompanhamentos'" (click)="changeColor('Acompanhamentos')">Acompanhamentos</p>
+    <p class="item-chip" [class.selected]="selectedItem === 'Sobremesas'" (click)="changeColor('Sobremesas')">Sobremesas</p>
+    <p class="item-chip" [class.selected]="selectedItem === 'Outros'" (click)="changeColor('Outros')">Outros</p>
+  </div>
+  

@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="id">#{{ product.id }}</div>
+    <div class="p-details d-flex flex-column gap-1">
+        <div class="p-name">
+            {{ product.isPizza ? 'Pizza - ' + product.tamanho : product.nomeProduto }}
+        </div>
+        <div class="p-price">R$ {{ product.preco.toFixed(2) }}</div>
+    </div>
+    <button class="add">Adicionar Produto</button>
+</div>
