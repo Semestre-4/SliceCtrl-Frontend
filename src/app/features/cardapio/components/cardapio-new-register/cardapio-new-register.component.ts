@@ -1,5 +1,5 @@
 import { style } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -18,6 +18,7 @@ export class CardapioNewRegisterComponent implements OnInit{
 
   definirTextoDoComponente() {
     const paginaAtual = this.router.url;
+    const element = document.getElementById('new');
 
     if (paginaAtual.includes('produtos')) {
       this.componenteTexto = 'Novo Produto';
@@ -27,8 +28,7 @@ export class CardapioNewRegisterComponent implements OnInit{
       this.componenteTexto = 'Novo Sabor';
     } else if (paginaAtual.includes('ingredientes')) {
       this.componenteTexto = 'Novo Ingrediente';
-
-    
+      
     } else {
       this.componenteTexto = '...';
     }
