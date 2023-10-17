@@ -8,19 +8,7 @@ import { Router } from '@angular/router';
 })
 export class CardapioNavbarComponent {
 
-  constructor(private router: Router) { }
+  constructor() { }
 
-  navigateToProdutos() {
-      this.router.navigate(['/cardapio/produtos/listar']);
-  }
-  navigateToPizzas() {
-    this.router.navigate(['/cardapio/pizzas/listar']);
 
-  }
-  navigateToSabores() {
-    this.router.navigate(['/cardapio/sabores/listar']);
-  }
-  navigateToIngredientes() {
-    this.router.navigate(['/cardapio/ingredientes/listar']);
-  }
 }
