@@ -1,4 +1,4 @@
 <div class="search-container">
-    <input type="text" class="search-input" placeholder="Buscar" />
+    <input type="text" class="search-input" placeholder="Buscar" [(ngModel)]="searchTerm" (input)="onInputChange()"/>
     <i class="bi bi-search"></i>
   </div>

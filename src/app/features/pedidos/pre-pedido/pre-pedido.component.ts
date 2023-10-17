@@ -77,19 +77,22 @@ export class PrePedidoComponent implements OnInit {
   getClientByCPF() {
     this.reformatCPFC();
     const cpf = this.pedido.cliente.cpf;
-    this.clienteService.getClientesByCPF(cpf).subscribe({
-      next: (cliente) => {
-        if (cliente) {
-          this.pedido.cliente = cliente;
+    if(cpf.length == 14){
+      this.clienteService.getClientesByCPF(cpf).subscribe({
+        next: (cliente) => {
+          if (cliente) {
+            this.pedido.cliente = cliente;
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   getFuncByCPF() {
     this.reformatCPF();
     const cpf = this.pedido.funcionario.cpf;
     this.isErro = false;
+    if(cpf.length == 14){
     this.funcionarioService.getFuncionarioByCPF(cpf).subscribe({
       next: (funcionario) => {
         if (funcionario) {
@@ -97,6 +100,7 @@ export class PrePedidoComponent implements OnInit {
         }
       }
     });
+  }
   }
 
   submitForm(form: NgForm): void {
@@ -109,7 +113,8 @@ export class PrePedidoComponent implements OnInit {
         )
         .subscribe({
           next: (pedido) => {
-            this.router.navigate(['/pedidos/menu-pedido', this.pedido.id]);
+            console.log(pedido);
+           this.router.navigate(['/pedidos/menu-pedido', pedido.id]);
           },
           error: (erro) => {
             if (erro.status === 200) {
