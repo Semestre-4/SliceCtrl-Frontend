@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Poppins:ital,wght@0,200;0,300;0,400;1,200;1,300&family=Source+Sans+3&display=swap');
 
 .novo {
+    margin-top: 30px;
+    margin-left: 10px;
     display: flex;
     width: 180px;
     height: 46px;
-    padding: 8px 21px 8px 22px;
+    padding: 8px 21px 8px 18px;
     align-items: center;
     gap: 15px;
     border-radius: 8px;
@@ -21,7 +23,7 @@
 p {
     margin-top: 16px;
     color: #2A282F;
-    font-family: 'Inter';
+    font-family: 'Poppins';
     font-size: 16px;
     font-style: normal;
     font-weight: 600;

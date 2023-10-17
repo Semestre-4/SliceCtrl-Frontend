@@ -1,3 +1,4 @@
+import { style } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
@@ -26,6 +27,8 @@ export class CardapioNewRegisterComponent implements OnInit{
       this.componenteTexto = 'Novo Sabor';
     } else if (paginaAtual.includes('ingredientes')) {
       this.componenteTexto = 'Novo Ingrediente';
+
+    
     } else {
       this.componenteTexto = '...';
     }
