@@ -39,6 +39,7 @@ import { SaborDisplayComponent } from './features/pedidos/components/sabor-displ
 import { FormsModule} from '@angular/forms';
 import { ProdutosService } from './features/cardapio/produtos/service/produtos.service';
 import { PizzasService } from './features/cardapio/pizzas/service/pizzas.service';
+import { CardapioNavbarComponent } from './features/cardapio/components/cardapio-navbar/cardapio-navbar.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { PizzasService } from './features/cardapio/pizzas/service/pizzas.service
     ListarFuncionariosComponent,
     RegisterFuncionariosComponent,
     ProductDisplayComponent,
-    SaborDisplayComponent],
+    SaborDisplayComponent,
+    CardapioNavbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
