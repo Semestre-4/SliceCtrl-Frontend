@@ -1,0 +1,27 @@
+button{
+    width: 129px;
+    padding: 16px;
+    gap: 24px;
+    border-radius: 12px;
+    background: #F6725C;
+    border: none;
+    margin-left: 0.8%;
+    font-size: 18px;
+    letter-spacing: -0.64px;
+}
+
+.navbar{
+    display: flex;
+    align-items: start;
+    justify-content: start;
+}
+
+.header h1{
+    color: var(--gray-800, #212B36);
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 120% */
+    padding-top: 10px;
+}

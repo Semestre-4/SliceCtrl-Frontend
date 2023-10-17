@@ -38,6 +38,8 @@ import { SaborDisplayComponent } from './features/pedidos/components/sabor-displ
 import { FormsModule} from '@angular/forms';
 import { ProdutosService } from './features/cardapio/produtos/service/produtos.service';
 import { PizzasService } from './features/cardapio/pizzas/service/pizzas.service';
+import { CardapioNavbarComponent } from './features/cardapio/components/cardapio-navbar/cardapio-navbar.component';
+import { CardapioNewRegisterComponent } from './features/cardapio/components/cardapio-new-register/cardapio-new-register.component';
 import { ChosenPizzaComponent } from './features/pedidos/components/chosen-pizza/chosen-pizza.component';
 
 
@@ -73,7 +75,10 @@ import { ChosenPizzaComponent } from './features/pedidos/components/chosen-pizza
     RegisterFuncionariosComponent,
     ProductDisplayComponent,
     SaborDisplayComponent,
-    ChosenPizzaComponent],
+    ChosenPizzaComponent,
+    SaborDisplayComponent,
+    CardapioNavbarComponent,
+    CardapioNewRegisterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
