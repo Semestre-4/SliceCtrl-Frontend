@@ -11,7 +11,7 @@ import { ThisReceiver } from '@angular/compiler';
 })
 export class IngredientesService {
 
-  private baseURL: string = 'http:localhost:8080/api/ingredientes'
+  private baseURL: string = 'http://localhost:8080/api/ingredientes'
   private http!: HttpClient;
 
 

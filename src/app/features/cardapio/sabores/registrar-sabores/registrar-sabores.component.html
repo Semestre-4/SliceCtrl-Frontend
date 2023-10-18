@@ -1,1 +1,69 @@
-<p>registrar-sabores works!</p>
+<div class="registrar">
+    <div class="header">
+        <h1>Sabores</h1>
+        <hr>
+    </div>
+    
+    <form class="needs-validation">
+        <div class="row g-3">
+          <div class="col-md-3">
+                <label for="nomeSabor" class="form-label margintop">Nome do Sabor</label>
+                <input
+                type="text"
+                class="form-control inputs"
+                id="nomeSabor"
+                name="nomeSabor"
+                placeholder="Digite aqui..."
+                [(ngModel)]="sabor.nomeSabor"
+                />
+          </div>
+    
+            <div class="col-md-3">
+              <label for="ingredientes" class="form-label marginleft margintop">Ingredientes</label>
+              <select
+                type="text"
+                class="form-control marginleft inputs"
+                id="ingredientes"
+                name="ingredientes"
+                [(ngModel)]="sabor.ingredientes"          >  
+                <option *ngFor="let ingrediente of ingredientes">{{ ingrediente }}</option>
+                </select>
+        </div>
+    
+    
+            <div class="col-md-3 marginleft">
+                <label for="valorAdicional" class="form-label margintop marginleft">Valor Adicional</label>
+                <input
+                  type="number"
+                  class="form-control marginleft inputs"
+                  id="valorAdicional"
+                  name="valorAdicional"
+                  placeholder="Digite aqui..."
+                  [(ngModel)]="sabor.valorAdicional"
+                />
+              </div>
+    
+        </div>
+    
+        <div class="row g-3 margintop">
+            <div class="col-md-3">
+                <label for="descSabor" class="form-label">Descrição do Sabor</label>
+                <input
+                type="number"
+                class="form-control inputs"
+                id="descSabor"
+                name="descSabor"
+                placeholder="Digite aqui..."
+                [(ngModel)]="sabor.descricao"
+                />
+            </div>
+        </div>
+    
+        <div class="actions d-flex flex-row gap-1">
+            <button class="btn btn-primary" routerLink="/cardapio/sabores/listar">Cancelar</button>
+            <button class="btn btn-secondary" type="submit"  >Continuar</button>
+          </div>
+    
+    
+    </form>  
+    </div>
