@@ -1,1 +1,77 @@
-<p>registrar-produtos works!</p>
+<div class="registrar">
+<div class="header">
+    <h1>Cadastrar Produto</h1>
+    <hr>
+</div>
+
+<form class="needs-validation">
+    <div class="row g-3">
+      <div class="col-md-3">
+            <label for="nomeProduto" class="form-label margintop">Nome do Produto</label>
+            <input
+            type="text"
+            class="form-control inputs"
+            id="nomeProduto"
+            name="nomeProduto"
+            placeholder="Digite aqui..."
+            [(ngModel)]="produto.nomeProduto"
+            />
+      </div>
+
+        <div class="col-md-3">
+          <label for="categoriaProduto" class="form-label marginleft margintop">Categoria do Produto</label>
+          <select
+            type="text"
+            class="form-control marginleft inputs"
+            id="categoriaProduto"
+            name="categoriaProduto"
+            [(ngModel)]="produto.categoria"          >  
+            <option *ngFor="let categorias of categoriaOption">{{ categorias }}</option>
+            </select>
+    </div>
+
+
+        <div class="col-md-3 marginleft">
+            <label for="qtdeEstoque" class="form-label margintop marginleft">Quantidade de Estoque</label>
+            <input
+              type="number"
+              class="form-control marginleft inputs"
+              id="qtdeEstoque"
+              name="qtdeEstoque"
+              placeholder="Digite aqui..."
+              [(ngModel)]="produto.qtdeEstoque"
+            />
+          </div>
+
+    </div>
+
+    <div class="row g-3 margintop">
+        <div class="col-md-3">
+            <label for="precoProduto" class="form-label">Preço do Produto</label>
+            <input
+            type="number"
+            class="form-control inputs"
+            id="precoProduto"
+            name="precoProduto"
+            placeholder="Digite aqui..."
+            [(ngModel)]="produto.preco"
+            />
+        </div>
+
+        <div class="col-md-3 check">
+            <div class="form-check form-switch">
+                <input class="form-check-input checkbox" type="checkbox" id="flexSwitchCheckChecked" [(ngModel)]="produto.disponivel" checked>
+                <label for="produtoDisponivel" class="form-label labels">Produto Disponivel</label>
+            </div>              
+        </div>
+    </div>
+
+    <div class="actions d-flex flex-row gap-1">
+  
+        <button class="btn btn-primary" routerLink="/produtos/listar">Cancelar</button>
+        <button class="btn btn-secondary" type="submit"  >Continuar</button>
+      </div>
+
+
+</form>  
+</div>
