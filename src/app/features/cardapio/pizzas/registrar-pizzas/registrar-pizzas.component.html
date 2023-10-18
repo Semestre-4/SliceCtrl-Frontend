@@ -1,1 +1,66 @@
-<p>registrar-pizzas works!</p>
+<div class="registrar">
+    <div class="header">
+        <h1>Pizza</h1>
+        <hr>
+    </div>
+    
+    <form class="needs-validation">
+        <div class="row g-3">
+    
+            <div class="col-md-3">
+              <label for="tamanhoPizza" class="form-label marginleft margintop">Tamanho da Pizza</label>
+              <select
+                type="text"
+                class="form-control marginleft inputs"
+                id="tamanhoPizza"
+                name="tamanhoPizza"
+                [(ngModel)]="pizza.tamanho"          >  
+                <option *ngFor="let tamanho of tamanhoOption">{{ tamanho }}</option>
+                </select>
+        </div>
+    
+    
+            <div class="col-md-3 marginleft">
+                <label for="descPizza" class="form-label margintop marginleft">Descrição da Pizza</label>
+                <input
+                  type="text"
+                  class="form-control marginleft inputs"
+                  id="descPizza"
+                  name="descPizza"
+                  placeholder="Digite aqui..."
+                  [(ngModel)]="pizza.descricao"
+                />
+              </div>
+    
+        </div>
+    
+        <div class="row g-3 margintop">
+            <div class="col-md-3">
+                <label for="precoPizza" class="form-label marginleft">Preço da Pizza</label>
+                <input
+                type="number"
+                class="form-control inputs marginleft"
+                id="precoPizza"
+                name="precoPizza"
+                placeholder="Digite aqui..."
+                [(ngModel)]="pizza.preco"
+                />
+            </div>
+    
+            <div class="col-md-3 check">
+                <div class="form-check form-switch">
+                    <input class="form-check-input checkbox" type="checkbox" id="flexSwitchCheckChecked" [(ngModel)]="pizza.disponivel" checked>
+                    <label for="produtoDisponivel" class="form-label labels">Pizza Disponivel</label>
+                </div>              
+            </div>
+        </div>
+    
+        <div class="actions d-flex flex-row gap-1">
+      
+            <button class="btn btn-primary" routerLink="/cardapio/pizzas/listar">Cancelar</button>
+            <button class="btn btn-secondary" type="submit"  >Continuar</button>
+          </div>
+    
+    
+    </form>  
+    </div>
