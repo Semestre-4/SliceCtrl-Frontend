@@ -41,7 +41,7 @@ import { PizzasService } from './features/cardapio/pizzas/service/pizzas.service
 import { CardapioNavbarComponent } from './features/cardapio/components/cardapio-navbar/cardapio-navbar.component';
 import { CardapioNewRegisterComponent } from './features/cardapio/components/cardapio-new-register/cardapio-new-register.component';
 import { ChosenPizzaComponent } from './features/pedidos/components/chosen-pizza/chosen-pizza.component';
-
+import { TableComponent } from './shared/components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -78,15 +78,19 @@ import { ChosenPizzaComponent } from './features/pedidos/components/chosen-pizza
     ChosenPizzaComponent,
     SaborDisplayComponent,
     CardapioNavbarComponent,
-    CardapioNewRegisterComponent],
+    CardapioNewRegisterComponent,
+    TableComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [PedidoService,ProdutosService,PizzasService],
+  providers: [PedidoService,ProdutosService,PizzasService,
+    FormatarPrecoPipe,
+    FormatarDataPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
