@@ -6,6 +6,7 @@ import { Cliente } from '../../clientes/cliente';
 import { Funcionario } from '../../funcionarios/funcionario';
 import { Pagamento } from '../models/pagamento';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
+import { TableHeader } from 'src/app/shared/components/table/table-header';
 
 @Component({
   selector: 'app-listar-pedido',
@@ -14,7 +15,7 @@ import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 })
 export class ListarPedidoComponent implements OnInit{
   data: any[] = [];
-  tableHeaders: string[] = [];
+
 
   p: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
@@ -32,24 +33,37 @@ export class ListarPedidoComponent implements OnInit{
   constructor(private pedidoService: PedidoService) { }
 
   ngOnInit(): void {
-    this.pedidoService.getAllPedidos().subscribe((response: any[]) => {
-      this.data = response;
-    });
-  }
-
-  getStatusClass(status: string): string {
-    switch(status) {
-      case 'PENDENTE':
-        return 'badge-yellow'; 
-      case 'PAGO':
-        return 'badge-green';
-      case 'CANCELADO':
-        return 'badge-red';
-      case 'TODOS':
-        return 'badge-danger';
-      default:
-        return '';
-    }
+    this.pedidoService.getAllPedidos().subscribe(
+      (response: any[]) => {
+        this.data = response;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
   }
   
+
+  onButtonClick(action: string) {
+    console.log(action);
+  }
+
+  apiUrlPath(){
+    return 'http://localhost:8080/api/pedido/all';  
+  }
+
+  callHeaders(){
+    let tableHeaders : TableHeader[] = [];
+    tableHeaders.push(new TableHeader('Cliente', 'cliente.nome'));
+    tableHeaders.push(new TableHeader('Funcionario', 'funcionario.nome'));
+    tableHeaders.push(new TableHeader('Data','cadastro'));
+    tableHeaders.push(new TableHeader('Forma de Retirada','formaDeEntrega'));
+    tableHeaders.push(new TableHeader('Status','status'));
+    tableHeaders.push(new TableHeader('ValorTotal','valorTotal'));
+    return tableHeaders;
+  }
+  
+  handleButtonClick(event: string) {
+    console.log(`Button clicked: ${event}`);
+  }
 }
