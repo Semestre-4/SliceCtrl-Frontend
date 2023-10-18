@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Ingredientes } from '../ingrediente';
 
 @Component({
   selector: 'app-registrar-ingredientes',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./registrar-ingredientes.component.scss']
 })
 export class RegistrarIngredientesComponent {
+
+  ingrediente: Ingredientes = new Ingredientes();
 
 }
