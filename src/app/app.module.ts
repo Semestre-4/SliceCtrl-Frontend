@@ -42,6 +42,7 @@ import { CardapioNavbarComponent } from './features/cardapio/components/cardapio
 import { CardapioNewRegisterComponent } from './features/cardapio/components/cardapio-new-register/cardapio-new-register.component';
 import { ChosenPizzaComponent } from './features/pedidos/components/chosen-pizza/chosen-pizza.component';
 import { TableComponent } from './shared/components/table/table.component';
+import { EditPedidoComponent } from './features/pedidos/edit-pedido/edit-pedido.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { TableComponent } from './shared/components/table/table.component';
     SaborDisplayComponent,
     CardapioNavbarComponent,
     CardapioNewRegisterComponent,
-    TableComponent
+    TableComponent,
+    EditPedidoComponent
     ],
   imports: [
     BrowserModule,

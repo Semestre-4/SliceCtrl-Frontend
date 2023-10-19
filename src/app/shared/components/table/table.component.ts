@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { inject } from '@angular/core/testing';
-import { Pedido } from 'src/app/features/pedidos/models/pedido';
 import { FormatarDataPipe } from '../../pipes/formatar-data/formatar-data.pipe';
 import { FormatarPrecoPipe } from '../../pipes/formatar-preco/formatar-preco.pipe';
 import { TableHeader } from './table-header';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -12,17 +11,21 @@ import { TableHeader } from './table-header';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
+
   @Input() headers: TableHeader[] = [];
   @Input() apiUrl: string = '';
   @Input() actions: any[] = [];
-  data: any[] = [];
+  @Input() editPath: string = '';
+  @Input() entityName: string = '';
+  @Input() showDeleteButton: boolean = true;
   @Output() buttonClick = new EventEmitter<string>();
-
+  data: any[] = [];
   carregando: boolean = true;
 
   constructor(private http: HttpClient,
     private datePipe: FormatarDataPipe,
     private numberPipe: FormatarPrecoPipe,
+    private router: Router
     ) {}
 
   ngOnInit(): void {
@@ -59,6 +62,20 @@ export class TableComponent implements OnInit {
     }
     return valor;
   }
+
+  onEditClick(item:any){
+    this.router.navigate([this.editPath]);
+  }
+
+  onDeleteClick(data: any) {
+    if (this.showDeleteButton) {
+      const deleteUrl = `http://localhost:8080/api/${this.entityName}/${data.id}`;
+      this.http.delete(deleteUrl).subscribe(response => {
+        this.loadData();
+      });
+    }
+  }
+  
 }
 
 

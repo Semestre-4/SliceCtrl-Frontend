@@ -8,6 +8,9 @@
     <app-table
     [headers]="callHeaders()"
     [apiUrl]="apiUrlPath()"
+    [editPath]="'pedidos/edit'"
+    [entityName]="'pedidos'" 
+    [showDeleteButton]="false"
     >
   </app-table>  
 </div>
