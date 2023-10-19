@@ -2,11 +2,16 @@
     <thead class="bg-light">
       <tr>
         <th *ngFor="let header of headers">{{ header.header }}</th>
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let dat of data">
           <td *ngFor="let header of headers"> {{retornarValor(header,dat)}}</td>
+          <td *ngIf="showDeleteButton || !showDeleteButton" class="d-flex gap-2"> 
+            <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold"  data-mdb-ripple-color="dark" (click)="onEditClick(dat)" class="btn">Edit</button>
+            <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold"  data-mdb-ripple-color="dark" *ngIf="showDeleteButton" (click)="onDeleteClick(dat)" class="btn">Delete</button>
+          </td>
       </tr>
     </tbody>
   </table>

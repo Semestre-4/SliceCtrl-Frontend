@@ -44,10 +44,6 @@ export class ListarPedidoComponent implements OnInit{
   }
   
 
-  onButtonClick(action: string) {
-    console.log(action);
-  }
-
   apiUrlPath(){
     return 'http://localhost:8080/api/pedido/all';  
   }
@@ -62,8 +58,6 @@ export class ListarPedidoComponent implements OnInit{
     tableHeaders.push(new TableHeader('ValorTotal','valorTotal'));
     return tableHeaders;
   }
-  
-  handleButtonClick(event: string) {
-    console.log(`Button clicked: ${event}`);
-  }
+
+
 }

@@ -38,17 +38,12 @@
        }
    }
 
-   .text-badge-yellow {
-       background-color: #fbf0da;
-       color: #73510d;
-   }
-
-   .text-badge-green {
-       background-color: #d6f0e0;
-       color: #0d6832;
-   }
-
-   .text-badge-red {
-       background-color: #f0d6da;
-       color: #731d1d;
+   .btn {
+       border-color: #F6725C;
+       background-color: transparent;
+       color: #F6725C;
+       border-radius: 24px;
+       height: 30px;
+       padding-bottom: 0;
+       padding-top: 0;
    }

@@ -18,6 +18,7 @@ import { FinalizarPedidoComponent } from './features/pedidos/finalizar-pedido/fi
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ListarFuncionariosComponent } from './features/funcionarios/listar-funcionarios/listar-funcionarios.component';
 import { RegisterFuncionariosComponent } from './features/funcionarios/register-funcionarios/register-funcionarios.component';
+import { EditPedidoComponent } from './features/pedidos/edit-pedido/edit-pedido.component';
 
 const routes: Routes = [
   {
@@ -69,7 +70,8 @@ const routes: Routes = [
     { path: 'pre-pedido', component: PrePedidoComponent },
     { path: 'menu-pedido/:id', component: MenuPedidoComponent },
     { path: 'sabores-pedido/:id', component: SaboresPedidoComponent },
-    { path: 'finalizar-pedido/:id', component: FinalizarPedidoComponent }
+    { path: 'finalizar-pedido/:id', component: FinalizarPedidoComponent },
+    { path: 'edit', component: EditPedidoComponent}
   ]
 },
 {
