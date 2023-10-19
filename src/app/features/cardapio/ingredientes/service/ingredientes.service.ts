@@ -11,11 +11,9 @@ import { ThisReceiver } from '@angular/compiler';
 })
 export class IngredientesService {
 
-  private baseURL: string = 'http:localhost:8080/api/ingredientes'
-  private http!: HttpClient;
+  private baseURL: string = 'http://localhost:8080/api/ingredientes'
 
-
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<Ingredientes>{
     return this.http.get<Ingredientes>(`${this.baseURL}/${id}`);
@@ -29,8 +27,8 @@ export class IngredientesService {
     return this.http.get<Ingredientes>(`${this.baseURL}/nome/${nome}`);
   }
 
-  save(ingrediente: Ingredientes): Observable<HttpStatusCode>{
-    return this.http.post<HttpStatusCode>(`${this.baseURL}`, ingrediente);
+  save(ingrediente: Ingredientes): Observable<string>{
+    return this.http.post<string>(`${this.baseURL}`, ingrediente);
   }
 
   edit(ingrediente: Ingredientes): Observable<HttpStatusCode>{

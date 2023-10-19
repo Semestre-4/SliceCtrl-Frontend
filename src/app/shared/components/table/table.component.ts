@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class TableComponent implements OnInit {
 
   @Input() headers: TableHeader[] = [];
-  @Input() apiUrl: string = '';
+  @Input() apiUrl: string = ''; 
   @Input() actions: any[] = [];
   @Input() editPath: string = '';
   @Input() entityName: string = '';

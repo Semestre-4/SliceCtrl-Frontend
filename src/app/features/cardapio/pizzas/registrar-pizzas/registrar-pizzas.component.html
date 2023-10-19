@@ -1,1 +1,46 @@
-<p>registrar-pizzas works!</p>
+<div class="registrar">
+    <div class="header">
+        <h1>Pizza</h1>
+        <hr>
+    </div>
+    
+    <form class="needs-validation">
+        <div class="row g-3">
+    
+            <div class="col-md-3">
+              <label for="tamanhoPizza" class="form-label marginleft margintop">Tamanho da Pizza</label>
+              <select
+                type="text"
+                class="form-control marginleft inputs"
+                id="tamanhoPizza"
+                name="tamanhoPizza"
+                [(ngModel)]="pizza.tamanho"          >  
+                <option *ngFor="let tamanho of tamanhoOption">{{ tamanho }}</option>
+                </select>
+        </div>
+    
+        </div>
+    
+        <div class="row g-3 margintop">
+            <div class="col-md-3">
+                <label for="precoPizza" class="form-label marginleft">Preço da Pizza</label>
+                <input
+                type="number"
+                class="form-control inputs marginleft"
+                id="precoPizza"
+                name="precoPizza"
+                placeholder="Digite aqui..."
+                [(ngModel)]="pizza.preco"
+                />
+            </div>
+        </div>
+    
+        <div class="actions d-flex flex-row gap-1">
+      
+            <button class="btn btn-primary" routerLink="/cardapio/pizzas/listar">Cancelar</button>
+            <button class="btn btn-secondary" type="submit" (click)="submit()">Continuar</button>
+          </div>
+    
+    
+    </form>  
+    </div>

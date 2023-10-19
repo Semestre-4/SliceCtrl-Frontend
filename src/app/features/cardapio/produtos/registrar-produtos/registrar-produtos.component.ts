@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Categoria } from 'src/app/shared/models/enums/categoria';
+import { Produtos } from '../produto';
+import { ProdutosService } from '../service/produtos.service';
 
 @Component({
   selector: 'app-registrar-produtos',
@@ -7,4 +10,14 @@ import { Component } from '@angular/core';
 })
 export class RegistrarProdutosComponent {
 
+  categoria!: Categoria;
+  produto: Produtos = new Produtos();
+
+  categoriaOption = Object.values(Categoria);
+
+  constructor(private service: ProdutosService){}
+
+  submit(){
+    this.service.save(this.produto).subscribe();
+  }
 }
