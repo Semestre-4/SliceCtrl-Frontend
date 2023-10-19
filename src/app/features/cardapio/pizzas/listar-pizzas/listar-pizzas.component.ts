@@ -36,6 +36,7 @@ export class ListarPizzasComponent implements OnInit{
     tableHeaders.push(new TableHeader('', ''));
     tableHeaders.push(new TableHeader('Preço', 'preco'));
     tableHeaders.push(new TableHeader('', ''));
+    tableHeaders.push(new TableHeader('Data', 'cadastro'));
 
     console.log(this.data[0].nomeProduto)
 
