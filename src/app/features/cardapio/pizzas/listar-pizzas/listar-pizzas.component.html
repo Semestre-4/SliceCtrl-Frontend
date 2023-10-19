@@ -1,2 +1,14 @@
 <app-cardapio-navbar></app-cardapio-navbar>
 <app-cardapio-new-register></app-cardapio-new-register>
+<div class="listar-pizzas">
+    <div class="body">
+      <app-table
+      [headers]="callHeaders()"
+      [apiUrl]="apiUrlPath()"
+      [editPath]="'pizza/edit'"
+      [entityName]="'pizza'" 
+      [showDeleteButton]="true"
+      >
+    </app-table>  
+  </div>
+  </div> 
