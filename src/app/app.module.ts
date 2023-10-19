@@ -35,7 +35,7 @@ import { ListarFuncionariosComponent } from './features/funcionarios/listar-func
 import { RegisterFuncionariosComponent } from './features/funcionarios/register-funcionarios/register-funcionarios.component';
 import { ProductDisplayComponent } from './features/pedidos/components/product-display/product-display.component';
 import { SaborDisplayComponent } from './features/pedidos/components/sabor-display/sabor-display.component';
-import { FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ProdutosService } from './features/cardapio/produtos/service/produtos.service';
 import { PizzasService } from './features/cardapio/pizzas/service/pizzas.service';
 import { CardapioNavbarComponent } from './features/cardapio/components/cardapio-navbar/cardapio-navbar.component';
@@ -43,6 +43,10 @@ import { CardapioNewRegisterComponent } from './features/cardapio/components/car
 import { ChosenPizzaComponent } from './features/pedidos/components/chosen-pizza/chosen-pizza.component';
 import { TableComponent } from './shared/components/table/table.component';
 import { EditPedidoComponent } from './features/pedidos/edit-pedido/edit-pedido.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
+
 
 @NgModule({
   declarations: [
@@ -81,14 +85,18 @@ import { EditPedidoComponent } from './features/pedidos/edit-pedido/edit-pedido.
     CardapioNavbarComponent,
     CardapioNewRegisterComponent,
     TableComponent,
-    EditPedidoComponent
-    ],
+    EditPedidoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    MatFormFieldModule,
+    MatSelectModule, 
+    FormsModule, 
+    ReactiveFormsModule, 
+
   ],
   providers: [PedidoService,ProdutosService,PizzasService,
     FormatarPrecoPipe,

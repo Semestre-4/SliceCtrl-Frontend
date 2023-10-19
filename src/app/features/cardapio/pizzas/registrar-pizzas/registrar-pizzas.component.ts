@@ -5,7 +5,7 @@ import { Pizzas } from '../pizza';
 @Component({
   selector: 'app-registrar-pizzas',
   templateUrl: './registrar-pizzas.component.html',
-  styleUrls: ['./registrar-pizzas.component.scss']
+  styleUrls: ['./registrar-pizzas.component.scss'],
 })
 export class RegistrarPizzasComponent {
 

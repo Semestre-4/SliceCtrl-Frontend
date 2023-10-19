@@ -1,38 +1,60 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Sabores } from '../sabor';
-import { Tamanho } from 'src/app/shared/models/enums/tamanho-pizza';
 import { Ingredientes } from '../../ingredientes/ingrediente';
 import { IngredientesService } from '../../ingredientes/service/ingredientes.service';
-import { Observable } from 'rxjs';
+import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { SaboresService } from '../service/sabores.service';
+import {NgIf, NgFor} from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 @Component({
   selector: 'app-registrar-sabores',
   templateUrl: './registrar-sabores.component.html',
-  styleUrls: ['./registrar-sabores.component.scss']
+  styleUrls: ['./registrar-sabores.component.scss'],
 })
-export class RegistrarSaboresComponent {
+export class RegistrarSaboresComponent implements OnInit{
 
   sabor: Sabores = new Sabores();
-  ingredientesTest!: Ingredientes[];
+  ingredientes!: Ingredientes[];
+ 
+  toppings = new FormControl('');
 
-  ingredientesService = inject(IngredientesService);
 
-  ingredientes = Object.values(this.ingredientesService);
+  ingredienteSelecionado!: Ingredientes[]
 
-  constructor(){
-    this.findIngredientes
+  constructor(private ingredientesService: IngredientesService, private service: SaboresService){
   } 
+
+  ngOnInit(){
+  
+  this.findIngredientes();
+  }
   
 findIngredientes(){
 
   this.ingredientesService.getAll().subscribe({
-    next: ingredientes => { 
-      this.ingredientesTest = ingredientes;
+    next: i => { 
+      this.ingredientes = i;
     },
     error: erro => {
       alert('Exemplo de tratamento de erro! Observe o erro no console!');
-      console.error(erro);
     }
   });
+}
+
+submit(){
+  this.sabor.ingredientesDTOS = this.ingredienteSelecionado;
+  console.log("Submit: ", this.sabor.ingredientesDTOS)
+  this.service.save(this.sabor).subscribe(
+    {
+      next: (i) => { 
+        console.log(i);
+      },
+      error: erro => {
+        alert('Exemplo de tratamento de erro! Observe o erro no console!');
+      }
+    });
 }
 }

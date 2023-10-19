@@ -20,15 +20,29 @@
     
             <div class="col-md-3">
               <label for="ingredientes" class="form-label marginleft margintop">Ingredientes</label>
-              <select
+              <!-- <select
                 type="text"
                 class="form-control marginleft inputs"
                 id="ingredientes"
                 name="ingredientes"
-                [(ngModel)]="sabor.ingredientes"          >  
-                <option *ngFor="let ingrediente of ingredientes">{{ ingrediente }}</option>
-                </select>
-        </div>
+                [(ngModel)]="ingredienteSelecionado"          >  
+                <option value="" disabled>Escolha ...</option>
+                <option *ngFor="let ingrediente of ingredientes" value="ingrediente">{{ ingrediente.nomeIngrediente }}</option>
+                </select> -->
+
+                
+                <mat-select [formControl]="toppings" multiple [(ngModel)]="ingredienteSelecionado" class="form-control marginleft inputs">
+                    <mat-select-trigger>
+                      {{ingredienteSelecionado?.[0]?.nomeIngrediente || ''}}
+                      <span *ngIf="(ingredienteSelecionado?.length || 0) > 1" class="example-additional-selection">
+                        (+{{(ingredienteSelecionado?.length || 0) - 1}} {{ingredienteSelecionado?.length === 2 ? 'outro' : 'outros'}})
+                      </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let topping of ingredientes" [value]="topping">{{topping.nomeIngrediente}}</mat-option>
+                  </mat-select>
+              
+              </div>
+
     
     
             <div class="col-md-3 marginleft">
@@ -61,7 +75,7 @@
     
         <div class="actions d-flex flex-row gap-1">
             <button class="btn btn-primary" routerLink="/cardapio/sabores/listar">Cancelar</button>
-            <button class="btn btn-secondary" type="submit"  >Continuar</button>
+            <button class="btn btn-secondary" type="submit" (click)="submit()"  >Continuar</button>
           </div>
     
     

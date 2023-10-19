@@ -8,7 +8,6 @@ export class Sabores extends AbstractEntity{
     nomeSabor!: string;
     descricao!: string;
     valorAdicional!: number;
-    ingredientes!: Ingredientes[];
-    pedidoPizza!: PedidoPizza[];
+    ingredientesDTOS!: Ingredientes[];
 
 }
