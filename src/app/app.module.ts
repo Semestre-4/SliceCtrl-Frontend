@@ -47,7 +47,6 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,7 +84,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     CardapioNavbarComponent,
     CardapioNewRegisterComponent,
     TableComponent,
-    EditPedidoComponent],
+    EditPedidoComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
