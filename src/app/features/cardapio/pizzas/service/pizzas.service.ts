@@ -26,8 +26,8 @@ export class PizzasService {
     return this.http.get<Pizzas[]>(`${this.baseURL}/tamanho/${tamanho}`);
   }
 
-  save(pizza: Pizzas): Observable<HttpStatusCode>{
-    return this.http.post<HttpStatusCode>(`${this.baseURL}`, pizza);
+  save(pizza: Pizzas): Observable<string>{
+    return this.http.post<string>(`${this.baseURL}`, pizza);
   }
 
   edit(pizza: Pizzas): Observable<HttpStatusCode>{

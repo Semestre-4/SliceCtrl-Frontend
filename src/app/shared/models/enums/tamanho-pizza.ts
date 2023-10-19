@@ -1,6 +1,6 @@
 export enum Tamanho{
-    P = "Pequeno",
-    M = "Medio",
-    G = "Grande",
-    XG = "Extra Gigante"
+    P = "P",
+    M = "M",
+    G = "G",
+    XG = "XG"
 }

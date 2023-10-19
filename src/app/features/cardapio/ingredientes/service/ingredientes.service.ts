@@ -27,8 +27,8 @@ export class IngredientesService {
     return this.http.get<Ingredientes>(`${this.baseURL}/nome/${nome}`);
   }
 
-  save(ingrediente: Ingredientes): Observable<HttpStatusCode>{
-    return this.http.post<HttpStatusCode>(`${this.baseURL}`, ingrediente);
+  save(ingrediente: Ingredientes): Observable<string>{
+    return this.http.post<string>(`${this.baseURL}`, ingrediente);
   }
 
   edit(ingrediente: Ingredientes): Observable<HttpStatusCode>{
