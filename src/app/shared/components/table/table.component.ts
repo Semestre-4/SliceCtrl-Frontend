@@ -63,8 +63,9 @@ export class TableComponent implements OnInit {
     return valor;
   }
 
-  onEditClick(item:any){
-    this.router.navigate([this.editPath]);
+  onEditClick(item: any) {
+    const entityId = item.id;
+    this.router.navigate([`/${this.editPath}`, entityId]);
   }
 
   onDeleteClick(data: any) {
