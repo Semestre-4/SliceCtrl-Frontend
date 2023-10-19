@@ -39,7 +39,7 @@ export class TableComponent implements OnInit {
       this.carregando = false;
     });
   }
-
+  
   retornarValor(tableHeader:TableHeader, item: any) {
     const parte = tableHeader.campo.split('.');
     let valor = item;
