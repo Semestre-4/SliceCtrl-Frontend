@@ -15,6 +15,7 @@ import { TableHeader } from 'src/app/shared/components/table/table-header';
 })
 export class ListarPedidoComponent implements OnInit{
   data: any[] = [];
+  orderId: number = 0;
 
 
   p: Pedido = new Pedido(

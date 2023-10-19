@@ -71,7 +71,7 @@ const routes: Routes = [
     { path: 'menu-pedido/:id', component: MenuPedidoComponent },
     { path: 'sabores-pedido/:id', component: SaboresPedidoComponent },
     { path: 'finalizar-pedido/:id', component: FinalizarPedidoComponent },
-    { path: 'edit', component: EditPedidoComponent}
+    { path: 'edit/:id', component: EditPedidoComponent}
   ]
 },
 {
