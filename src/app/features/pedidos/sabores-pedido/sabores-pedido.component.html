@@ -2,7 +2,7 @@
     <div class="menu d-flex flex-column align-items-start mt-3">
         <p class="type-title">Sabores</p>
         <app-search-bar class="align-selft-center"></app-search-bar>
-        <app-sabor-display class="mt-3"></app-sabor-display>      
+        <app-sabor-display class="mt-3" *ngFor="let sabor of sabores" [sabor]="sabor" (addToPizza)="addSaborToPizza($event)"></app-sabor-display>      
     </div>
     <div class="summary d-flex flex-column h-100">
         <div class="fixedInfos">

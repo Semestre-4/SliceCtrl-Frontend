@@ -1,8 +1,11 @@
 <div class="container">
-    <div class="id">#109</div>
+    <div class="id">#{{sabor.id}}</div>
     <div class="p-details d-flex flex-column gap-1">
-        <div class="p-name">Sabor : G</div>
-        <div class="p-price">R$ 30.00</div>
+        <div class="p-name">{{sabor.nomeSabor}}</div>
+        <div class="p-price">R$ {{sabor.valorAdicional}}</div>
     </div>
-    <button class="add">Slecionar Sabor</button>
+    <div class="description">
+        <div>{{sabor.descricao}}</div>
+    </div>
+    <button class="add" (click)="addToPizzaClicked()">Selecionar Sabor</button>
 </div>

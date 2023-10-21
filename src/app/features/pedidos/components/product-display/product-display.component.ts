@@ -13,4 +13,4 @@ export class ProductDisplayComponent {
     this.addToPedido.emit(this.product);
   }
   
-}
+} 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sabor-display',
@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./sabor-display.component.scss']
 })
 export class SaborDisplayComponent {
+  @Input() sabor: any;
+  @Output() addToPizza = new EventEmitter<any>();
 
+  addToPizzaClicked() {
+    this.addToPizza.emit(this.sabor);
+  }
+  
 }
