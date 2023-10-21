@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output } from '@angular/core';
 import { ProdutosService } from '../../cardapio/produtos/service/produtos.service';
 import { PizzasService } from '../../cardapio/pizzas/service/pizzas.service';
 import { Observable, catchError, forkJoin, map, of } from 'rxjs';
@@ -11,11 +11,10 @@ import { Funcionario } from '../../funcionarios/funcionario';
 import { Pagamento } from '../models/pagamento';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 import { Status } from 'src/app/shared/models/enums/status-pedido';
-import { PedidoProduto } from '../models/pedido-produto';
-import { PedidoPizza } from '../models/pedido-pizza';
-import { Produtos } from '../../cardapio/produtos/produto';
 import { Pizzas } from '../../cardapio/pizzas/pizza';
-import { ChosenPizzaComponent } from '../components/chosen-pizza/chosen-pizza.component';
+import { Produtos } from '../../cardapio/produtos/produto';
+import { PedidoProduto } from '../models/pedido-produto';
+import { QuantityService } from '../service/quantity.service';
 
 @Component({
   selector: 'app-menu-pedido',
@@ -23,15 +22,23 @@ import { ChosenPizzaComponent } from '../components/chosen-pizza/chosen-pizza.co
   styleUrls: ['./menu-pedido.component.scss']
 })
 export class MenuPedidoComponent implements OnInit {
-  @Input() options: string[] = [];
+
   products: any[] = [];
   pizzas: any[] = [];
+  pizzaSelected: Pizzas[] = [];
+  productsSelected: Produtos[] = [];
   filteredProducts: any[] = [];
   filteredPizzas: any[] = [];
+
+  pedidoProduto: PedidoProduto[] = [];
+
   selectedCategory: string = 'Todos';
   searchTerm: string = '';
+  quantity: number = 0;
   pedidoId: number = Number(this.getPedidoIdFromUrl());
-  @Input() selectedProduct: any;
+
+  @Input() selectedProduct: Produtos = new Produtos();
+  @Input() options: string[] = [];
 
 
   pedido: Pedido = new Pedido(
@@ -51,12 +58,25 @@ export class MenuPedidoComponent implements OnInit {
     private productService: ProdutosService,
     private pizzaService: PizzasService,
     private pedidoService: PedidoService,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private quantityService: QuantityService
+  ) {
+  }
+
+  updatePedidoProduto(productId: number, newQuantity: number) {
+    const pedidoProductIndex = this.pedidoProduto.findIndex(product => product.id === productId);
+
+    if (pedidoProductIndex !== -1) {
+      this.pedidoProduto[pedidoProductIndex].qtdePedida = newQuantity;
+    }
+  }
+
 
   ngOnInit(): void {
+
     this.fetchProducts();
     this.fetchPizzas();
+
     const pedidoId = this.getPedidoIdFromUrl();
     if (pedidoId !== null) {
       this.pedidoService.getPedidoById(pedidoId).subscribe({
@@ -67,8 +87,23 @@ export class MenuPedidoComponent implements OnInit {
           console.error('Error fetching pedido: ', error);
         }
       });
-    } else {
-    }
+    } 
+    const storedProductsSelected = JSON.parse(localStorage.getItem('productsSelected') || '[]');
+    this.productsSelected = storedProductsSelected;
+    
+    const storedPedidoProduto = JSON.parse(localStorage.getItem('pedidoProduto') || '[]');
+    this.pedidoProduto = storedPedidoProduto.map((item: any) => {
+      return {
+        productId: item.productId,
+        quantity: item.quantity
+      };
+    });
+
+    this.quantityService.quantity$.subscribe(quantity => {
+      this.quantity = quantity;
+    });
+    this.updatePedidoProduto(this.selectedProduct.id, this.quantity);
+    console.log(this.pedidoProduto);
   }
 
   getPedidoIdFromUrl(): number | null {
@@ -131,9 +166,38 @@ export class MenuPedidoComponent implements OnInit {
   }
 
   addToPedido(product: any): void {
-    
+    const pedidoProduct = this.transformProdutoToPedidoProduto(product, this.quantity);
+  
+    const isAlreadyAdded = this.productsSelected.some(item => item.id === product.id);
+  
+    if (!isAlreadyAdded) {
+      this.productsSelected.push(product);
+      this.updateLocalStorage(); 
+    }
   }
+  
+  private updateLocalStorage() {
+    localStorage.setItem('productsSelected', JSON.stringify(this.productsSelected));
+  }
+  
+
+  transformProdutoToPedidoProduto(product: any, quantity: number) {
+    const pedidoProduct: PedidoProduto = new PedidoProduto(
+      product,
+      this.pedido,
+      quantity
+    );
+    this.pedidoProduto.push(pedidoProduct);
+    console.log(this.pedidoProduto);
+  }
+
   addPizzaToPedido(pizza: any): void {
+    this.pizzaSelected.push(pizza);
+    console.log(this.pizzaSelected);
+  }
+
+  removeProdutoFromPedido(id: number): void {
+    this.productsSelected = this.productsSelected.filter(product => product.id !== id);
   }
 
 }

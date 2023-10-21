@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PedidoPizza } from '../../models/pedido-pizza';
 import { PedidoProduto } from '../../models/pedido-produto';
 
@@ -8,9 +8,5 @@ import { PedidoProduto } from '../../models/pedido-produto';
   styleUrls: ['./chosen-pizza.component.scss']
 })
 export class ChosenPizzaComponent {
-  receivedPedido: PedidoProduto | PedidoPizza = {} as PedidoProduto | PedidoPizza;
-
-  receivePedido(pedido: PedidoProduto | PedidoPizza): void {
-    this.receivedPedido = pedido;
-  }
+  @Input() pizza: any;
 }

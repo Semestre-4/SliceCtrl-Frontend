@@ -27,6 +27,7 @@
           </div>          
         <div class="variable-content">
           <div class="variable-content">
+            <app-chosen-product *ngFor="let product of productsSelected" [product]="product" [quantity]="0" (removeProduct)="removeProdutoFromPedido($event)"></app-chosen-product>
           </div>
           
         </div>
