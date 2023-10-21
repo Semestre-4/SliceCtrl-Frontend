@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, Output, ChangeDetectorRef } from '
 import { ProdutosService } from '../../cardapio/produtos/service/produtos.service';
 import { PizzasService } from '../../cardapio/pizzas/service/pizzas.service';
 import { Categoria } from 'src/app/shared/models/enums/categoria';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PedidoService } from '../service/pedido.service';
 import { Pedido } from '../models/pedido';
 import { Cliente } from '../../clientes/cliente';
@@ -58,6 +58,7 @@ export class MenuPedidoComponent implements OnInit {
     private pizzaService: PizzasService,
     private pedidoService: PedidoService,
     private route: ActivatedRoute,
+    private router: Router,
     private quantityService: QuantityService,
     private cdr: ChangeDetectorRef
   ) {}
@@ -90,7 +91,7 @@ export class MenuPedidoComponent implements OnInit {
     const storedPedidoProduto = JSON.parse(localStorage.getItem('pedidoProduto') || '[]');
     this.pedidoProduto = storedPedidoProduto.map((item: any) => {
       return {
-        productId: item.productId,
+        product: item.productId,
         quantity: item.quantity
       };
     });
@@ -161,7 +162,6 @@ export class MenuPedidoComponent implements OnInit {
 
   // Calculates valorPedido
   calculateValorPedido(): void {
-    console.log(this.calculatedPrices);
   }
 
   // Adds price to calculatedPrices
@@ -214,7 +214,9 @@ export class MenuPedidoComponent implements OnInit {
   // Updates local storage with productsSelected
   private updateLocalStorage(): void {
     localStorage.setItem('productsSelected', JSON.stringify(this.productsSelected));
+    localStorage.setItem('pedidoProduto', JSON.stringify(this.pedidoProduto));
   }
+  
 
   // Transforms product to PedidoProduto and updates local storage
   transformProdutoToPedidoProduto(product: any, quantity: number): void {
@@ -238,5 +240,31 @@ export class MenuPedidoComponent implements OnInit {
   // Removes a product from productsSelected
   removeProdutoFromPedido(id: number): void {
     this.productsSelected = this.productsSelected.filter(product => product.id !== id);
+  }
+
+  // Get quantity of a product
+  getQuantity(productId: number): number {
+    const storedProductsSelected = JSON.parse(localStorage.getItem('pedidoProduto') || '[]');
+    console.log(storedProductsSelected);
+    const product = storedProductsSelected.find((item: { productId: number; }) => item.productId === productId);
+    return product ? product.quantity : 0;
+  }
+  
+
+  //Saves added products and pizzas to pedido on DB
+  savePedido(): void {
+    //Loop through productsSelected and foreach product, save it to pedido
+    this.productsSelected.forEach(product => {
+      console.log(this.getQuantity(product.id));
+      const pedidoProductObject: PedidoProduto = new PedidoProduto(product, this.pedido, this.getQuantity(product.id));
+      this.pedidoService.addProdutoToPedido(this.pedido.id, pedidoProductObject).subscribe({
+        next: (pedido) => {
+          this.router.navigate(['/pedidos/finalizar-pedido', this.pedido.id]);
+        },
+        error: (error) => {
+          console.error('Error adding product to pedido: ', error);
+        }
+      });
+    });
   }
 }
