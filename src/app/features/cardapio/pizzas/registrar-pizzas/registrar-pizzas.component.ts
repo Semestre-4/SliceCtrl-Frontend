@@ -32,12 +32,12 @@ export class RegistrarPizzasComponent {
           setTimeout(() => {this.router.navigate(["/cardapio/pizzas/listar"])}, 1000 )  
         },
         error: erro => {
-          if (erro.status === 200) {
+          if (erro.status == 201) {
             this.mensagem = 'Cadastrado com sucesso!';
             this.type = 'success';
             setTimeout(() => {this.router.navigate(["/cardapio/pizzas/listar"])}, 1000 )  
           }else{
-            this.mensagem = erro.error;
+            this.mensagem = erro.error.response;
             this.type = 'danger';
           }
       }
