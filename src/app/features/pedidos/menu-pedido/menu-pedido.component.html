@@ -27,7 +27,7 @@
           </div>          
         <div class="variable-content">
           <div class="variable-content">
-            <app-chosen-product *ngFor="let product of productsSelected" [product]="product" [quantity]="0" (removeProduct)="removeProdutoFromPedido($event)"></app-chosen-product>
+            <app-chosen-product *ngFor="let product of productsSelected" (priceCalculated)="onPriceCalculated($event)" [product]="product" [quantity]="0" (removeProduct)="removeProdutoFromPedido($event)"></app-chosen-product>
           </div>
           
         </div>
@@ -46,7 +46,7 @@
                     <p class="type-subtitlee">R$ {{valorTotal}}</p>
                 </div>
                 <div class="btns d-flex flex-row gap-1">
-                    <button class="btn btn-sm btn-block">Cancelar</button>
+                    <button class="btn btn-sm btn-block" routerLink="/pedidos/listar-pedido">Cancelar</button>
                     <button class="btn btn-sm btn-block">Finalizar</button>
                 </div>
             </div>

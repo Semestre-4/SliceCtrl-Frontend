@@ -13,11 +13,15 @@ export class ChosenProductComponent {
   @Output() removeProduct = new EventEmitter<number>();
   @Output() quantityChanged = new EventEmitter<{ productId: number, quantity: number }>();
   @Input() quantity: number = 1;
+  @Output() priceCalculated = new EventEmitter<number>();
+
 
   constructor(private quantityService: QuantityService){}
 
   calculatePrice(): number {
-    return this.product.preco * this.quantity;
+    const price = this.product.preco * this.quantity;
+    this.priceCalculated.emit(price);
+    return price;
   }
 
   increaseQuantity(): void {

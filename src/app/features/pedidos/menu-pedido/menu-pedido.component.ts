@@ -44,6 +44,9 @@ export class MenuPedidoComponent implements OnInit {
   valorEntrega: number = 15.00;
   valorTotal: number = 0;
 
+  calculatedPrices: number[] = [];
+
+
 
   pedido: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
@@ -108,7 +111,16 @@ export class MenuPedidoComponent implements OnInit {
       this.quantity = quantity;
     });
     this.updatePedidoProduto(this.selectedProduct.id, this.quantity);
-    console.log(this.pedidoProduto);
+    this.calculateValorPedido();
+  }
+
+
+  calculateValorPedido() {
+    console.log(this.calculatedPrices);
+  }
+
+  onPriceCalculated(price: number) {
+    this.calculatedPrices.push(price);
   }
 
   getPedidoIdFromUrl(): number | null {
@@ -184,7 +196,6 @@ export class MenuPedidoComponent implements OnInit {
   private updateLocalStorage() {
     localStorage.setItem('productsSelected', JSON.stringify(this.productsSelected));
   }
-  
   
 
   transformProdutoToPedidoProduto(product: any, quantity: number) {
