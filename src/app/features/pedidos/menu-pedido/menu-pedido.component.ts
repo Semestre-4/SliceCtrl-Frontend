@@ -257,14 +257,20 @@ export class MenuPedidoComponent implements OnInit {
     this.productsSelected.forEach(product => {
       console.log(this.getQuantity(product.id));
       const pedidoProductObject: PedidoProduto = new PedidoProduto(product, this.pedido, this.getQuantity(product.id));
+      console.log(pedidoProductObject);
       this.pedidoService.addProdutoToPedido(this.pedido.id, pedidoProductObject).subscribe({
         next: (pedido) => {
+          localStorage.clear();
           this.router.navigate(['/pedidos/finalizar-pedido', this.pedido.id]);
         },
-        error: (error) => {
-          console.error('Error adding product to pedido: ', error);
+        error: (erro) => {
+          if (erro.status === 200) {
+            localStorage.clear();
+            this.router.navigate(['/pedidos/finalizar-pedido', this.pedido.id]);
+          }
         }
       });
     });
   }
 }
+
