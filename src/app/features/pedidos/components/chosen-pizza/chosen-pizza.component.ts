@@ -8,5 +8,4 @@ import { PedidoProduto } from '../../models/pedido-produto';
   styleUrls: ['./chosen-pizza.component.scss']
 })
 export class ChosenPizzaComponent {
-  @Input() pizza: any;
 }
