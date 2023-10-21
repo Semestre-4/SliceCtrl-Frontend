@@ -7,6 +7,7 @@ import { SaboresService } from '../service/sabores.service';
 import {NgIf, NgFor} from '@angular/common';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,10 +22,14 @@ export class RegistrarSaboresComponent implements OnInit{
  
   toppings = new FormControl('');
 
+  
+  mensagem: string = '';
+  type: string ='';
+
 
   ingredienteSelecionado!: Ingredientes[]
 
-  constructor(private ingredientesService: IngredientesService, private service: SaboresService){
+  constructor(private ingredientesService: IngredientesService, private service: SaboresService, private router: Router){
   } 
 
   ngOnInit(){
@@ -50,11 +55,21 @@ submit(){
   this.service.save(this.sabor).subscribe(
     {
       next: (i) => { 
-        console.log(i);
+        this.mensagem = 'Cadastrado com sucesso!';
+        this.type = 'success';
+
+        setTimeout(() => {this.router.navigate(["/cardapio/sabores/listar"])}, 1000 )  
       },
       error: erro => {
-        alert('Exemplo de tratamento de erro! Observe o erro no console!');
-      }
+        if (erro.status === 200) {
+          this.mensagem = 'Cadastrado com sucesso!';
+          this.type = 'success';
+          setTimeout(() => {this.router.navigate(["/cardapio/sabores/listar"])}, 1000 )  
+        }else{
+          this.mensagem = erro.error;
+          this.type = 'danger';
+        }
+    }
     });
 }
 }

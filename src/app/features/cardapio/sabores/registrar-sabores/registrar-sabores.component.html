@@ -76,7 +76,12 @@
         <div class="actions d-flex flex-row gap-1">
             <button class="btn btn-primary" routerLink="/cardapio/sabores/listar">Cancelar</button>
             <button class="btn btn-secondary" type="submit" (click)="submit()"  >Continuar</button>
-          </div>
+        </div>
+
+
+        <div class="aviso d-flex align-items-center" id="alert" [ngClass]="{'alert alert-success': type === 'success', 'alert alert-danger': type === 'danger' }">
+          <p>{{mensagem}}</p>
+      </div>
     
     
     </form>  
