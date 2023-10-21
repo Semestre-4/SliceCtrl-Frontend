@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, Output } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, ChangeDetectorRef } from '@angular/core';
 import { ProdutosService } from '../../cardapio/produtos/service/produtos.service';
 import { PizzasService } from '../../cardapio/pizzas/service/pizzas.service';
 import { Observable, catchError, forkJoin, map, of } from 'rxjs';
@@ -40,6 +40,10 @@ export class MenuPedidoComponent implements OnInit {
   @Input() selectedProduct: Produtos = new Produtos();
   @Input() options: string[] = [];
 
+  valorPedido: number = 0;
+  valorEntrega: number = 15.00;
+  valorTotal: number = 0;
+
 
   pedido: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
@@ -59,7 +63,8 @@ export class MenuPedidoComponent implements OnInit {
     private pizzaService: PizzasService,
     private pedidoService: PedidoService,
     private route: ActivatedRoute,
-    private quantityService: QuantityService
+    private quantityService: QuantityService,
+    private cdr : ChangeDetectorRef
   ) {
   }
 
@@ -167,18 +172,19 @@ export class MenuPedidoComponent implements OnInit {
 
   addToPedido(product: any): void {
     const pedidoProduct = this.transformProdutoToPedidoProduto(product, this.quantity);
-  
     const isAlreadyAdded = this.productsSelected.some(item => item.id === product.id);
   
     if (!isAlreadyAdded) {
       this.productsSelected.push(product);
-      this.updateLocalStorage(); 
+      this.updateLocalStorage();
+      this.cdr.detectChanges();
     }
   }
   
   private updateLocalStorage() {
     localStorage.setItem('productsSelected', JSON.stringify(this.productsSelected));
   }
+  
   
 
   transformProdutoToPedidoProduto(product: any, quantity: number) {
@@ -189,6 +195,8 @@ export class MenuPedidoComponent implements OnInit {
     );
     this.pedidoProduto.push(pedidoProduct);
     console.log(this.pedidoProduto);
+    this.updateLocalStorage();
+    this.cdr.detectChanges();
   }
 
   addPizzaToPedido(pizza: any): void {
