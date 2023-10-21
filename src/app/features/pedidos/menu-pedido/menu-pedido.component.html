@@ -3,8 +3,9 @@
         <app-search-bar (searchEvent)="filterData($event)"></app-search-bar>
         <app-menu-chips (categorySelected)="onCategorySelected($event)"></app-menu-chips>
         <div class="products">
-          <app-product-display *ngFor="let product of filteredProducts" [product]="product"></app-product-display>
-        </div>
+          <app-product-display *ngFor="let product of filteredProducts" [product]="product" (addToPedido)="addToPedido($event)"></app-product-display>
+          <app-pizza-display *ngFor="let pizza of filteredPizzas" [pizza]="pizza" (addPizzaToPedido)="addPizzaToPedido($event)"></app-pizza-display>
+        </div>        
     </div>
     <div class="summary d-flex flex-column h-100">
         <div class="fixedInfos">
@@ -24,7 +25,11 @@
               </div>
             </div>
           </div>          
-        <div class="variable-content"></div>
+        <div class="variable-content">
+          <div class="variable-content">
+          </div>
+          
+        </div>
         <div class="checkout">
             <div class="checkout-content d-flex flex-column">
                 <div class="d-flex flex-row justify-content-between">

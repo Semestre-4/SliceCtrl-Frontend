@@ -45,6 +45,7 @@ import { TableComponent } from './shared/components/table/table.component';
 import { EditPedidoComponent } from './features/pedidos/edit-pedido/edit-pedido.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { PizzaDisplayComponent } from './features/pedidos/components/pizza-display/pizza-display.component';
 
 
 
@@ -85,7 +86,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     CardapioNavbarComponent,
     CardapioNewRegisterComponent,
     TableComponent,
-    EditPedidoComponent],
+    EditPedidoComponent,
+    PizzaDisplayComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

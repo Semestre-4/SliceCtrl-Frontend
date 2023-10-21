@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-product-display',
@@ -7,4 +7,10 @@ import { Component, Input } from '@angular/core';
 })
 export class ProductDisplayComponent {
   @Input() product: any;
+  @Output() addToPedido = new EventEmitter<any>();
+
+  addToPedidoClicked() {
+    this.addToPedido.emit(this.product);
+  }
+  
 }

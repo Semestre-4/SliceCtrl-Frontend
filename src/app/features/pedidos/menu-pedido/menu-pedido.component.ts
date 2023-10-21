@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ProdutosService } from '../../cardapio/produtos/service/produtos.service';
 import { PizzasService } from '../../cardapio/pizzas/service/pizzas.service';
-import { forkJoin } from 'rxjs';
+import { Observable, catchError, forkJoin, map, of } from 'rxjs';
 import { Categoria } from 'src/app/shared/models/enums/categoria';
 import { ActivatedRoute } from '@angular/router';
 import { PedidoService } from '../service/pedido.service';
@@ -11,6 +11,11 @@ import { Funcionario } from '../../funcionarios/funcionario';
 import { Pagamento } from '../models/pagamento';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 import { Status } from 'src/app/shared/models/enums/status-pedido';
+import { PedidoProduto } from '../models/pedido-produto';
+import { PedidoPizza } from '../models/pedido-pizza';
+import { Produtos } from '../../cardapio/produtos/produto';
+import { Pizzas } from '../../cardapio/pizzas/pizza';
+import { ChosenPizzaComponent } from '../components/chosen-pizza/chosen-pizza.component';
 
 @Component({
   selector: 'app-menu-pedido',
@@ -20,9 +25,14 @@ import { Status } from 'src/app/shared/models/enums/status-pedido';
 export class MenuPedidoComponent implements OnInit {
   @Input() options: string[] = [];
   products: any[] = [];
+  pizzas: any[] = [];
   filteredProducts: any[] = [];
+  filteredPizzas: any[] = [];
   selectedCategory: string = 'Todos';
   searchTerm: string = '';
+  pedidoId: number = Number(this.getPedidoIdFromUrl());
+  @Input() selectedProduct: any;
+
 
   pedido: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
@@ -46,6 +56,7 @@ export class MenuPedidoComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchProducts();
+    this.fetchPizzas();
     const pedidoId = this.getPedidoIdFromUrl();
     if (pedidoId !== null) {
       this.pedidoService.getPedidoById(pedidoId).subscribe({
@@ -60,7 +71,7 @@ export class MenuPedidoComponent implements OnInit {
     }
   }
 
-  private getPedidoIdFromUrl(): number | null {
+  getPedidoIdFromUrl(): number | null {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       return +id;
@@ -69,23 +80,29 @@ export class MenuPedidoComponent implements OnInit {
   }
 
   fetchProducts(): void {
-    forkJoin([
-      this.productService.getAll(),
-      this.pizzaService.getAll()
-    ]).subscribe({
-      next: ([products, pizzas]) => {
-        this.products = [
-          ...products.map(product => ({ ...product, category: 'Product', isPizza: false })),
-          ...pizzas.map(pizza => ({ ...pizza, category: 'Pizza', isPizza: true }))
-        ];
+    this.productService.getAll().subscribe({
+      next: (products) => {
+        this.products = [...products.map(product => ({ ...product }))];
         this.filterProducts();
-        console.log('Products and Pizzas: ', this.products);
       },
       error: (error) => {
-        console.error('Error fetching products and pizzas: ', error);
+        console.error('Error fetching products: ', error);
       }
     });
   }
+
+  fetchPizzas(): void {
+    this.pizzaService.getAll().subscribe({
+      next: (pizzas) => {
+        this.pizzas = [...pizzas.map(pizza => ({ ...pizza }))];
+        this.filterProducts();
+      },
+      error: (error) => {
+        console.error('Error fetching pizzas: ', error);
+      }
+    });
+  }
+
 
   onCategorySelected(category: string): void {
     this.selectedCategory = category;
@@ -95,14 +112,28 @@ export class MenuPedidoComponent implements OnInit {
   filterProducts(): void {
     if (this.selectedCategory === 'Todos') {
       this.filteredProducts = this.products;
-    } else if (this.selectedCategory === 'Outros') {
+      this.filteredPizzas = this.pizzas;
+    } else if (this.selectedCategory === 'Pizzas') {
+      this.filteredProducts = [];
+      this.filteredPizzas = this.pizzas;
+    }
+    else if (this.selectedCategory === 'Outros') {
       this.filteredProducts = this.products.filter(product => product.categoria === Categoria.OUTROS);
-    }else {
+      this.filteredPizzas = [];
+    } else {
       const categoryEnum = Categoria[this.selectedCategory.toUpperCase() as keyof typeof Categoria];
       this.filteredProducts = this.products.filter(product => product.categoria === categoryEnum);
+      this.filteredPizzas = [];
     }
   }
 
   filterData(searchTerm: string): void {
   }
+
+  addToPedido(product: any): void {
+    
+  }
+  addPizzaToPedido(pizza: any): void {
+  }
+
 }
