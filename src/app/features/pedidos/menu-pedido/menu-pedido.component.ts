@@ -32,7 +32,7 @@ export class MenuPedidoComponent implements OnInit {
   pedidoProduto: PedidoProduto[] = [];
   selectedCategory: string = 'Todos';
   searchTerm: string = '';
-  quantity: number = 0;
+  quantity: number = 1;
 
   @Input() selectedProduct: Produtos = new Produtos();
   @Input() options: string[] = [];
@@ -211,6 +211,12 @@ export class MenuPedidoComponent implements OnInit {
     }
   }
 
+    // Adds a pizza to pizzaSelected
+    addPizzaToPedido(pizza: any): void {
+      this.router.navigate(['/pedidos/sabores-pedido', pizza.id]);
+    }
+  
+
   // Updates local storage with productsSelected
   private updateLocalStorage(): void {
     localStorage.setItem('productsSelected', JSON.stringify(this.productsSelected));
@@ -229,12 +235,6 @@ export class MenuPedidoComponent implements OnInit {
     console.log(this.pedidoProduto);
     this.updateLocalStorage();
     this.cdr.detectChanges();
-  }
-
-  // Adds a pizza to pizzaSelected
-  addPizzaToPedido(pizza: any): void {
-    this.pizzaSelected.push(pizza);
-    console.log(this.pizzaSelected);
   }
 
   // Removes a product from productsSelected

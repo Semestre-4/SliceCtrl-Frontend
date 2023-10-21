@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class QuantityService {
-  private quantitySubject = new BehaviorSubject<number>(0);
+  private quantitySubject = new BehaviorSubject<number>(1);
   quantity$ = this.quantitySubject.asObservable();
 
   updateQuantity(quantity: number) {
