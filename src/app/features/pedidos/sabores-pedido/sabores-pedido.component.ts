@@ -4,6 +4,7 @@ import { Sabores } from '../../cardapio/sabores/sabor';
 import { SaboresService } from '../../cardapio/sabores/service/sabores.service';
 import { PizzasService } from '../../cardapio/pizzas/service/pizzas.service';
 import { Tamanho } from 'src/app/shared/models/enums/tamanho-pizza';
+import { PedidoPizza } from '../models/pedido-pizza';
 
 @Component({
   selector: 'app-sabores-pedido',
@@ -15,6 +16,8 @@ export class SaboresPedidoComponent implements OnInit {
   pizzaId: number = 0;
   pizzaTamnho: Tamanho = Tamanho.P;
   saboresPermitidos: number = 0;
+  saboresSelecionados: Sabores[] = [];
+  valorPizza: number = 0;
 
   constructor(
     private saborService: SaboresService,
@@ -27,11 +30,11 @@ export class SaboresPedidoComponent implements OnInit {
       this.pizzaId = params['id'];
     });
 
-    // Use the ID to get pizza information
     this.pizzaService.getById(this.pizzaId).subscribe({
       next: pizzaInfo => {
         this.pizzaTamnho = pizzaInfo.tamanho;
         this.saboresPermitidosChanged(this.pizzaTamnho);
+        this.valorPizza = pizzaInfo.preco;
       },
       error: err => console.log('Error', err)
     });
@@ -42,22 +45,33 @@ export class SaboresPedidoComponent implements OnInit {
       },
       error: err => console.log('Error', err)
     });
-
+    
   }
 
   saboresPermitidosChanged(pizzaTamnho: Tamanho) {
-    if(pizzaTamnho == Tamanho.P) {
-      this.saboresPermitidos = 1;
-    } else if(pizzaTamnho == Tamanho.M) {
-      this.saboresPermitidos = 2;
-    } else if(pizzaTamnho == Tamanho.G) {
-      this.saboresPermitidos = 3;
-    }else {
-      this.saboresPermitidos = 4;
+    switch (pizzaTamnho) {
+      case Tamanho.P:
+        this.saboresPermitidos = 1;
+        break;
+      case Tamanho.M:
+        this.saboresPermitidos = 2;
+        break;
+      case Tamanho.G:
+        this.saboresPermitidos = 3;
+        break;
+      default:
+        this.saboresPermitidos = 4;
+        break;
     }
   }
 
-  addSaborToPizza(sabor: any) {
-    console.log('SaborDisplayComponent.addSaborToPizza', sabor);
+  addSaborToPizza(sabor: Sabores) {
+    this.saboresSelecionados.push(sabor);
+    this.valorPizza += sabor.valorAdicional;
   }
+
+  removeSaborFromPizza(sabor: Sabores) {
+    this.saboresSelecionados = this.saboresSelecionados.filter(s => s !== sabor);
+  }
+  
 }

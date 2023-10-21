@@ -2,7 +2,9 @@
     <div class="menu d-flex flex-column align-items-start mt-3">
         <p class="type-title">Sabores</p>
         <app-search-bar class="align-selft-center"></app-search-bar>
-        <app-sabor-display class="mt-3" *ngFor="let sabor of sabores" [sabor]="sabor" (addToPizza)="addSaborToPizza($event)"></app-sabor-display>      
+        <div class="sabores d-flex flex-row gap-2">
+        <app-sabor-display class=" mt-3" *ngFor="let sabor of sabores" [sabor]="sabor" (addToPizza)="addSaborToPizza($event)"></app-sabor-display> 
+      </div>     
     </div>
     <div class="summary d-flex flex-column h-100">
         <div class="fixedInfos">
@@ -20,6 +22,7 @@
           </div>          
         <div class="variable-content">
           <div class="variable-content">
+            <app-chosen-sabores *ngFor="let sabor of saboresSelecionados" [sabor]="sabor"   (removeSabor)="removeSaborFromPizza($event)"></app-chosen-sabores>
           </div>
         </div>
         <div class="form-group p-2">
@@ -30,7 +33,7 @@
             <div class="checkout-content d-flex flex-column">
                 <div class="d-flex flex-row justify-content-between">
                     <p class="type-subtitle">VALOR PIZZA</p>
-                    <p class="type-subtitlee">R$ 00.00</p>
+                    <p class="type-subtitlee">R$ {{valorPizza}}</p>
                 </div>
                 <div class="btns d-flex flex-row gap-1">
                     <button class="btn btn-sm btn-block">Cancelar</button>

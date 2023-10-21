@@ -47,6 +47,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { PizzaDisplayComponent } from './features/pedidos/components/pizza-display/pizza-display.component';
 import { ChosenProductComponent } from './features/pedidos/components/chosen-product/chosen-product.component';
+import { ChosenSaboresComponent } from './features/pedidos/components/chosen-sabores/chosen-sabores.component';
 
 
 
@@ -89,7 +90,8 @@ import { ChosenProductComponent } from './features/pedidos/components/chosen-pro
     TableComponent,
     EditPedidoComponent,
     PizzaDisplayComponent,
-    ChosenProductComponent
+    ChosenProductComponent,
+    ChosenSaboresComponent
     ],
   imports: [
     BrowserModule,

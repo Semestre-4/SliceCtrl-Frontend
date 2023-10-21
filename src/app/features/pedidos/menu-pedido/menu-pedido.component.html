@@ -22,14 +22,13 @@
               <div class="d-flex flex-row justify-content-between">
                 <p class="type-subtitle">FORMA DE ENTREGA</p>
                 <p class="type-subtitlee">{{ pedido.formaDeEntrega }}</p>
-              </div>
+              </div> 
             </div>
           </div>          
         <div class="variable-content">
           <div class="variable-content">
             <app-chosen-product *ngFor="let product of productsSelected" (priceCalculated)="onPriceCalculated($event)" [product]="product" [quantity]="1" (removeProduct)="removeProdutoFromPedido($event)"></app-chosen-product>
           </div>
-          
         </div>
         <div class="checkout">
             <div class="checkout-content d-flex flex-column">
