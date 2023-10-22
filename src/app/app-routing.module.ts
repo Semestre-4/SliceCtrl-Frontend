@@ -20,6 +20,7 @@ import { ListarFuncionariosComponent } from './features/funcionarios/listar-func
 import { RegisterFuncionariosComponent } from './features/funcionarios/register-funcionarios/register-funcionarios.component';
 import { EditPedidoComponent } from './features/pedidos/edit-pedido/edit-pedido.component';
 import { EditProdutoComponent } from './features/cardapio/produtos/edit-produto/edit-produto.component';
+import { EditPizzaComponent } from './features/cardapio/pizzas/edit-pizza/edit-pizza.component';
 
 const routes: Routes = [
   {
@@ -52,7 +53,8 @@ const routes: Routes = [
       path: 'pizzas',
       children: [
         { path: 'listar', component: ListarPizzasComponent },
-        { path: 'register', component: RegistrarPizzasComponent }
+        { path: 'register', component: RegistrarPizzasComponent },
+        { path: 'edit/:id', component: EditPizzaComponent}
       ]
     },
     {
