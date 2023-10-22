@@ -11,15 +11,14 @@ export class Endereco extends AbstractEntity{
     estado: string;
     pais: string;
     cep: string;
-    clientes: Cliente[];    
+    clientes!: Cliente[];    
 
     constructor(    rua: string, numero: number, complemento: string,
         bairro: string,
         cidade: string,
         estado: string,
         pais: string,
-        cep: string,
-        clientes: Cliente[]    
+        cep: string  
     ){
     super();
 
@@ -31,7 +30,6 @@ export class Endereco extends AbstractEntity{
     this.estado = estado;
     this.pais = pais;
     this.cep = cep;
-    this.clientes = clientes;
     }
 
 }
