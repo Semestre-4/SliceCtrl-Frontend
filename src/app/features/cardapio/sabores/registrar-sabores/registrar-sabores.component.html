@@ -20,16 +20,6 @@
     
             <div class="col-md-3">
               <label for="ingredientes" class="form-label marginleft margintop">Ingredientes</label>
-              <!-- <select
-                type="text"
-                class="form-control marginleft inputs"
-                id="ingredientes"
-                name="ingredientes"
-                [(ngModel)]="ingredienteSelecionado"          >  
-                <option value="" disabled>Escolha ...</option>
-                <option *ngFor="let ingrediente of ingredientes" value="ingrediente">{{ ingrediente.nomeIngrediente }}</option>
-                </select> -->
-
                 
                 <mat-select [formControl]="toppings" multiple [(ngModel)]="ingredienteSelecionado" class="form-control marginleft inputs">
                     <mat-select-trigger>

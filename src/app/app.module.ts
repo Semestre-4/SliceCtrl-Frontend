@@ -103,7 +103,8 @@ import { EditIngredienteComponent } from './features/cardapio/ingredientes/edit-
     MatFormFieldModule,
     MatSelectModule, 
     FormsModule, 
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
+    
 
   ],
   providers: [PedidoService,ProdutosService,PizzasService,

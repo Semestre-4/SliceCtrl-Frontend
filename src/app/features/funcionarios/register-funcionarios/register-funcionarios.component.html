@@ -1,1 +1,59 @@
-<p>register-funcionarios works!</p>
+<div class="registrar">
+    <div class="header">
+        <h1>Produto</h1>
+        <hr>
+    </div>
+    
+    <form class="needs-validation">
+        <div class="row g-3">
+          <div class="col-md-3">
+              <label for="nome" class="form-label marginleft margintop">Nome do Funcionario</label>
+              <input
+              type="text"
+              class="form-control marginleft inputs"
+              id="nome"
+              name="nome"
+              placeholder="Digite aqui..."
+              [(ngModel)]="funcionario.nome"
+            />
+        </div>
+    
+    
+            <div class="col-md-3 marginleft">
+                <label for="cpf" class="form-label margintop marginleft">CPF</label>
+                <input
+                  type="text"
+                  class="form-control marginleft inputs"
+                  id="cpf"
+                  name="cpf"
+                  placeholder="Digite aqui..."
+                  [(ngModel)]="funcionario.cpf"
+                />
+              </div>
+    
+    
+            <div class="col-md-3 marginleft">
+                <label for="telefone" class="form-label margintop marginleft">Telefone</label>
+                <input
+                type="text"
+                class="form-control inputs marginleft"
+                id="telefone"
+                name="telefone"
+                placeholder="Digite aqui..."
+                [(ngModel)]="funcionario.telefone"
+                />
+            </div>
+        </div>
+
+        <div class="actions d-flex flex-row gap-1">
+      
+            <button class="btn btn-primary" routerLink="/funcionarios/listar">Cancelar</button>
+            <button class="btn btn-secondary" type="submit" (click)="submit()" >Continuar</button>
+          </div>
+    
+    
+          <div class="aviso d-flex align-items-center" id="alert" [ngClass]="{'alert alert-success': type === 'success', 'alert alert-danger': type === 'danger' }">
+            <p>{{mensagem}}</p>
+        </div>
+    </form>  
+    </div>
