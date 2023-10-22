@@ -29,7 +29,10 @@ export class CardapioNewRegisterComponent implements OnInit{
     } else if (paginaAtual.includes('ingredientes')) {
       this.componenteTexto = 'Novo Ingrediente';
       
-    } else {
+    }else if (paginaAtual.includes('funcionario')) {
+      this.componenteTexto = 'Novo Funcionario';
+    }
+    else {
       this.componenteTexto = '...';
     }
   }
@@ -45,6 +48,8 @@ export class CardapioNewRegisterComponent implements OnInit{
       this.router.navigate(["/cardapio/sabores/register"]);  
     } else if (paginaAtual.includes('ingredientes')) {
       this.router.navigate(["/cardapio/ingredientes/register"]);  
+    }else if (paginaAtual.includes('funcionario')) {
+      this.router.navigate(["/funcionarios/register"]);  
     } else {
       this.componenteTexto = '...';
     }

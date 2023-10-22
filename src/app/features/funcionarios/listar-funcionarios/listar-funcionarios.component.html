@@ -1,1 +1,18 @@
-<p>listar-funcionarios works!</p>
+<div class="header">
+    <h1>Funcionarios</h1>
+    <hr>
+</div>
+
+<app-cardapio-new-register></app-cardapio-new-register>
+<div class="listar-funcionarios">
+    <div class="body">
+      <app-table
+      [headers]="callHeaders()"
+      [apiUrl]="apiUrlPath()"
+      [editPath]="'funcionarios/edit'"
+      [entityName]="'funcionario'" 
+      [showDeleteButton]="true"
+      >
+    </app-table>  
+  </div>
+  </div> 
