@@ -28,11 +28,11 @@ export class EditPizzaComponent {
     const path = location.path();
     const parts = path.split('/');
     this.id = parts[parts.length - 1];
-    this.getProdutoById(this.id);
+    this.getPizzaById(this.id);
 
   }
 
-  getProdutoById(id: string){
+  getPizzaById(id: string){
 
     this.service.getById(Number(id)).subscribe({
       next: success => {

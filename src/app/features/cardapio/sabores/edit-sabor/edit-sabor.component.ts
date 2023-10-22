@@ -5,18 +5,20 @@ import { IngredientesService } from '../../ingredientes/service/ingredientes.ser
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SaboresService } from '../service/sabores.service';
 import { Router } from '@angular/router';
-
+import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-registrar-sabores',
-  templateUrl: './registrar-sabores.component.html',
-  styleUrls: ['./registrar-sabores.component.scss'],
+  selector: 'app-edit-sabor',
+  templateUrl: './edit-sabor.component.html',
+  styleUrls: ['./edit-sabor.component.scss']
 })
-export class RegistrarSaboresComponent implements OnInit{
+export class EditSaborComponent implements OnInit{
 
   sabor: Sabores = new Sabores();
   ingredientes!: Ingredientes[];
  
+  id: string
+
   toppings = new FormControl('');
 
   
@@ -26,40 +28,54 @@ export class RegistrarSaboresComponent implements OnInit{
 
   ingredienteSelecionado!: Ingredientes[]
 
-  constructor(private ingredientesService: IngredientesService, private service: SaboresService, private router: Router){
-  } 
+  constructor(private ingredientesService: IngredientesService, private service: SaboresService, private router: Router, private location: Location){
+    const path = location.path();
+    const parts = path.split('/');
+    this.id = parts[parts.length - 1];
+    this.getSaborById(this.id);
 
-  ngOnInit(){
+  }
+
+  ngOnInit(){  
+    this.findIngredientes();
   
-  this.findIngredientes();
+  }
+
+  findIngredientes(){
+  
+    this.ingredientesService.getAll().subscribe({
+      next: i => { 
+        this.ingredientes = i;
+      },
+      error: erro => {
+        alert('Exemplo de tratamento de erro! Observe o erro no console!');
+      }
+    });
+  }
+
+  getSaborById(id: string){
+    this.service.getById(Number(id)).subscribe({
+      next: success => {
+        this.sabor = success
+        this.ingredienteSelecionado = this.sabor.ingredientesDTOS
+      }});
   }
   
-findIngredientes(){
-
-  this.ingredientesService.getAll().subscribe({
-    next: i => { 
-      this.ingredientes = i;
-    },
-    error: erro => {
-      alert('Exemplo de tratamento de erro! Observe o erro no console!');
-    }
-  });
-}
-
+  
 submit(){
   this.sabor.ingredientesDTOS = this.ingredienteSelecionado;
   console.log("Submit: ", this.sabor.ingredientesDTOS)
-  this.service.save(this.sabor).subscribe(
+  this.service.edit(this.sabor).subscribe(
     {
       next: (i) => { 
-        this.mensagem = 'Cadastrado com sucesso!';
+        this.mensagem = 'Editado com sucesso!';
         this.type = 'success';
 
         setTimeout(() => {this.router.navigate(["/cardapio/sabores/listar"])}, 1000 )  
       },
       error: erro => {
         if (erro.status === 200) {
-          this.mensagem = 'Cadastrado com sucesso!';
+          this.mensagem = 'Editado com sucesso!';
           this.type = 'success';
           setTimeout(() => {this.router.navigate(["/cardapio/sabores/listar"])}, 1000 )  
         }else{

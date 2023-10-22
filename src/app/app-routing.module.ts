@@ -21,6 +21,7 @@ import { RegisterFuncionariosComponent } from './features/funcionarios/register-
 import { EditPedidoComponent } from './features/pedidos/edit-pedido/edit-pedido.component';
 import { EditProdutoComponent } from './features/cardapio/produtos/edit-produto/edit-produto.component';
 import { EditPizzaComponent } from './features/cardapio/pizzas/edit-pizza/edit-pizza.component';
+import { EditSaborComponent } from './features/cardapio/sabores/edit-sabor/edit-sabor.component';
 
 const routes: Routes = [
   {
@@ -39,7 +40,9 @@ const routes: Routes = [
       path: 'sabores',
       children: [
         { path: 'listar', component: ListarSaboresComponent },
-        { path: 'register', component: RegistrarSaboresComponent }
+        { path: 'register', component: RegistrarSaboresComponent },
+        { path: 'edit/:id', component: EditSaborComponent}
+
       ]
     },
     {

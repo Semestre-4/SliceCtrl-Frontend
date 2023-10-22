@@ -47,6 +47,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { EditProdutoComponent } from './features/cardapio/produtos/edit-produto/edit-produto.component';
 import { EditPizzaComponent } from './features/cardapio/pizzas/edit-pizza/edit-pizza.component';
+import { EditSaborComponent } from './features/cardapio/sabores/edit-sabor/edit-sabor.component';
 
 
 @NgModule({
@@ -89,6 +90,7 @@ import { EditPizzaComponent } from './features/cardapio/pizzas/edit-pizza/edit-p
     EditPedidoComponent,
     EditProdutoComponent,
     EditPizzaComponent,
+    EditSaborComponent,
     ],
   imports: [
     BrowserModule,
