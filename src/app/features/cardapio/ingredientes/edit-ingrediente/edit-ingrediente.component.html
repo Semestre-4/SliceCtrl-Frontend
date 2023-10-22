@@ -1,0 +1,51 @@
+<div class="registrar">
+    <div class="header">
+        <h1>Ingrediente</h1>
+        <hr>
+    </div>
+    
+    <form class="needs-validation">
+        <div class="row g-3">
+    
+            <div class="col-md-3">
+                <label for="nomeIngrediente" class="form-label margintop marginleft">Nome do Ingrediente</label>
+                <input
+                  type="text"
+                  class="form-control marginleft inputs"
+                  id="nomeIngrediente"
+                  name="nomeIngrediente"
+                  placeholder="Digite aqui..."
+                  [(ngModel)]="ingrediente.nomeIngrediente"
+                />
+        </div>
+    
+    
+            <div class="col-md-3 marginleft">
+                <label for="qtdeIngrediente" class="form-label margintop marginleft">Quantidade de Ingrediente</label>
+                <input
+                  type="number"
+                  class="form-control marginleft inputs"
+                  id="qtdeIngrediente"
+                  name="qtdeIngrediente"
+                  placeholder="Digite aqui..."
+                  [(ngModel)]="ingrediente.qtdeIngrediente"
+                />
+              </div>
+    
+        </div>
+    
+        <div class="actions d-flex flex-row gap-1">
+      
+            <button class="btn btn-primary" routerLink="/cardapio/ingredientes/listar">Cancelar</button>
+            <button class="btn btn-secondary" type="submit" (click)="submit()" >Continuar</button>
+          </div>
+
+
+          <div class="aviso d-flex align-items-center" id="alert" [ngClass]="{'alert alert-success': type === 'success', 'alert alert-danger': type === 'danger' }">
+            <p>{{mensagem}}</p>
+        </div>
+      
+    
+    
+    </form>  
+    </div>

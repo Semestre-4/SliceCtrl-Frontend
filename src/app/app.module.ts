@@ -48,6 +48,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { EditProdutoComponent } from './features/cardapio/produtos/edit-produto/edit-produto.component';
 import { EditPizzaComponent } from './features/cardapio/pizzas/edit-pizza/edit-pizza.component';
 import { EditSaborComponent } from './features/cardapio/sabores/edit-sabor/edit-sabor.component';
+import { EditIngredienteComponent } from './features/cardapio/ingredientes/edit-ingrediente/edit-ingrediente.component';
 
 
 @NgModule({
@@ -91,6 +92,7 @@ import { EditSaborComponent } from './features/cardapio/sabores/edit-sabor/edit-
     EditProdutoComponent,
     EditPizzaComponent,
     EditSaborComponent,
+    EditIngredienteComponent,
     ],
   imports: [
     BrowserModule,
