@@ -14,6 +14,8 @@ import { Pizzas } from '../../cardapio/pizzas/pizza';
 import { Produtos } from '../../cardapio/produtos/produto';
 import { PedidoProduto } from '../models/pedido-produto';
 import { QuantityService } from '../service/quantity.service';
+import { Sabores } from '../../cardapio/sabores/sabor';
+import { PedidoPizza } from '../models/pedido-pizza';
 
 @Component({
   selector: 'app-menu-pedido',
@@ -30,9 +32,12 @@ export class MenuPedidoComponent implements OnInit {
   filteredProducts: any[] = [];
   filteredPizzas: any[] = [];
   pedidoProduto: PedidoProduto[] = [];
+  selectedPedidoPizza: PedidoPizza[] = [];
   selectedCategory: string = 'Todos';
   searchTerm: string = '';
   quantity: number = 1;
+  selectedSabores: Sabores[] = [];
+  pizzaInPedido: PedidoPizza[] = [];
 
   @Input() selectedProduct: Produtos = new Produtos();
   @Input() options: string[] = [];
@@ -40,6 +45,7 @@ export class MenuPedidoComponent implements OnInit {
   valorEntrega: number = 15.00;
   valorTotal: number = 0;
   calculatedPrices: number[] = [];
+  pedidoId: number = 0;
   pedido: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
     new Funcionario('', '', '', 0, []),
@@ -70,6 +76,16 @@ export class MenuPedidoComponent implements OnInit {
     this.subscribeToQuantityChanges(); // Subscribes to quantity changes
     this.updatePedidoProduto(this.selectedProduct.id, this.quantity); // Updates pedidoProduto
     this.calculateValorPedido(); // Calculates valorPedido
+    console.log(this.pizzaInPedido);
+    const savedPizza = localStorage.getItem('pedidoPizza');
+    if (savedPizza) {
+      this.pizzaInPedido = [JSON.parse(savedPizza)];
+    }
+    
+  }
+
+  private saveToLocalStorage(): void {
+    localStorage.setItem('pedidoPizza', JSON.stringify(this.pizzaInPedido[0]));
   }
 
   // Fetches products and pizzas
@@ -77,11 +93,20 @@ export class MenuPedidoComponent implements OnInit {
     this.fetchProducts();
     this.fetchPizzas();
 
-    const pedidoId = this.getPedidoIdFromUrl();
-    if (pedidoId !== null) {
-      this.loadPedidoById(pedidoId);
+    this.pedidoId = Number(this.getPedidoIdFromUrl());
+    if (this.pedidoId !== null) {
+      this.loadPedidoById(this.pedidoId);
     }
+
+    this.pedidoService.getPedidoById(this.pedidoId).subscribe({
+      next: (pedido) => {
+        this.pizzaInPedido = pedido.pizzas;
+      },
+      error: (erro) => {}
+    })
+
   }
+
 
   // Loads stored products and pedidoProduto from local storage
   loadStoredData(): void {
@@ -102,6 +127,10 @@ export class MenuPedidoComponent implements OnInit {
     this.quantityService.quantity$.subscribe(quantity => {
       this.quantity = quantity;
     });
+  }
+
+  handleSelectedSabores(sabores: Sabores[]) {
+    this.selectedSabores = sabores;
   }
 
   // Updates pedidoProduto with new quantity
@@ -213,7 +242,12 @@ export class MenuPedidoComponent implements OnInit {
 
     // Adds a pizza to pizzaSelected
     addPizzaToPedido(pizza: any): void {
-      this.router.navigate(['/pedidos/sabores-pedido', pizza.id]);
+      this.router.navigate(['/pedidos/sabores-pedido', this.pedidoId], { 
+        queryParams: { 
+          pedidoId: this.pedidoId, 
+          pizzaId: pizza.id 
+        } 
+      });
     }
   
 
@@ -249,7 +283,11 @@ export class MenuPedidoComponent implements OnInit {
     const product = storedProductsSelected.find((item: { productId: number; }) => item.productId === productId);
     return product ? product.quantity : 0;
   }
-  
+
+    onQuantityChanged(newQuantity: number, index: number): void {
+    this.pizzaInPedido[index].qtdePedida = newQuantity;
+    this.saveToLocalStorage();
+  }
 
   //Saves added products and pizzas to pedido on DB
   savePedido(): void {
