@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Sabores } from '../../cardapio/sabores/sabor';
 import { SaboresService } from '../../cardapio/sabores/service/sabores.service';
 import { PizzasService } from '../../cardapio/pizzas/service/pizzas.service';
 import { Tamanho } from 'src/app/shared/models/enums/tamanho-pizza';
 import { PedidoPizza } from '../models/pedido-pizza';
+import { PedidoDataService } from '../service/pedido-data.service';
 
 @Component({
   selector: 'app-sabores-pedido',
@@ -14,20 +15,25 @@ import { PedidoPizza } from '../models/pedido-pizza';
 export class SaboresPedidoComponent implements OnInit {
   sabores: Sabores[] = [];
   pizzaId: number = 0;
+  pedidoId: number = 0;
   pizzaTamnho: Tamanho = Tamanho.P;
   saboresPermitidos: number = 0;
   saboresSelecionados: Sabores[] = [];
   valorPizza: number = 0;
+  observacao: string = '';
 
   constructor(
     private saborService: SaboresService,
     private pizzaService: PizzasService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private pedidoDataService: PedidoDataService
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.pizzaId = params['id'];
+    this.route.queryParams.subscribe(params => {
+      this.pedidoId = params['pedidoId'];
+      this.pizzaId = params['pizzaId'];
     });
 
     this.pizzaService.getById(this.pizzaId).subscribe({
@@ -72,6 +78,14 @@ export class SaboresPedidoComponent implements OnInit {
 
   removeSaborFromPizza(sabor: Sabores) {
     this.saboresSelecionados = this.saboresSelecionados.filter(s => s !== sabor);
+  }
+
+  salvar(){
+    this.pedidoDataService.selectedSabores = this.saboresSelecionados;
+    this.pedidoDataService.observacao = this.observacao;
+    this.pedidoDataService.pedidoId = this.pedidoId;
+    this.pedidoDataService.pizzaId = this.pizzaId;
+    this.router.navigate(['/pedidos/menu-pedido', this.pedidoId]);
   }
   
 }

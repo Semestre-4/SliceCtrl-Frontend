@@ -27,7 +27,7 @@
         </div>
         <div class="form-group p-2">
             <label for="exampleFormControlTextarea1">Observações</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="observacao"></textarea>
           </div>
         <div class="checkout">
             <div class="checkout-content d-flex flex-column">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="btns d-flex flex-row gap-1">
                     <button class="btn btn-sm btn-block">Cancelar</button>
-                    <button class="btn btn-sm btn-block">Salvar</button>
+                    <button class="btn btn-sm btn-block" (click)="salvar()">Salvar</button>
                 </div>
             </div>
         </div>
