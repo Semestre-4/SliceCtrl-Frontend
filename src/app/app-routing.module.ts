@@ -19,6 +19,7 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ListarFuncionariosComponent } from './features/funcionarios/listar-funcionarios/listar-funcionarios.component';
 import { RegisterFuncionariosComponent } from './features/funcionarios/register-funcionarios/register-funcionarios.component';
 import { EditPedidoComponent } from './features/pedidos/edit-pedido/edit-pedido.component';
+import { EditProdutoComponent } from './features/cardapio/produtos/edit-produto/edit-produto.component';
 
 const routes: Routes = [
   {
@@ -58,7 +59,9 @@ const routes: Routes = [
       path: 'produtos',
       children: [
         { path: 'listar', component: ListarProdutosComponent },
-        { path: 'register', component: RegistrarProdutosComponent }
+        { path: 'register', component: RegistrarProdutosComponent },
+        { path: 'edit/:id', component: EditProdutoComponent}
+
       ]
     }
   ]

@@ -45,6 +45,7 @@ import { TableComponent } from './shared/components/table/table.component';
 import { EditPedidoComponent } from './features/pedidos/edit-pedido/edit-pedido.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { EditProdutoComponent } from './features/cardapio/produtos/edit-produto/edit-produto.component';
 
 
 @NgModule({
@@ -85,6 +86,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     CardapioNewRegisterComponent,
     TableComponent,
     EditPedidoComponent,
+    EditProdutoComponent,
     ],
   imports: [
     BrowserModule,
