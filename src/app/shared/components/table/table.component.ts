@@ -4,6 +4,8 @@ import { FormatarDataPipe } from '../../pipes/formatar-data/formatar-data.pipe';
 import { FormatarPrecoPipe } from '../../pipes/formatar-preco/formatar-preco.pipe';
 import { TableHeader } from './table-header';
 import { Router } from '@angular/router';
+import { PedidoService } from 'src/app/features/pedidos/service/pedido.service';
+import { Status } from '../../models/enums/status-pedido';
 
 @Component({
   selector: 'app-table',
@@ -18,6 +20,8 @@ export class TableComponent implements OnInit {
   @Input() editPath: string = '';
   @Input() entityName: string = '';
   @Input() showDeleteButton: boolean = true;
+  @Input() showEndButton: boolean = true;
+  @Input() pedidoStatus: string = ''; 
   @Output() buttonClick = new EventEmitter<string>();
   data: any[] = [];
   carregando: boolean = true;
@@ -25,6 +29,7 @@ export class TableComponent implements OnInit {
   constructor(private http: HttpClient,
     private datePipe: FormatarDataPipe,
     private numberPipe: FormatarPrecoPipe,
+    private p:PedidoService,
     private router: Router
     ) {}
 
@@ -75,6 +80,22 @@ export class TableComponent implements OnInit {
         this.loadData();
       });
     }
+  }
+
+  onViewClick(item: any) {
+    const entityId = item.id;
+    this.p.getPedidoById(entityId).subscribe({
+      next: (pedido) => {
+        this.pedidoStatus = pedido.status;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+      if(this.pedidoStatus == Status.PENDENTE){
+        this.router.navigate([`/pedidos/finalizar-pedido`, entityId]);
+
+  }
   }
   
 }

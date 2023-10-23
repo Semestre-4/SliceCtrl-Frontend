@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Cliente } from '../../clientes/cliente';
-import { PedidoProduto } from '../models/pedido-produto';
 import { PedidoPizza } from '../models/pedido-pizza';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PedidoService } from '../service/pedido.service';

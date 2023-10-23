@@ -15,6 +15,7 @@ import { TableHeader } from 'src/app/shared/components/table/table-header';
 })
 export class ListarPedidoComponent implements OnInit{
   data: any[] = [];
+  status : any[] = [];
   orderId: number = 0;
 
 
@@ -37,6 +38,7 @@ export class ListarPedidoComponent implements OnInit{
     this.pedidoService.getAllPedidos().subscribe(
       (response: any[]) => {
         this.data = response;
+        this.status = this.data.map((pedido) => pedido.status);
       },
       (error) => {
         console.error('Error fetching data:', error);
