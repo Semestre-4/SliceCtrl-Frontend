@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProdutosService } from '../service/produtos.service';
 import { TableHeader } from 'src/app/shared/components/table/table-header';
 
@@ -7,7 +7,7 @@ import { TableHeader } from 'src/app/shared/components/table/table-header';
   templateUrl: './listar-produtos.component.html',
   styleUrls: ['./listar-produtos.component.scss']
 })
-export class ListarProdutosComponent {
+export class ListarProdutosComponent implements OnInit{
   data: any[] = [];
 
   constructor(private service: ProdutosService) { }
@@ -36,6 +36,9 @@ export class ListarProdutosComponent {
     tableHeaders.push(new TableHeader('Data','cadastro'));
     tableHeaders.push(new TableHeader('Preço','preco'));
     tableHeaders.push(new TableHeader('Disponivel','disponivel'));
+  
+    console.log(this.data[0].nomeProduto)
+
     return tableHeaders;
   }
 

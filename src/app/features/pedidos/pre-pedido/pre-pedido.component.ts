@@ -23,7 +23,7 @@ export class PrePedidoComponent implements OnInit {
 
   pedido: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
-    new Funcionario('', '', '', 0, []),
+    new Funcionario(),
     [],
     [],
     new Pagamento(),

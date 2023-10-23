@@ -21,7 +21,7 @@ export class ListarPedidoComponent implements OnInit{
 
   p: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
-    new Funcionario('', '', '', 0, []),
+    new Funcionario(),
     [],
     [],
     new Pagamento(),

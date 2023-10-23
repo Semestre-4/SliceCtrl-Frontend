@@ -48,7 +48,7 @@ export class MenuPedidoComponent implements OnInit {
   pedidoId: number = 0;
   pedido: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
-    new Funcionario('', '', '', 0, []),
+    new Funcionario(),
     [],
     [],
     new Pagamento(),

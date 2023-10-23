@@ -19,6 +19,11 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ListarFuncionariosComponent } from './features/funcionarios/listar-funcionarios/listar-funcionarios.component';
 import { RegisterFuncionariosComponent } from './features/funcionarios/register-funcionarios/register-funcionarios.component';
 import { EditPedidoComponent } from './features/pedidos/edit-pedido/edit-pedido.component';
+import { EditProdutoComponent } from './features/cardapio/produtos/edit-produto/edit-produto.component';
+import { EditPizzaComponent } from './features/cardapio/pizzas/edit-pizza/edit-pizza.component';
+import { EditSaborComponent } from './features/cardapio/sabores/edit-sabor/edit-sabor.component';
+import { EditIngredienteComponent } from './features/cardapio/ingredientes/edit-ingrediente/edit-ingrediente.component';
+import { EditFuncionarioComponent } from './features/funcionarios/edit-funcionario/edit-funcionario.component';
 
 const routes: Routes = [
   {
@@ -37,28 +42,35 @@ const routes: Routes = [
       path: 'sabores',
       children: [
         { path: 'listar', component: ListarSaboresComponent },
-        { path: 'register', component: RegistrarSaboresComponent }
+        { path: 'register', component: RegistrarSaboresComponent },
+        { path: 'edit/:id', component: EditSaborComponent}
+
       ]
     },
     {
       path: 'ingredientes',
       children: [
         { path: 'listar', component: ListarIngredientesComponent },
-        { path: 'register', component: RegistrarIngredientesComponent }
+        { path: 'register', component: RegistrarIngredientesComponent },
+        { path: 'edit/:id', component: EditIngredienteComponent}
+
       ]
     },
     {
       path: 'pizzas',
       children: [
         { path: 'listar', component: ListarPizzasComponent },
-        { path: 'register', component: RegistrarPizzasComponent }
+        { path: 'register', component: RegistrarPizzasComponent },
+        { path: 'edit/:id', component: EditPizzaComponent}
       ]
     },
     {
       path: 'produtos',
       children: [
         { path: 'listar', component: ListarProdutosComponent },
-        { path: 'register', component: RegistrarProdutosComponent }
+        { path: 'register', component: RegistrarProdutosComponent },
+        { path: 'edit/:id', component: EditProdutoComponent}
+
       ]
     }
   ]
@@ -85,7 +97,9 @@ const routes: Routes = [
   path: 'funcionarios',
   children: [
     { path: 'listar', component: ListarFuncionariosComponent },
-    { path: 'register', component: RegisterFuncionariosComponent }
+    { path: 'register', component: RegisterFuncionariosComponent },
+    { path: 'edit/:id', component: EditFuncionarioComponent}
+
   ]
 }
 ];
