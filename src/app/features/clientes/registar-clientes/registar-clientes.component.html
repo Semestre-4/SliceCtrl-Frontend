@@ -5,6 +5,11 @@
     </div>
     
     <form class="needs-validation">
+
+        <div class="aviso d-flex align-items-center ms-4" id="alert" [ngClass]="{'alert alert-success': type === 'success', 'alert alert-danger': type === 'danger' }">
+            <p>{{mensagem}}</p>
+        </div>
+
         <div class="row g-3">
           <div class="col-md-3 ms-3">
               <label for="nome" class="form-label marginleft">Nome do Cliente</label>
@@ -180,9 +185,7 @@
             <button class="btn btn-secondary" type="submit" (click)="submit()" >Continuar</button>
           </div>
     
-          <div class="aviso d-flex align-items-center" id="alert" [ngClass]="{'alert alert-success': type === 'success', 'alert alert-danger': type === 'danger' }">
-            <p>{{mensagem}}</p>
-        </div>
+
 
     </form>  
     </div>
