@@ -23,6 +23,7 @@ import { EditProdutoComponent } from './features/cardapio/produtos/edit-produto/
 import { EditPizzaComponent } from './features/cardapio/pizzas/edit-pizza/edit-pizza.component';
 import { EditSaborComponent } from './features/cardapio/sabores/edit-sabor/edit-sabor.component';
 import { EditIngredienteComponent } from './features/cardapio/ingredientes/edit-ingrediente/edit-ingrediente.component';
+import { EditFuncionarioComponent } from './features/funcionarios/edit-funcionario/edit-funcionario.component';
 
 const routes: Routes = [
   {
@@ -96,7 +97,9 @@ const routes: Routes = [
   path: 'funcionarios',
   children: [
     { path: 'listar', component: ListarFuncionariosComponent },
-    { path: 'register', component: RegisterFuncionariosComponent }
+    { path: 'register', component: RegisterFuncionariosComponent },
+    { path: 'edit/:id', component: EditFuncionarioComponent}
+
   ]
 }
 ];

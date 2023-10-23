@@ -25,14 +25,14 @@ export class RegisterFuncionariosComponent {
         this.mensagem = 'Cadastrado com sucesso!';
         this.type = 'success';
 
-        setTimeout(() => {this.router.navigate(["/funcionario/listar"])}, 1000 )  
+        setTimeout(() => {this.router.navigate(["/funcionarios/listar"])}, 1000 )  
 
       },
       error: (erro) => {
         if (erro.status === 200) {
           this.mensagem = 'Cadastrado com sucesso!';
           this.type = 'success';
-          setTimeout(() => {this.router.navigate(["/funcionario/listar"])}, 1000 )  
+          setTimeout(() => {this.router.navigate(["/funcionarios/listar"])}, 1000 )  
         }else{
           this.mensagem = erro.error;
           this.type = 'danger';
