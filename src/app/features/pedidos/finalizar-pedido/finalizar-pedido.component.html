@@ -1,1 +1,202 @@
-<p>finalizar-pedido works!</p>
+<div class="header">
+    <h1>Finalizar Pedido</h1>
+    <hr>
+</div>
+<div class="cliente">
+    <p class="headerP">Dados do Cliente</p>
+    <form action="">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label for="cpfCliente" class="form-label">CPF do Cliente</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="cpfCliente"
+                    name="cpfCliente"
+                    [(ngModel)]="clienteInfo.cpf"
+                    disabled
+                />
+            </div>
+
+            <div class="col-md-3">
+                <label for="nomeCliente" class="form-label">Nome do Cliente</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="nomeCliente"
+                    name="nomeCliente"
+                    [(ngModel)]="clienteInfo.nome"
+                    disabled
+                />
+            </div>
+
+            <div class="col-md-2">
+                <label for="cep" class="form-label">CEP</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="cep"
+                    name="cep"
+                    [(ngModel)]="endereco.cep"
+                    [disabled]="isAddressDisabled"
+                    (blur)="fetchAddressDetails(endereco.cep)"
+                />
+            </div>
+
+            <div class="col-md-2">
+                <label for="numero" class="form-label">Número</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="numero"
+                    name="numero"
+                    [(ngModel)]="endereco.numero"
+                    [disabled]="isAddressDisabled"
+                />
+            </div>
+
+            <div class="col-md-3">
+                <label for="complemento" class="form-label">Complemento</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="complemento"
+                    name="complemento"
+                    [(ngModel)]="endereco.complemento"
+                    [disabled]="isAddressDisabled"
+                />
+            </div>
+
+            <div class="col-md-4">
+                <label for="bairro" class="form-label">Bairro</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="bairro"
+                    name="bairro"
+                    [(ngModel)]="endereco.bairro"
+                    [disabled]="isAddressDisabled"
+                />
+            </div>
+
+            <div class="col-md-3">
+                <label for="cidade" class="form-label">Cidade</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="cidade"
+                    name="cidade"
+                    [(ngModel)]="endereco.cidade"
+                    [disabled]="isAddressDisabled"
+                />
+            </div>
+
+            <div class="col-md-2">
+                <label for="estado" class="form-label">Estado</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="estado"
+                    name="estado"
+                    [(ngModel)]="endereco.estado"
+                    [disabled]="isAddressDisabled"
+                />
+            </div>
+
+            <div class="col-md-3">
+                <label for="pais" class="form-label">País</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="pais"
+                    name="pais"
+                    [(ngModel)]="endereco.pais"
+                    [disabled]="isAddressDisabled"
+                />
+            </div>
+
+            <div class="btns col-md-5 mt-5 d-flex gap-3 align-items-start">
+                <button type="button" class="btn btn-sm"  (click)="enableAddressFields()">Mudar Endereço</button>
+                <button type="submit" class="btn btn-sm"  (click)="disableAddressFields()">Salvar Endereço</button>
+            </div>
+        </div>
+    </form>
+</div>
+<hr>
+<div class="funcionario">
+    <p class="headerP">Dados do Funcionario</p>
+    <div class="col-md-4">
+        <label for="nomeFunc" class="form-label">Nome do Funcionario</label>
+        <input
+            type="text"
+            class="form-control"
+            id="nomeFunc"
+            name="nomeFunc"
+            [(ngModel)]="funcionarioInfo.nome"
+            disabled
+        />
+    </div>
+</div>
+<hr>
+<div class="resumoProdutos">
+    <p class="headerP">Resumo dos Produtos</p>
+    <div class="tables d-flex justify-content-around gap-3">
+        <table>
+            <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let produto of produtos">
+                    <td>{{ produto.produto.nomeProduto }}</td>
+                    <td>{{ produto.qtdePedida }}</td>
+                    <td>R$ {{ produto.produto.preco }}</td>
+                  </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+              <tr>
+                <th>Tamanho</th>
+                <th>Sabores</th>
+                <th>Qtde.</th>
+                <th>Preço</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pizza of pizzas">
+                <td>{{ pizza.pizza.tamanho }}</td>
+                <td>
+                  <ul>
+                    <li *ngFor="let sabor of pizza.sabores">{{ sabor.nomeSabor }}</li>
+                  </ul>
+                </td>
+                <td>{{ pizza.qtdePedida }}</td>
+                <td>R$ {{ pizza.pizza.preco }}</td>
+              </tr>
+            </tbody>
+          </table>
+          
+    </div>
+</div>
+<hr>
+<div class="formaDePagamento">
+    <p class="headerP">Forma de Pagamento</p>
+    <form action="" class="d-flex flex-column w-100 gap-3">
+        <div class="col-md-3">
+            <label for="formaDePagamento" class="form-label">Forma De Pagamento</label>
+            <select class="form-select" id="formaDePagamento" name="formaDePagamento" [(ngModel)]="selectedFormaDePagamento" required>
+              <option value="" disabled>Escolha ...</option>
+              <option *ngFor="let forma of formaDePagamento" [value]="forma">{{ forma }}</option>
+            </select>
+          </div>
+          <div class="actions d-flex flex-row gap-1 align-self-end m-2">
+            <button class="btn btn-secondary" type="submit" (click)="finalizarPedido()" >Finalizar</button>
+          </div>
+    </form>
+</div>
+
+

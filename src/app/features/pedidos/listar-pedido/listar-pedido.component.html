@@ -5,19 +5,13 @@
   </div>
   <div class="body">
     <app-new-pedido></app-new-pedido>
-    
-    
-    
-    <app-table
-    [headers]="callHeaders()"
-    [apiUrl]="apiUrlPath()"
-    [editPath]="'pedidos/edit'"
-    [entityName]="'pedido'" 
-    [showDeleteButton]="false"
-    >
-  </app-table>  
-
-
-  
+      <app-table
+        [headers]="callHeaders()"
+        [apiUrl]="apiUrlPath()"
+        [editPath]="'pedidos/menu-pedido/'"
+        [entityName]="'pedido'" 
+        [showDeleteButton]="false"
+        [showEndButton]="true"
+      ></app-table>
 </div>
 </div> 

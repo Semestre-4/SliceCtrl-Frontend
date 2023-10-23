@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, ChangeDetectorRef } from '@angular/core';
 import { ProdutosService } from '../../cardapio/produtos/service/produtos.service';
 import { PizzasService } from '../../cardapio/pizzas/service/pizzas.service';
-import { forkJoin } from 'rxjs';
 import { Categoria } from 'src/app/shared/models/enums/categoria';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PedidoService } from '../service/pedido.service';
 import { Pedido } from '../models/pedido';
 import { Cliente } from '../../clientes/cliente';
@@ -11,6 +10,12 @@ import { Funcionario } from '../../funcionarios/funcionario';
 import { Pagamento } from '../models/pagamento';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 import { Status } from 'src/app/shared/models/enums/status-pedido';
+import { Pizzas } from '../../cardapio/pizzas/pizza';
+import { Produtos } from '../../cardapio/produtos/produto';
+import { PedidoProduto } from '../models/pedido-produto';
+import { QuantityService } from '../service/quantity.service';
+import { Sabores } from '../../cardapio/sabores/sabor';
+import { PedidoPizza } from '../models/pedido-pizza';
 
 @Component({
   selector: 'app-menu-pedido',
@@ -18,12 +23,29 @@ import { Status } from 'src/app/shared/models/enums/status-pedido';
   styleUrls: ['./menu-pedido.component.scss']
 })
 export class MenuPedidoComponent implements OnInit {
-  @Input() options: string[] = [];
+
+  // Properties
   products: any[] = [];
+  pizzas: any[] = [];
+  pizzaSelected: Pizzas[] = [];
+  productsSelected: Produtos[] = [];
   filteredProducts: any[] = [];
+  filteredPizzas: any[] = [];
+  pedidoProduto: PedidoProduto[] = [];
+  selectedPedidoPizza: PedidoPizza[] = [];
   selectedCategory: string = 'Todos';
   searchTerm: string = '';
+  quantity: number = 1;
+  selectedSabores: Sabores[] = [];
+  pizzaInPedido: PedidoPizza[] = [];
 
+  @Input() selectedProduct: Produtos = new Produtos();
+  @Input() options: string[] = [];
+  valorPedido: number = 0;
+  valorEntrega: number = 15.00;
+  valorTotal: number = 0;
+  calculatedPrices: number[] = [];
+  pedidoId: number = 0;
   pedido: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
     new Funcionario(),
@@ -41,26 +63,87 @@ export class MenuPedidoComponent implements OnInit {
     private productService: ProdutosService,
     private pizzaService: PizzasService,
     private pedidoService: PedidoService,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private quantityService: QuantityService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
+  // Initialize component
   ngOnInit(): void {
+    this.fetchData(); // Fetches products and pizzas
+    this.loadStoredData(); // Loads stored products and pedidoProduto from local storage
+    this.subscribeToQuantityChanges(); // Subscribes to quantity changes
+    this.updatePedidoProduto(this.selectedProduct.id, this.quantity); // Updates pedidoProduto
+    this.calculateValorPedido(); // Calculates valorPedido
+    console.log(this.pizzaInPedido);
+    const savedPizza = localStorage.getItem('pedidoPizza');
+    if (savedPizza) {
+      this.pizzaInPedido = [JSON.parse(savedPizza)];
+    }
+    
+  }
+
+  private saveToLocalStorage(): void {
+    localStorage.setItem('pedidoPizza', JSON.stringify(this.pizzaInPedido[0]));
+  }
+
+  // Fetches products and pizzas
+  fetchData(): void {
     this.fetchProducts();
-    const pedidoId = this.getPedidoIdFromUrl();
-    if (pedidoId !== null) {
-      this.pedidoService.getPedidoById(pedidoId).subscribe({
-        next: (pedido) => {
-          this.pedido = pedido;
-        },
-        error: (error) => {
-          console.error('Error fetching pedido: ', error);
-        }
-      });
-    } else {
+    this.fetchPizzas();
+
+    this.pedidoId = Number(this.getPedidoIdFromUrl());
+    if (this.pedidoId !== null) {
+      this.loadPedidoById(this.pedidoId);
+    }
+
+    this.pedidoService.getPedidoById(this.pedidoId).subscribe({
+      next: (pedido) => {
+        this.pizzaInPedido = pedido.pizzas;
+      },
+      error: (erro) => {}
+    })
+
+  }
+
+
+  // Loads stored products and pedidoProduto from local storage
+  loadStoredData(): void {
+    const storedProductsSelected = JSON.parse(localStorage.getItem('productsSelected') || '[]');
+    this.productsSelected = storedProductsSelected;
+
+    const storedPedidoProduto = JSON.parse(localStorage.getItem('pedidoProduto') || '[]');
+    this.pedidoProduto = storedPedidoProduto.map((item: any) => {
+      return {
+        product: item.productId,
+        quantity: item.quantity
+      };
+    });
+  }
+
+  // Subscribes to quantity changes
+  subscribeToQuantityChanges(): void {
+    this.quantityService.quantity$.subscribe(quantity => {
+      this.quantity = quantity;
+    });
+  }
+
+  handleSelectedSabores(sabores: Sabores[]) {
+    this.selectedSabores = sabores;
+  }
+
+  // Updates pedidoProduto with new quantity
+  updatePedidoProduto = (productId: number, newQuantity: number) => {
+    const pedidoProductIndex = this.pedidoProduto.findIndex(product => product.id === productId);
+
+    if (pedidoProductIndex !== -1) {
+      this.pedidoProduto[pedidoProductIndex].qtdePedida = newQuantity;
     }
   }
 
-  private getPedidoIdFromUrl(): number | null {
+  // Gets pedido ID from URL
+  getPedidoIdFromUrl = (): number | null => {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       return +id;
@@ -68,41 +151,164 @@ export class MenuPedidoComponent implements OnInit {
     return null;
   }
 
+  // Fetches products from service
   fetchProducts(): void {
-    forkJoin([
-      this.productService.getAll(),
-      this.pizzaService.getAll()
-    ]).subscribe({
-      next: ([products, pizzas]) => {
-        this.products = [
-          ...products.map(product => ({ ...product, category: 'Product', isPizza: false })),
-          ...pizzas.map(pizza => ({ ...pizza, category: 'Pizza', isPizza: true }))
-        ];
+    this.productService.getAll().subscribe({
+      next: (products) => {
+        this.products = [...products.map(product => ({ ...product }))];
         this.filterProducts();
-        console.log('Products and Pizzas: ', this.products);
       },
       error: (error) => {
-        console.error('Error fetching products and pizzas: ', error);
+        console.error('Error fetching products: ', error);
       }
     });
   }
 
+  // Fetches pizzas from service
+  fetchPizzas(): void {
+    this.pizzaService.getAll().subscribe({
+      next: (pizzas) => {
+        this.pizzas = [...pizzas.map(pizza => ({ ...pizza }))];
+        this.filterProducts();
+      },
+      error: (error) => {
+        console.error('Error fetching pizzas: ', error);
+      }
+    });
+  }
+
+  // Loads pedido by ID
+  loadPedidoById(pedidoId: number): void {
+    this.pedidoService.getPedidoById(pedidoId).subscribe({
+      next: (pedido) => {
+        this.pedido = pedido;
+      },
+      error: (error) => {
+        console.error('Error fetching pedido: ', error);
+      }
+    });
+  }
+
+  // Calculates valorPedido
+  calculateValorPedido(): void {
+  }
+
+  // Adds price to calculatedPrices
+  onPriceCalculated(price: number): void {
+    this.calculatedPrices.push(price);
+  }
+
+  // Handles category selection
   onCategorySelected(category: string): void {
     this.selectedCategory = category;
     this.filterProducts();
   }
 
+  // Filters products based on category
   filterProducts(): void {
     if (this.selectedCategory === 'Todos') {
       this.filteredProducts = this.products;
-    } else if (this.selectedCategory === 'Outros') {
+      this.filteredPizzas = this.pizzas;
+    } else if (this.selectedCategory === 'Pizzas') {
+      this.filteredProducts = [];
+      this.filteredPizzas = this.pizzas;
+    }
+    else if (this.selectedCategory === 'Outros') {
       this.filteredProducts = this.products.filter(product => product.categoria === Categoria.OUTROS);
-    }else {
+      this.filteredPizzas = [];
+    } else {
       const categoryEnum = Categoria[this.selectedCategory.toUpperCase() as keyof typeof Categoria];
       this.filteredProducts = this.products.filter(product => product.categoria === categoryEnum);
+      this.filteredPizzas = [];
     }
   }
 
+  // Filters data based on searchTerm
   filterData(searchTerm: string): void {
+    // Implement filtering logic here
+  }
+
+  // Adds a product to productsSelected and updates local storage
+  addToPedido(product: any): void {
+    const pedidoProduct = this.transformProdutoToPedidoProduto(product, this.quantity);
+    const isAlreadyAdded = this.productsSelected.some(item => item.id === product.id);
+
+    if (!isAlreadyAdded) {
+      this.productsSelected.push(product);
+      this.updateLocalStorage();
+      this.cdr.detectChanges();
+    }
+  }
+
+    // Adds a pizza to pizzaSelected
+    addPizzaToPedido(pizza: any): void {
+      this.router.navigate(['/pedidos/sabores-pedido', this.pedidoId], { 
+        queryParams: { 
+          pedidoId: this.pedidoId, 
+          pizzaId: pizza.id 
+        } 
+      });
+    }
+  
+
+  // Updates local storage with productsSelected
+  private updateLocalStorage(): void {
+    localStorage.setItem('productsSelected', JSON.stringify(this.productsSelected));
+    localStorage.setItem('pedidoProduto', JSON.stringify(this.pedidoProduto));
+  }
+  
+
+  // Transforms product to PedidoProduto and updates local storage
+  transformProdutoToPedidoProduto(product: any, quantity: number): void {
+    const pedidoProduct: PedidoProduto = new PedidoProduto(
+      product,
+      this.pedido,
+      quantity
+    );
+    this.pedidoProduto.push(pedidoProduct);
+    console.log(this.pedidoProduto);
+    this.updateLocalStorage();
+    this.cdr.detectChanges();
+  }
+
+  // Removes a product from productsSelected
+  removeProdutoFromPedido(id: number): void {
+    this.productsSelected = this.productsSelected.filter(product => product.id !== id);
+  }
+
+  // Get quantity of a product
+  getQuantity(productId: number): number {
+    const storedProductsSelected = JSON.parse(localStorage.getItem('pedidoProduto') || '[]');
+    console.log(storedProductsSelected);
+    const product = storedProductsSelected.find((item: { productId: number; }) => item.productId === productId);
+    return product ? product.quantity : 0;
+  }
+
+    onQuantityChanged(newQuantity: number, index: number): void {
+    this.pizzaInPedido[index].qtdePedida = newQuantity;
+    this.saveToLocalStorage();
+  }
+
+  //Saves added products and pizzas to pedido on DB
+  savePedido(): void {
+    //Loop through productsSelected and foreach product, save it to pedido
+    this.productsSelected.forEach(product => {
+      console.log(this.getQuantity(product.id));
+      const pedidoProductObject: PedidoProduto = new PedidoProduto(product, this.pedido, this.getQuantity(product.id));
+      console.log(pedidoProductObject);
+      this.pedidoService.addProdutoToPedido(this.pedido.id, pedidoProductObject).subscribe({
+        next: (pedido) => {
+          localStorage.clear();
+          this.router.navigate(['/pedidos/finalizar-pedido', this.pedido.id]);
+        },
+        error: (erro) => {
+          if (erro.status === 200) {
+            localStorage.clear();
+            this.router.navigate(['/pedidos/finalizar-pedido', this.pedido.id]);
+          }
+        }
+      });
+    });
   }
 }
+

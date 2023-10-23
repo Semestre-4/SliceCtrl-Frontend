@@ -50,6 +50,10 @@ import { EditPizzaComponent } from './features/cardapio/pizzas/edit-pizza/edit-p
 import { EditSaborComponent } from './features/cardapio/sabores/edit-sabor/edit-sabor.component';
 import { EditIngredienteComponent } from './features/cardapio/ingredientes/edit-ingrediente/edit-ingrediente.component';
 import { EditFuncionarioComponent } from './features/funcionarios/edit-funcionario/edit-funcionario.component';
+import { PizzaDisplayComponent } from './features/pedidos/components/pizza-display/pizza-display.component';
+import { ChosenProductComponent } from './features/pedidos/components/chosen-product/chosen-product.component';
+import { ChosenSaboresComponent } from './features/pedidos/components/chosen-sabores/chosen-sabores.component';
+
 
 
 @NgModule({
@@ -94,7 +98,10 @@ import { EditFuncionarioComponent } from './features/funcionarios/edit-funcionar
     EditPizzaComponent,
     EditSaborComponent,
     EditIngredienteComponent,
-    EditFuncionarioComponent
+    EditFuncionarioComponent,
+    PizzaDisplayComponent,
+    ChosenProductComponent,
+    ChosenSaboresComponent
     ],
   imports: [
     BrowserModule,
