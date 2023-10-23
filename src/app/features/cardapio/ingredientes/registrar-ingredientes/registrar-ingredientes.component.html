@@ -4,10 +4,14 @@
         <hr>
     </div>
     
+    <div class="aviso d-flex align-items-center" id="alert" [ngClass]="{'alert alert-success': type === 'success', 'alert alert-danger': type === 'danger' }">
+      <p>{{mensagem}}</p>
+  </div>
+
     <form class="needs-validation">
         <div class="row g-3">
     
-            <div class="col-md-3">
+            <div class="col-md-4 ms-3">
                 <label for="nomeIngrediente" class="form-label margintop marginleft">Nome do Ingrediente</label>
                 <input
                   type="text"
@@ -20,7 +24,7 @@
         </div>
     
     
-            <div class="col-md-3 marginleft">
+            <div class="col-md-4 ms-5">
                 <label for="qtdeIngrediente" class="form-label margintop marginleft">Quantidade de Ingrediente</label>
                 <input
                   type="number"
@@ -39,13 +43,7 @@
             <button class="btn btn-primary" routerLink="/cardapio/ingredientes/listar">Cancelar</button>
             <button class="btn btn-secondary" type="submit" (click)="submit()" >Continuar</button>
           </div>
-
-
-          <div class="aviso d-flex align-items-center" id="alert" [ngClass]="{'alert alert-success': type === 'success', 'alert alert-danger': type === 'danger' }">
-            <p>{{mensagem}}</p>
-        </div>
-      
-    
+          
     
     </form>  
     </div>

@@ -1,11 +1,23 @@
-.header h1{
+.pre{
+    padding: 10px;
+}
+
+.header h1 {
     color: var(--gray-800, #212B36);
     font-family: Poppins;
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
-    line-height: 24px; /* 120% */
+    line-height: 24px;
+    /* 120% */
     padding-top: 10px;
+}
+
+.btn {
+    border-radius: 8px;
+    background: #F6725C;
+    color: #fff;
+    height: 33px;
 }
 
 .actions{
@@ -15,104 +27,16 @@
 
 }
 
-.inputs{
-
-    display: flex;
-    padding: 12px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-
-    align-self: stretch;
-    border-radius: 12px;
-    border: 1px solid #CCC;
-    background: var(--W-Background, #FFF);
-
-}
-
-.margintop{
-
-    margin-top: 20px;
-
-}
-
-.form-label{
-
-    color: #666;
-
-    font-family: Inter;
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 18px; /* 120% */
-    letter-spacing: -0.75px;
-
-}
-.marginleft{
-    margin-left: 50px;
-}
-
-select{
-
-    
-    display: flex;
-    padding: 12px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    text-indent: 5px;
-    align-self: stretch;
-    border-radius: 12px;
-    border: 1px solid #CCC;
-    background: var(--W-Background, #FFF);
-    
-
-}
-
-.form-check-input{
-
-    width: 50px;
-}
-
-.checkbox{
-
-    width: 50px;
-    height: 25px;
-}
-.labels{
-
-    margin-left: 10px;
-    margin-top: 5px;
-}
-
-.check{
-
-    margin-top: 50px;
-    margin-left: 60px;
-}
-
-.btn {
-
-    border-radius: 8px;
-    background: #F6725C;
-    color: #fff;
-    height: 33px;
-}
-
 .actions button{
-    width: 105px;
-    height: 33px;
-    border: none;
-    padding: 0;
+width: 105px;
+height: 33px;
+border: none;
+padding: 0;
 }
 
 .aviso{
-
-    margin-top: 200px;
-    align-items: center;
-    justify-content: center;
-
+    align-items: start;
+    justify-content: start;
     font-style: bold;
     font-size: 16px;
-
 }
