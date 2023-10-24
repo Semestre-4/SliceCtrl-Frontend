@@ -1,0 +1,126 @@
+.chosen-pizza {
+    border-radius: 12px;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 400px;
+    height: 208px;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 12px 28px;
+    flex-shrink: 0;
+    padding-bottom: 0;
+    padding-left: 15px;;
+}
+
+.id {
+    display: flex;
+    padding: 4px 8px;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 4px;
+    background: #165BAA;
+    color: #FFF;
+
+    /* Caption */
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.name {
+    color: #000;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.qtde .varQtde {
+    color: var(--Gray-7, #2A282F);
+
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+.bi {
+    font-size: 20px;
+}
+
+.price {
+    color: #5C5E64;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.7px;
+}
+
+.obsrv{
+flex-shrink: 0;
+color: #666;
+font-feature-settings: 'clig' off, 'liga' off;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: -0.56px;
+}
+
+.title-sabor{
+    color: #666;
+text-align: center;
+font-feature-settings: 'clig' off, 'liga' off;
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: -0.48px;
+}
+
+.name-sabor{
+    color: #181818;
+text-align: center;
+font-feature-settings: 'clig' off, 'liga' off;
+font-family: Inter;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+letter-spacing: -0.85px;
+margin: 0;
+font-size: 15px;
+}
+
+.btn{
+    display: flex;
+width: 138px;
+height: 26px;
+padding: 12px;
+justify-content: center;
+align-items: center;
+gap: 4px;
+border-radius: 8px;
+background: #F6725C;
+flex: 1 0 0;
+color: #FFF;
+text-align: center;
+
+/* Title 2 */
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+letter-spacing: -0.56px;
+}

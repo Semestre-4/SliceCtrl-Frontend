@@ -1,6 +1,6 @@
 export enum FormaDePagamento{
-    DINHERO,
-    PIX,
-    CREDITO,
-    DEBITO
+    DINHERO = 'DINHEIRO',
+    PIX = 'PIX',
+    CREDITO = 'CREDITO',
+    DEBITO = 'DEBITO'
 }

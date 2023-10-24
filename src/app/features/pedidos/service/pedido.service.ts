@@ -43,8 +43,8 @@ export class PedidoService {
     return this.http.get<Pedido[]>(`${this.baseUrl}/pedido/pagamento-pending`);
   }
   
-  abrirPedido(clienteId: number, funcId: number, formaDeEntrega: string): Observable<string> {
-    return this.http.post<string>(`${this.baseUrl}/abrir/${clienteId}/${funcId}/${formaDeEntrega}`, null);
+  abrirPedido(clienteId: number, funcId: number, formaDeEntrega: string): Observable<Pedido> {
+    return this.http.post<Pedido>(`${this.baseUrl}/abrir/${clienteId}/${funcId}/${formaDeEntrega}`, null);
   }
 
   addProdutoToPedido(pedidoId: number, pedidoProduto: PedidoProduto): Observable<string> {

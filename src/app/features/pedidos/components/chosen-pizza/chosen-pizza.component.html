@@ -1,0 +1,27 @@
+<div class="chosen-pizza d-flex flex-column align-items-start justify-content-center gap-2 mt-2">
+  <div class="header  d-flex align-items-start gap-2">
+    <span class="id"># {{pedidoPizza.id}}</span>
+    <span class="name">Pizza - {{pedidoPizza.pizza.tamanho}}</span>
+    <div class="d-flex flex-grow-1 justify-content-end">
+      <div class="qtde d-flex gap-1 align-items-center">
+        <i class="bi bi-dash-circle" (click)="decreaseQuantity()"></i>
+        <span class="varQtde">{{ pedidoPizza.qtdePedida }}</span>
+        <i class="bi bi-plus-circle" (click)="increaseQuantity()"></i>
+      </div>
+    </div>
+  </div>
+  <div class="details d-flex flex-column">
+    <span class="price">$R {{ calcularPreco() }}</span>
+    <div class="obsrv">Observação : {{pedidoPizza.observacao}}</div>
+  </div>
+  <div class="sabores d-flex align-items-start justify-content-between gap-4">
+    <div class="item-sabor"  *ngFor="let sabor of pedidoPizza.sabores; let i = index">
+      <p class="title-sabor m-0">Sabor {{ i + 1 }}</p>
+      <p class="name-sabor">{{ sabor.nomeSabor }}</p>
+    </div>
+  </div> 
+  <div class="actions d-flex align-items-center align-self-center gap-3">
+    <button class="btn" (click)="excluirProduto()">Excluir Produto</button>
+    <button class="btn" (click)="editarProduto()">Editar Produto</button>
+  </div>
+</div>

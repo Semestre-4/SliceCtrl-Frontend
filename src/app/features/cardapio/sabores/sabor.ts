@@ -5,22 +5,9 @@ import { PedidoPizza } from "../../pedidos/models/pedido-pizza";
 
 export class Sabores extends AbstractEntity{
 
-    nomeSabor: string;
-    descricao: string;
-    valorAdicional: number;
-    ingredientes: Ingredientes[];
-    pedidoPizza: PedidoPizza[];
-
-    constructor(nomeSabor: string, descricao: string, valorAdicional: number, ingredientes: Ingredientes[], pedidoPizza: PedidoPizza[]){
-
-        super();
-
-        this.nomeSabor = nomeSabor;
-        this.descricao = descricao;
-        this.valorAdicional = valorAdicional;
-        this.ingredientes = ingredientes;
-        this.pedidoPizza = pedidoPizza;
-    }
-
+    nomeSabor!: string;
+    descricao!: string;
+    valorAdicional!: number;
+    ingredientesDTOS!: Ingredientes[];
 
 }

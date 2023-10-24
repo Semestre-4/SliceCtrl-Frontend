@@ -10,11 +10,11 @@ import { Sabores } from '../sabor';
 export class SaboresService {
 
 
-  private baseURL: string = 'http:localhost:8080/api/sabores';
-  private http!: HttpClient
+  private baseURL: string = 'http://localhost:8080/api/sabores';
 
 
-  constructor() { }
+  constructor(  private http: HttpClient
+    ) { }
 
   getById(id: number): Observable<Sabores>{
     return this.http.get<Sabores>(`${this.baseURL}/id/${id}`);
@@ -28,8 +28,9 @@ export class SaboresService {
     return this.http.get<Sabores>(`${this.baseURL}/nome/${nome}`);
   }
 
-  save(sabor: Sabores): Observable<HttpStatusCode>{
-    return this.http.post<HttpStatusCode>(`${this.baseURL}`, sabor);
+  save(sabor: Sabores): Observable<string>{
+    console.log("Service: ", sabor.ingredientesDTOS)
+    return this.http.post<string>(`${this.baseURL}`, sabor);
   }
 
   edit(sabor: Sabores): Observable<HttpStatusCode>{

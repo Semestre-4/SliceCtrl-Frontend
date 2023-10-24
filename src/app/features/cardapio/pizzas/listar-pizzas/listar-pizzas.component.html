@@ -1,1 +1,14 @@
-<p>listar-pizzas works!</p>
+<app-cardapio-navbar></app-cardapio-navbar>
+<app-cardapio-new-register></app-cardapio-new-register>
+<div class="listar-pizzas">
+    <div class="body">
+      <app-table
+      [headers]="callHeaders()"
+      [apiUrl]="apiUrlPath()"
+      [editPath]="'cardapio/pizzas/edit'"
+      [entityName]="'pizza'" 
+      [showDeleteButton]="true"
+      >
+    </app-table>  
+  </div>
+  </div> 
