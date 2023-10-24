@@ -1,2 +1,15 @@
 <app-cardapio-navbar></app-cardapio-navbar>
 <app-cardapio-new-register></app-cardapio-new-register>
+<div class="listar-produtos">
+    <div class="body">
+      <app-table
+      [headers]="callHeaders()"
+      [apiUrl]="apiUrlPath()"
+      [editPath]="'cardapio/produtos/edit'"
+      [entityName]="'produtos'" 
+      [showDeleteButton]="true"
+      [showEndButton]="false"
+      >
+    </app-table>  
+  </div>
+  </div> 

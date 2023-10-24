@@ -2,13 +2,14 @@
     border-radius: 12px;
     background: #FFF;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    width: 370px;
-    height: 198px;
-    padding: 16px 34px 16px 12px;
+    width: 400px;
+    height: 208px;
     align-items: flex-start;
     align-content: flex-start;
     gap: 12px 28px;
     flex-shrink: 0;
+    padding-bottom: 0;
+    padding-left: 15px;;
 }
 
 .id {
@@ -93,11 +94,12 @@ letter-spacing: -0.48px;
 text-align: center;
 font-feature-settings: 'clig' off, 'liga' off;
 font-family: Inter;
-font-size: 17px;
 font-style: normal;
 font-weight: 500;
 line-height: normal;
-letter-spacing: -0.65px;
+letter-spacing: -0.85px;
+margin: 0;
+font-size: 15px;
 }
 
 .btn{

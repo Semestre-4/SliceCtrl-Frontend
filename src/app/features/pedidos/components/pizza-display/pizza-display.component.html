@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="id">#{{ pizza.id }}</div>
+    <div class="p-details d-flex flex-column gap-1">
+        <div class="p-name">
+            {{  'Pizza - ' + pizza.tamanho}}
+        </div>
+        <div class="p-price">R$ {{ pizza.preco.toFixed(2) }}</div>
+    </div>
+    <button class="add" (click)="addToPizzaPedidoClicked()">Adicionar Produto</button>
+</div>

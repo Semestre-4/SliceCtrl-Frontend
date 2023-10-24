@@ -3,18 +3,8 @@ import { Sabores } from "../sabores/sabor";
 
 export class Ingredientes extends AbstractEntity{
 
-    nomeIngrediente: string;
-    qtdeIngrediente: number;
-    sabores: Sabores[];
-
-    constructor(nomeIngrediente: string, qtdeIngrediente: number, sabores: Sabores[]){
-
-        super();
-
-        this.nomeIngrediente = nomeIngrediente;
-        this.qtdeIngrediente = qtdeIngrediente;
-        this.sabores = sabores;
-
-    }
+    nomeIngrediente!: string;
+    qtdeIngrediente!: number;
+    sabores!: Sabores[];
 
 }

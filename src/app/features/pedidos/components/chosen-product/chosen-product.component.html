@@ -1,0 +1,20 @@
+<div class="chosen-pizza d-flex flex-column align-items-start justify-content-center gap-2 mt-2">
+  <div class="header d-flex align-items-start gap-2">
+    <span class="id">#{{ product.produto.id }}</span>
+    <span class="name">{{ product.produto.nomeProduto }}</span>
+    <div class="d-flex flex-grow-1 justify-content-end">
+      <div class="qtde d-flex gap-1 align-items-center">
+        <i class="bi bi-dash-circle" (click)="decreaseQuantity()"></i>
+        <span class="varQtde">{{ quantity }}</span>
+        <i class="bi bi-plus-circle" (click)="increaseQuantity()"></i>
+      </div>
+    </div>
+  </div>  
+  <div class="details d-flex flex-column">
+    <span class="price">$R {{ calculatePrice() }}</span>
+  </div>
+  <button class="btn" (click)="removeProduto()">
+    Excluir Produto
+  </button>
+</div>
+

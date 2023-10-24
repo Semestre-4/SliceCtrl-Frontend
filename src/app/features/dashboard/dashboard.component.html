@@ -1,7 +1,34 @@
 <div class="header">
-    <h1>Dashboard</h1>
-    <hr>
+  <h1>Dashboard</h1>
+  <hr />
+</div>
+
+<div class="top d-flex flex-column gap-4">
+  <app-new-pedido></app-new-pedido>
+  <div class="topper d-flex flex-row gap-3 mt-2">
+    <img src="assets/4255150-removebg-preview 2.png" />
+    <app-general-stats class="mt-2"></app-general-stats>
+    <div class="graph">
+      <canvas
+        baseChart
+        [type]="'pie'"
+        [datasets]="pieChartDatasets"
+        [labels]="pieChartLabels"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [legend]="pieChartLegend"
+      ></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="bottom d-flex flex-row w-100 gap-3">
+<table>
+    <tr>
+        <th>Nome Produto</th>
+        <th>Qtde. Pedida</th>
+    </tr>
+</table>
 </div>
 
 
-<app-chosen-pizza></app-chosen-pizza>
