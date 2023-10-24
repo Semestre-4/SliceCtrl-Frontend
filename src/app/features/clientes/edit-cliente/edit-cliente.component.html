@@ -1,0 +1,191 @@
+<div class="registrar">
+    <div class="header">
+        <h1>Cliente</h1>
+        <hr>
+    </div>
+    
+    <form class="needs-validation">
+
+        <div class="aviso d-flex align-items-center ms-4" id="alert" [ngClass]="{'alert alert-success': type === 'success', 'alert alert-danger': type === 'danger' }">
+            <p>{{mensagem}}</p>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-3 ms-3">
+              <label for="nome" class="form-label marginleft">Nome do Cliente</label>
+              <input
+              type="text"
+              class="form-control marginleft inputs"
+              id="nome"
+              name="nome"
+              placeholder="Digite aqui..."
+              [(ngModel)]="cliente.nome"
+            />
+        </div>
+    
+    
+            <div class="col-md-3 ms-3">
+                <label for="cpf" class="form-label margintop marginleft">CPF</label>
+                <input
+                  type="text"
+                  class="form-control marginleft inputs"
+                  id="cpf"
+                  name="cpf"
+                  placeholder="Digite aqui..."
+                  [(ngModel)]="cliente.cpf"
+                />
+              </div>
+    
+    
+            <div class="col-md-3 ms-3">
+                <label for="telefone" class="form-label margintop marginleft">Telefone</label>
+                <input
+                type="text"
+                class="form-control"
+                id="telefone"
+                name="telefone"
+                placeholder="Digite aqui..."
+                [(ngModel)]="cliente.telefone"
+                />
+            </div>
+        </div>
+
+    <div class="row g-3">
+        <div class="col-md-3 ms-3">
+            <label for="email" class="form-label mt-3">E-mail</label>
+            <input
+            type="text"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Digite aqui..."
+            [(ngModel)]="cliente.email"
+            />
+        </div>
+    </div>
+
+
+    <div class="header mt-3">
+        <h1>Endereço</h1>
+        <hr>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-3 ms-3">
+            <label for="cep" class="form-label margintop">CEP</label>
+            <input
+            type="text"
+            class="form-control"
+            id="cep"
+            name="cep"
+            placeholder="Digite aqui..."
+            [(ngModel)]="cliente.enderecos[0].cep"
+            />
+        </div>
+
+        <div class="col-md-3 ms-3">
+            <label for="rua" class="form-label">Rua</label>
+            <input
+            type="text"
+            class="form-control"
+            id="rua"
+            name="rua"
+            placeholder="Digite aqui..."
+            [(ngModel)]="cliente.enderecos[0].rua"
+            />
+        </div>
+
+    
+        <div class="col-md-3 ms-3">
+            <label for="numero" class="form-label">Número</label>
+            <input
+            type="text"
+            class="form-control"
+            id="numero"
+            name="numero"
+            placeholder="Digite aqui..."
+            [(ngModel)]="cliente.enderecos[0].numero"
+            />
+        </div>
+    </div>
+
+    <div class="row g-3">
+
+
+        <div class="col-md-3 ms-3">
+            <label for="bairro" class="form-label mt-3">Bairro</label>
+            <input
+            type="text"
+            class="form-control"
+            id="bairro"
+            name="bairro"
+            placeholder="Digite aqui..."
+            [(ngModel)]="cliente.enderecos[0].bairro"
+            />
+        </div>
+
+        <div class="col-md-3 ms-3">
+            <label for="cidade" class="form-label mt-3">Cidade</label>
+            <input
+            type="text"
+            class="form-control"
+            id="cidade"
+            name="cidade"
+            placeholder="Digite aqui..."
+            [(ngModel)]="cliente.enderecos[0].cidade"
+            />
+        </div>
+    
+        <div class="col-md-3 ms-3">
+            <label for="estado" class="form-label mt-3">Estado</label>
+            <input
+            type="text"
+            class="form-control"
+            id="estado"
+            name="estado"
+            placeholder="Digite aqui..."
+            [(ngModel)]="cliente.enderecos[0].estado"
+            />
+        </div>
+
+    </div>
+
+    <div class="row g-3">
+
+
+        <div class="col-md-3 ms-3">
+            <label for="pais" class="form-label mt-3">Pais</label>
+            <input
+            type="text"
+            class="form-control"
+            id="pais"
+            name="pais"
+            placeholder="Digite aqui..."
+            [(ngModel)]="cliente.enderecos[0].pais"
+            />
+        </div>
+
+        <div class="col-md-3 ms-3">
+            <label for="complemento" class="form-label mt-3">Complemento</label>
+            <input
+            type="text"
+            class="form-control"
+            id="complemento"
+            name="complemento"
+            placeholder="Digite aqui..."
+            [(ngModel)]="cliente.enderecos[0].complemento"
+            />
+        </div>
+    
+    </div>
+
+        <div class="actions d-flex flex-row gap-1">
+      
+            <button class="btn btn-primary" routerLink="/clientes/listar">Cancelar</button>
+            <button class="btn btn-secondary" type="submit" (click)="submit()" >Continuar</button>
+          </div>
+    
+
+
+    </form>  
+    </div>
