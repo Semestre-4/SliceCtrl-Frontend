@@ -32,7 +32,7 @@ export class SaboresPedidoComponent implements OnInit {
   pizza: Pizzas = new Pizzas();
   pedido: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
-    new Funcionario('', '', '', 0, []),
+    new Funcionario,
     [],
     [],
     new Pagamento(),
