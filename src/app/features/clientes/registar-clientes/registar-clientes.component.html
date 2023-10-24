@@ -79,10 +79,10 @@
             id="cep"
             name="cep"
             placeholder="Digite aqui..."
-            [(ngModel)]="cliente.enderecos[0].cep"
+            [(ngModel)]="enderecos.cep"
+            (blur)="fetchAddressDetails(enderecos.cep)"
             />
         </div>
-
         <div class="col-md-3 ms-3">
             <label for="rua" class="form-label">Rua</label>
             <input
@@ -91,7 +91,7 @@
             id="rua"
             name="rua"
             placeholder="Digite aqui..."
-            [(ngModel)]="cliente.enderecos[0].rua"
+            [(ngModel)]="enderecos.rua"
             />
         </div>
 
@@ -104,7 +104,7 @@
             id="numero"
             name="numero"
             placeholder="Digite aqui..."
-            [(ngModel)]="cliente.enderecos[0].numero"
+            [(ngModel)]="enderecos.numero"
             />
         </div>
     </div>
@@ -120,7 +120,7 @@
             id="bairro"
             name="bairro"
             placeholder="Digite aqui..."
-            [(ngModel)]="cliente.enderecos[0].bairro"
+            [(ngModel)]="enderecos.bairro"
             />
         </div>
 
@@ -132,7 +132,7 @@
             id="cidade"
             name="cidade"
             placeholder="Digite aqui..."
-            [(ngModel)]="cliente.enderecos[0].cidade"
+            [(ngModel)]="enderecos.cidade"
             />
         </div>
     
@@ -144,7 +144,7 @@
             id="estado"
             name="estado"
             placeholder="Digite aqui..."
-            [(ngModel)]="cliente.enderecos[0].estado"
+            [(ngModel)]="enderecos.estado"
             />
         </div>
 
@@ -161,7 +161,7 @@
             id="pais"
             name="pais"
             placeholder="Digite aqui..."
-            [(ngModel)]="cliente.enderecos[0].pais"
+            [(ngModel)]="enderecos.pais"
             />
         </div>
 
@@ -173,7 +173,7 @@
             id="complemento"
             name="complemento"
             placeholder="Digite aqui..."
-            [(ngModel)]="cliente.enderecos[0].complemento"
+            [(ngModel)]="enderecos.complemento"
             />
         </div>
     

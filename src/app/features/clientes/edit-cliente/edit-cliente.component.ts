@@ -3,6 +3,9 @@ import { Cliente } from '../cliente';
 import { ClienteService } from '../service/cliente.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { Endereco } from 'src/app/shared/models/endereco/endereco';
+import { HttpClient } from '@angular/common/http';
+import { EnderecoService } from 'src/app/shared/models/endereco/service/endereco.service';
 
 
 
@@ -19,15 +22,16 @@ export class EditClienteComponent {
 
   mensagem: string = '';
   type: string= '';
+  isAddressDisabled: boolean = true;
 
-  constructor(private service: ClienteService, private router: Router, private location: Location){
+  enderecos = new Endereco('', 0, '', '', '', '','', '');
+
+
+  constructor(private service: ClienteService, private router: Router, private location: Location, private http: HttpClient, private enderecoService: EnderecoService){
     const path = location.path();
     const parts = path.split('/');
     this.id = parts[parts.length - 1];
     this.getClienteById(this.id);
-
-
-
   }
 
   getClienteById(id: string){
@@ -37,10 +41,11 @@ export class EditClienteComponent {
       }});
   }
 
-
   submit(){
 
-    this.service.cadastrarCliente(this.cliente).subscribe({
+    this.cliente.enderecos[0] = this.enderecos;
+
+    this.service.editarCliente(Number(this.id), this.cliente).subscribe({
       next: (newClientes) => {
         this.mensagem = 'Editado com sucesso!';
         this.type = 'success';
@@ -58,6 +63,21 @@ export class EditClienteComponent {
 
         }
         }
+    });
+  }
+
+  fetchAddressDetails(cep: string) {
+    console.log(`fetch: ${cep}`)
+
+    const apiUrl = `https://viacep.com.br/ws/${cep}/json/`;
+  
+    this.http.get(apiUrl).subscribe((data: any) => {
+      this.enderecos.rua = data.logradouro;
+      this.enderecos.bairro = data.bairro;
+      this.enderecos.cidade = data.localidade;
+      this.enderecos.estado = data.uf;
+      this.enderecos.complemento = data.complemento;
+      this.enderecos.pais = 'Brasil';
     });
   }
 }
