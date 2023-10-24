@@ -28,14 +28,14 @@ export class RegistrarProdutosComponent {
         this.mensagem = 'Cadastrado com sucesso!';
         this.type = 'success';
 
-        setTimeout(() => {this.router.navigate(["/cardapio/produtos/listar"])}, 1000 )  
+        this.router.navigate(["/cardapio/produtos/listar"])
 
       },
       error: (erro) => {
         if (erro.status === 200) {
           this.mensagem = 'Cadastrado com sucesso!';
           this.type = 'success';
-          setTimeout(() => {this.router.navigate(["/cardapio/produtos/listar"])}, 1000 )  
+          this.router.navigate(["/cardapio/produtos/listar"])
         }else{
           this.mensagem = erro.error;
           this.type = 'danger';
