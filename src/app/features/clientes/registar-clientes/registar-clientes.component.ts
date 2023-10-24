@@ -24,15 +24,14 @@ export class RegistarClientesComponent {
         this.mensagem = 'Cadastrado com sucesso!';
         this.type = 'success';
 
-        setTimeout(() => {this.router.navigate(["/clientes/listar"])}, 1000 )  
-
+        this.router.navigate(["/clientes/listar"])
       },
       error: (erro) => {
         if (erro.status === 200) {
           this.mensagem = 'Cadastrado com sucesso!';
           this.type = 'success';
-          setTimeout(() => {this.router.navigate(["/clintes/listar"])}, 1000 )  
-        }else{
+          this.router.navigate(["/clientes/listar"])
+                }else{
           this.mensagem = erro.error;
           this.type = 'danger';
 
