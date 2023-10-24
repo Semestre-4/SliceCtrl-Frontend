@@ -32,8 +32,8 @@ export class FuncionarioService {
     return this.http.post<string>(`${this.baseUrl}`, funcionario);
   }
 
-  editarFuncionario(id: number, funcionario: Funcionario): Observable<string> {
-    return this.http.put<string>(`${this.baseUrl}/${id}`, funcionario);
+  editarFuncionario(funcionario: Funcionario): Observable<string> {
+    return this.http.put<string>(`${this.baseUrl}/${funcionario.id}`, funcionario);
   }
 
   excluirFuncionario(id: number): Observable<string> {

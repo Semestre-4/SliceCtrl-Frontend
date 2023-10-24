@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Produtos } from 'src/app/features/cardapio/produtos/produto';
 import { QuantityService } from '../../service/quantity.service';
+import { PedidoProduto } from '../../models/pedido-produto';
 
 @Component({
   selector: 'app-chosen-product',
@@ -9,56 +10,32 @@ import { QuantityService } from '../../service/quantity.service';
 })
 export class ChosenProductComponent {
 
-  @Input() product: any;
+  @Input() product!: PedidoProduto;;
   @Output() removeProduct = new EventEmitter<number>();
-  @Output() quantityChanged = new EventEmitter<{ productId: number, quantity: number }>();
+  @Output() quantityChanged = new EventEmitter<number>();
   @Input() quantity: number = 1;
   @Output() priceCalculated = new EventEmitter<number>();
 
-
-  constructor(private quantityService: QuantityService){}
-
   calculatePrice(): number {
-    const price = this.product.preco * this.quantity;
+    const price = this.product.produto.preco * this.quantity;
     this.priceCalculated.emit(price);
     return price;
   }
 
   increaseQuantity(): void {
     this.quantity++;
-    this.quantityChanged.emit({ productId: this.product.id, quantity: this.quantity });
-    this.updateLocalStorage();
+    this.quantityChanged.emit(this.quantity);
   }
 
   decreaseQuantity(): void {
     if (this.quantity > 0) {
       this.quantity--;
-      this.quantityChanged.emit({ productId: this.product.id, quantity: this.quantity });
-      this.updateLocalStorage();
+      this.quantityChanged.emit(this.quantity);
     }
   }
 
   removeProduto(): void {
     this.removeProduct.emit(this.product.id);
-    this.removeFromLocalStorage();
   }
 
-  private removeFromLocalStorage() {
-    const pedidoProduto = JSON.parse(localStorage.getItem('pedidoProduto') || '[]');
-    const updatedPedidoProduto = pedidoProduto.filter((item: any) => item.productId !== this.product.id && item.quantity > 0);
-    localStorage.setItem('pedidoProduto', JSON.stringify(updatedPedidoProduto));
-  }
-
-  private updateLocalStorage() {
-    const pedidoProduto = JSON.parse(localStorage.getItem('pedidoProduto') || '[]');
-    const existingProductIndex = pedidoProduto.findIndex((item: any) => item.productId === this.product.id);
-
-    if (existingProductIndex !== -1) {
-      pedidoProduto[existingProductIndex].quantity = this.quantity;
-    } else {
-      pedidoProduto.push({ productId: this.product.id, quantity: this.quantity });
-    }
-
-    localStorage.setItem('pedidoProduto', JSON.stringify(pedidoProduto));
-  }
 }

@@ -73,5 +73,8 @@
       </div>
 
 
+      <div class="aviso d-flex align-items-center" id="alert" [ngClass]="{'alert alert-success': type === 'success', 'alert alert-danger': type === 'danger' }">
+        <p>{{mensagem}}</p>
+    </div>
 </form>  
 </div>

@@ -45,10 +45,15 @@ import { TableComponent } from './shared/components/table/table.component';
 import { EditPedidoComponent } from './features/pedidos/edit-pedido/edit-pedido.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { EditProdutoComponent } from './features/cardapio/produtos/edit-produto/edit-produto.component';
+import { EditPizzaComponent } from './features/cardapio/pizzas/edit-pizza/edit-pizza.component';
+import { EditSaborComponent } from './features/cardapio/sabores/edit-sabor/edit-sabor.component';
+import { EditIngredienteComponent } from './features/cardapio/ingredientes/edit-ingrediente/edit-ingrediente.component';
+import { EditFuncionarioComponent } from './features/funcionarios/edit-funcionario/edit-funcionario.component';
 import { PizzaDisplayComponent } from './features/pedidos/components/pizza-display/pizza-display.component';
 import { ChosenProductComponent } from './features/pedidos/components/chosen-product/chosen-product.component';
 import { ChosenSaboresComponent } from './features/pedidos/components/chosen-sabores/chosen-sabores.component';
-
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -89,10 +94,50 @@ import { ChosenSaboresComponent } from './features/pedidos/components/chosen-sab
     CardapioNewRegisterComponent,
     TableComponent,
     EditPedidoComponent,
+    AppComponent,
+    DashboardComponent,
+    TamanhoPizzaPipe,
+    StatusPedidoPipe,
+    FormatarPrecoPipe,
+    ListarPedidoComponent,
+    PrePedidoComponent,
+    MenuPedidoComponent,
+    FinalizarPedidoComponent,
+    SaboresPedidoComponent,
+    ListarClientesComponent,
+    RegistarClientesComponent,
+    ListarProdutosComponent,
+    RegistrarProdutosComponent,
+    ListarPizzasComponent,
+    RegistrarPizzasComponent,
+    ListarSaboresComponent,
+    FormatarDataPipe,
+    RegistrarSaboresComponent,
+    ListarIngredientesComponent,
+    RegistrarIngredientesComponent,
+    GeneralStatsComponent,
+    SearchBarComponent,
+    MenuChipsComponent,
+    NewPedidoComponent,
+    SidebarComponent,
+    ListarFuncionariosComponent,
+    RegisterFuncionariosComponent,
+    ProductDisplayComponent,
+    SaborDisplayComponent,
+    ChosenPizzaComponent,
+    SaborDisplayComponent,
+    CardapioNavbarComponent,
+    CardapioNewRegisterComponent,
+    TableComponent,
+    EditPedidoComponent,
+    EditProdutoComponent,
+    EditPizzaComponent,
+    EditSaborComponent,
+    EditIngredienteComponent,
+    EditFuncionarioComponent,
     PizzaDisplayComponent,
     ChosenProductComponent,
-    ChosenSaboresComponent
-    ],
+    ChosenSaboresComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -102,7 +147,8 @@ import { ChosenSaboresComponent } from './features/pedidos/components/chosen-sab
     MatFormFieldModule,
     MatSelectModule, 
     FormsModule, 
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
+    NgChartsModule,
 
   ],
   providers: [PedidoService,ProdutosService,PizzasService,
