@@ -14,8 +14,6 @@
         [type]="'pie'"
         [datasets]="pieChartData"
         [labels]="pieChartLabels"
-        [options]="pieChartOptions"
-        [plugins]="pieChartPlugins"
         [legend]="pieChartLegend"
       ></canvas>
     </div>
@@ -31,11 +29,11 @@
       <th>Ações</th>
     </tr>
     <tr *ngFor="let item of pedidos">
-      <td>{{item.cpfCliente}}</td>
-      <td>{{item.formaRetirada}}</td>
+      <td>{{item.cliente.cpf}}</td>
+      <td>{{item.formaDeEntrega}}</td>
       <td>{{item.valorTotal}}</td>
       <td>
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" (click)="editar(item)">
           <i class="bi bi-pencil-square"></i>
         </button>
       </td>
@@ -43,15 +41,15 @@
   </table>
 </div>
 
-<div class="bottom d-flex flex-row w-100 gap-2 mt-3">
+<!-- <div class="bottom d-flex flex-row w-100 gap-2 mt-3">
 <table>
     <tr>
         <th>Nome Produto</th>
         <th>Qtde. Pedida</th>
     </tr>
     <tr *ngFor="let item of produtosMaisPedidos">
-        <td>{{item.nome}}</td>
-        <td>{{item.qtde}}</td>
+        <td>{{item.produto.nomeProduto}}</td>
+        <td>{{item.qtdePedida}}</td>
     </tr>
 </table>
 <table>
@@ -60,8 +58,8 @@
         <th>Qtde. Pedida</th>
     </tr>
     <tr *ngFor="let item of saboresMaisPedidos">
-        <td>{{item.nome}}</td>
-        <td>{{item.qtde}}</td>
+        <td>{{item.pizza.tamanho}}</td>
+        <td>{{item.qtdePedida}}</td>
     </tr>
 </table>
-</div>
+</div> -->

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Sabores } from '../../cardapio/sabores/sabor';
 import { SaboresService } from '../../cardapio/sabores/service/sabores.service';
@@ -25,6 +25,8 @@ export class SaboresPedidoComponent implements OnInit {
   sabores: Sabores[] = [];
   saboresPermitidos: number = 0;
   searchTerm: string = '';
+  @Input() isErro: boolean = true;
+  @Input() mensagem: string = '';
 
 
   pedidoId: number = 0;
@@ -108,6 +110,7 @@ export class SaboresPedidoComponent implements OnInit {
 
     if (this.pedidoPizza.sabores == null)
       this.pedidoPizza.sabores = [];
+  
 
     this.pedidoPizza.sabores.push(sabor);
     this.pedidoPizza.valor += sabor.valorAdicional;
@@ -119,9 +122,19 @@ export class SaboresPedidoComponent implements OnInit {
   }
 
   salvar() {
-
-    this.pedidoService.incluirPedidoPizza(this.pedidoPizza, this.pedidoId);
-    this.router.navigate(['/pedidos/menu-pedido', this.pedidoId]);
+    if(this.pedidoPizza.sabores.length > this.saboresPermitidos){
+      this.mensagem = 'Qtde. de sabores invalida para o tamanho da pizza';
+      this.isErro = true;
+    }else{
+      console.log(this.pedidoPizza)
+      this.pedidoService.incluirPedidoPizza(this.pedidoPizza, this.pedidoId);
+      this.router.navigate(['/pedidos/menu-pedido', this.pedidoId]);
+    }
   }
+
+// Helper function to compare arrays for equality
+areArraysEqual(arr1: any[], arr2: any[]): boolean {
+    return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
+}
 
 }

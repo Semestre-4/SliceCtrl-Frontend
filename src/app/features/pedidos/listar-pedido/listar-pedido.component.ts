@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PedidoService } from '../service/pedido.service';
 import { Status } from 'src/app/shared/models/enums/status-pedido';
 import { Pedido } from '../models/pedido';
@@ -31,6 +31,8 @@ export class ListarPedidoComponent implements OnInit{
     Status.PENDENTE,
     FormaDeEntrega.LOCAL
   );
+  @Input() isErro: boolean = true;
+  @Input() mensagem: string = '';
 
   constructor(private pedidoService: PedidoService) { }
 
@@ -45,7 +47,12 @@ export class ListarPedidoComponent implements OnInit{
       }
     );
   }
-  
+
+  handleEditButtonClick(item: any) {
+    this.mensagem = 'Pedido não pode ser editado pois já foi finalizado!';
+    this.isErro = true;
+  }
+
 
   apiUrlPath(){
     return 'http://localhost:8080/api/pedido/all';  

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Tamanho } from 'src/app/shared/models/enums/tamanho-pizza';
 import { Pizzas } from '../pizza';
 import { PizzasService } from '../service/pizzas.service';
@@ -16,9 +16,9 @@ export class RegistrarPizzasComponent {
 
   tamanhoOption = Object.values(Tamanho);
 
-    
-  mensagem: string = '';
-  type: string ='';
+
+  @Input() isErro: boolean = true;
+  @Input() mensagem: string = '';
 
   constructor(private service: PizzasService, private router: Router){}
 
@@ -26,18 +26,13 @@ export class RegistrarPizzasComponent {
     this.service.save(this.pizza).subscribe(
       {
         next: (i) => { 
-          this.mensagem = 'Cadastrado com sucesso!';
-          this.type = 'success';
-  
           this.router.navigate(["/cardapio/pizzas/listar"])        },
         error: erro => {
-          if (erro.status == 201) {
-            this.mensagem = 'Cadastrado com sucesso!';
-            this.type = 'success';
+          if (erro.status == 201 || erro.status == 200) {
             this.router.navigate(["/cardapio/pizzas/listar"])
             }else{
-            this.mensagem = erro.error.response;
-            this.type = 'danger';
+              this.mensagem = 'Preencha todos os campos';
+              this.isErro = true;
           }
       }
       }

@@ -4,14 +4,22 @@
     <hr />
   </div>
   <div class="body">
+    <div [ngClass]="{
+      'alert alert-success':'!isErro',
+      'alert alert-danger':'isErro'}" *ngIf="mensagem" role="alert">
+      {{mensagem}}
+    </div>
     <app-new-pedido></app-new-pedido>
-      <app-table
-        [headers]="callHeaders()"
-        [apiUrl]="apiUrlPath()"
-        [editPath]="'pedidos/menu-pedido/'"
-        [entityName]="'pedido'" 
-        [showDeleteButton]="false"
-        [showEndButton]="true"
-      ></app-table>
+    <app-table
+    [headers]="callHeaders()"
+    [apiUrl]="apiUrlPath()"
+    [editPath]="'pedidos/menu-pedido/'"
+    [entityName]="'pedido'" 
+    [showDeleteButton]="false"
+    [showEndButton]="true"
+    [pedidoStatus]="p.status"
+    (editButtonClick)="handleEditButtonClick($event)"
+  ></app-table>
+
 </div>
 </div> 

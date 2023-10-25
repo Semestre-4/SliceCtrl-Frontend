@@ -2,6 +2,11 @@
     <h1>Finalizar Pedido</h1>
     <hr>
 </div>
+<div [ngClass]="{
+    'alert alert-success':'!isErro',
+    'alert alert-danger':'isErro'}" *ngIf="mensagem" role="alert" class="error">
+{{mensagem}}
+</div>
 <div class="cliente">
     <p class="headerP">Dados do Cliente</p>
     <form action="">
