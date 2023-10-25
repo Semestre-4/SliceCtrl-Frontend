@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TableHeader } from 'src/app/shared/components/table/table-header';
 import { FuncionarioService } from '../service/funcionario.service';
+import { TableComponent } from 'src/app/shared/components/table/table.component';
 
 @Component({
   selector: 'app-listar-funcionarios',
@@ -8,7 +9,11 @@ import { FuncionarioService } from '../service/funcionario.service';
   styleUrls: ['./listar-funcionarios.component.scss']
 })
 export class ListarFuncionariosComponent implements OnInit{
+  @ViewChild(TableComponent) tableComponent!: TableComponent;
+
   data: any[] = [];
+
+  isAtivo: boolean = true;
 
   constructor(private service: FuncionarioService) { }
 
@@ -25,7 +30,7 @@ export class ListarFuncionariosComponent implements OnInit{
   
 
   apiUrlPath(){
-    return 'http://localhost:8080/api/funcionario/all';  
+    return `http://localhost:8080/api/funcionario/ativo/${this.isAtivo}`;  
   }
 
   callHeaders(){
@@ -43,5 +48,10 @@ export class ListarFuncionariosComponent implements OnInit{
     return tableHeaders;
   }
 
+
+  findAtivo(){
+    this.isAtivo = !this.isAtivo;
+    this.tableComponent.loadData();
+  }
 
 }

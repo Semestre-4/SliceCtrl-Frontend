@@ -52,7 +52,22 @@ export class EditFuncionarioComponent {
           this.type = 'success';
           setTimeout(() => {this.router.navigate(["/funcionarios/listar"])}, 1000 )  
         }else{
-          this.mensagem = erro.error;
+          if(erro.error.nome){
+            this.mensagem = `${erro.error.nome}`
+          }
+          if(erro.error.cpf){
+            this.mensagem = `${erro.error.cpf}`
+          }
+          if(erro.error.telefone){
+            this.mensagem = `${erro.error.telefone}`
+          }
+
+
+          if(!erro.error.nome && !erro.error.cpf && !erro.error.telefone){
+            this.mensagem = erro.error
+
+          }
+
           this.type = 'danger';
         }
         }

@@ -40,7 +40,25 @@ export class RegistarClientesComponent {
           this.type = 'success';
           this.router.navigate(["/clientes/listar"])
                 }else{
-          this.mensagem = erro.error;
+          if(erro.error.nome){
+            this.mensagem = `${erro.error.nome}`
+          }
+          if(erro.error.cpf){
+            this.mensagem = `${erro.error.cpf}`
+          }
+          if(erro.error.telefone){
+            this.mensagem = `${erro.error.telefone}`
+          }
+          if(erro.error.email){
+            this.mensagem = `${erro.error.email}`
+          }
+          if(erro.error.enderecos){
+            this.mensagem = `${erro.error.enderecos}`
+          }
+          if(!erro.error.nome && !erro.error.cpf && !erro.error.telefone && !erro.error.email && !erro.error.enderecos ){
+            this.mensagem = erro.error
+
+          }
           this.type = 'danger';
 
         }
