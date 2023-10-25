@@ -21,16 +21,19 @@ import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
   styleUrls: ['./sabores-pedido.component.scss']
 })
 export class SaboresPedidoComponent implements OnInit {
+  loading: boolean = true;
   sabores: Sabores[] = [];
-  pizzaId: number = 0;
-  pedidoId: number = 0;
-  pizzaTamnho: Tamanho = Tamanho.P;
   saboresPermitidos: number = 0;
-  saboresSelecionados: Sabores[] = [];
-  valorPizza: number = 0;
-  observacao: string = '';
-  pizza: Pizzas = new Pizzas();
-  pedido: Pedido = new Pedido(
+
+  //pizzaId: number = 0;
+  pedidoId: number = 0;
+  //pizzaTamnho: Tamanho = Tamanho.P;
+  //saboresSelecionados: Sabores[] = [];
+  //valorPizza: number = 0;
+  //observacao: string = '';
+
+  pizza: Pizzas = new Pizzas(); //PIZZA SELECIONADA NA ETAPA ANTERIOR
+  /*pedido: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
     new Funcionario,
     [],
@@ -41,28 +44,60 @@ export class SaboresPedidoComponent implements OnInit {
     0,
     Status.PENDENTE,
     FormaDeEntrega.LOCAL
-  );
+  );*/
+
+  //OBJETO QUE VAI SER INSERIDO NO PEDIDO
+  pedidoPizza: PedidoPizza = new PedidoPizza(new Pizzas(), [], new Pedido(
+    new Cliente('', '', '', '', [], []),
+    new Funcionario,
+    [],
+    [],
+    new Pagamento(),
+    0,
+    0,
+    0,
+    Status.PENDENTE,
+    FormaDeEntrega.LOCAL
+  ), 0, '',0);
 
   constructor(
     private saborService: SaboresService,
     private pizzaService: PizzasService,
     private route: ActivatedRoute,
     private router: Router,
-    private pedidoDataService: PedidoDataService,
     private pedidoService: PedidoService
   ) { }
 
   ngOnInit(): void {
+
     this.route.queryParams.subscribe(params => {
-      this.pedidoId = +params['pedidoId']; 
-      this.pizzaId = +params['pizzaId']; 
+      this.pedidoId = +params['pedidoId'];
+      this.carregarObjetos(+params['pizzaId']);
     });
-    this.pizzaService.getById(this.pizzaId).subscribe({
+
+
+
+    // this.pedidoService.getPedidoById(this.pedidoId).subscribe({
+    //   next: pedidoInfo => {
+    //     this.pedido = pedidoInfo;
+    //   },
+    //   error: err => console.log('Error', err)
+    // });
+
+  }
+
+  carregarObjetos(pizzaId: number) {
+    
+    this.pizzaService.getById(pizzaId).subscribe({
       next: pizzaInfo => {
         this.pizza = pizzaInfo;
-        this.pizzaTamnho = pizzaInfo.tamanho;
-        this.saboresPermitidosChanged(this.pizzaTamnho);
-        this.valorPizza = pizzaInfo.preco;
+        this.pedidoPizza.valor = this.pizza.preco;
+        this.pedidoPizza.pizza = this.pizza;
+        this.pedidoPizza.qtdePedida = 1;
+        // this.pizzaTamnho = pizzaInfo.tamanho;
+        this.saboresPermitidosChanged(this.pizza.tamanho);
+        //this.valorPizza = pizzaInfo.preco;
+        this.loading = false;
       },
       error: err => console.log('Error', err)
     });
@@ -73,14 +108,6 @@ export class SaboresPedidoComponent implements OnInit {
       },
       error: err => console.log('Error', err)
     });
-
-    this.pedidoService.getPedidoById(this.pedidoId).subscribe({
-      next: pedidoInfo => {
-        this.pedido = pedidoInfo;
-      },
-      error: err => console.log('Error', err)
-    });
-
   }
 
   saboresPermitidosChanged(pizzaTamnho: Tamanho) {
@@ -101,34 +128,44 @@ export class SaboresPedidoComponent implements OnInit {
   }
 
   addSaborToPizza(sabor: Sabores) {
-    this.saboresSelecionados.push(sabor);
-    this.valorPizza += sabor.valorAdicional;
+
+    if (this.pedidoPizza.sabores == null)
+      this.pedidoPizza.sabores = [];
+
+    this.pedidoPizza.sabores.push(sabor);
+    this.pedidoPizza.valor += sabor.valorAdicional;
   }
 
   removeSaborFromPizza(sabor: Sabores) {
-    this.saboresSelecionados = this.saboresSelecionados.filter(s => s !== sabor);
-    this.valorPizza -= sabor.valorAdicional;
+    this.pedidoPizza.sabores = this.pedidoPizza.sabores.filter(s => s !== sabor);
+    this.pedidoPizza.valor -= sabor.valorAdicional;
   }
 
   salvar() {
-    const pedidoPizzaObject = new PedidoPizza(
-      this.pizza,
-      this.saboresSelecionados,
-      this.pedido,
-      0,
-      this.observacao
-    );
-    this.pedidoService.addPizzaPedido(this.pedidoId,pedidoPizzaObject).subscribe({
-      next: (pedido) => {
-        console.log(pedido);
-      this.router.navigate(['/pedidos/menu-pedido', this.pedidoId]);
-  },
-      error: (erro) => {
-        if (erro.status === 200) {
-          this.router.navigate(['/pedidos/menu-pedido', this.pedidoId]);
-        }
-        }
-    });
+
+    this.pedidoService.incluirPedidoPizza(this.pedidoPizza, this.pedidoId);
+    this.router.navigate(['/pedidos/menu-pedido', this.pedidoId]);
+
+
+    //localStorage.setItem('pedidoPizza', JSON.stringify([this.pizza, this.saboresSelecionados, this.pedido, this.observacao]));
+    //   const pedidoPizzaObject = new PedidoPizza(
+    //     this.pizza,
+    //     this.saboresSelecionados,
+    //     this.pedido,
+    //     0,
+    //     this.observacao
+    //   );
+    //   this.pedidoService.addPizzaPedido(this.pedidoId,pedidoPizzaObject).subscribe({
+    //     next: (pedido) => {
+    //       console.log(pedido);
+    //     this.router.navigate(['/pedidos/menu-pedido', this.pedidoId]);
+    // },
+    //     error: (erro) => {
+    //       if (erro.status === 200) {
+    //         this.router.navigate(['/pedidos/menu-pedido', this.pedidoId]);
+    //       }
+    //       }
+    //   });
   }
-  
+
 }

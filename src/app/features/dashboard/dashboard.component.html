@@ -4,15 +4,15 @@
 </div>
 
 <div class="top d-flex flex-column gap-4">
-  <app-new-pedido></app-new-pedido>
-  <div class="topper d-flex flex-row gap-3 mt-2">
+  <app-new-pedido ></app-new-pedido>
+  <div class="topper d-flex flex-row justify-content-between gap-4 mt-2 w-100">
     <img src="assets/4255150-removebg-preview 2.png" />
-    <app-general-stats class="mt-2"></app-general-stats>
+    <app-general-stats class=" align-self-end mt-2"></app-general-stats>
     <div class="graph">
       <canvas
         baseChart
         [type]="'pie'"
-        [datasets]="pieChartDatasets"
+        [datasets]="pieChartData"
         [labels]="pieChartLabels"
         [options]="pieChartOptions"
         [plugins]="pieChartPlugins"
@@ -22,13 +22,46 @@
   </div>
 </div>
 
-<div class="bottom d-flex flex-row w-100 gap-3">
+<div class="mid w-100  mt-4">
+  <table>
+    <tr>
+      <th>CPF Cliente</th>
+      <th>Forma de Retirada</th>
+      <th>Valor Total</th>
+      <th>Ações</th>
+    </tr>
+    <tr *ngFor="let item of pedidos">
+      <td>{{item.cpfCliente}}</td>
+      <td>{{item.formaRetirada}}</td>
+      <td>{{item.valorTotal}}</td>
+      <td>
+        <button class="btn btn-primary">
+          <i class="bi bi-pencil-square"></i>
+        </button>
+      </td>
+
+  </table>
+</div>
+
+<div class="bottom d-flex flex-row w-100 gap-2 mt-3">
 <table>
     <tr>
         <th>Nome Produto</th>
         <th>Qtde. Pedida</th>
     </tr>
+    <tr *ngFor="let item of produtosMaisPedidos">
+        <td>{{item.nome}}</td>
+        <td>{{item.qtde}}</td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th>Nome Sabor</th>
+        <th>Qtde. Pedida</th>
+    </tr>
+    <tr *ngFor="let item of saboresMaisPedidos">
+        <td>{{item.nome}}</td>
+        <td>{{item.qtde}}</td>
+    </tr>
 </table>
 </div>
-
-

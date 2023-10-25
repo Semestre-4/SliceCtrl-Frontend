@@ -4,7 +4,7 @@ import { Pedido } from "./pedido";
 
 export class PedidoProduto extends AbstractEntity{
     produto: Produtos;
-    pedido: Pedido;
+    pedido: Pedido | null;
     qtdePedida: number;
 
     constructor(produto: Produtos, pedido: Pedido, qtdePedida: number){

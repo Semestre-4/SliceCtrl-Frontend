@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PedidoPizza } from '../../models/pedido-pizza';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chosen-pizza',
@@ -7,32 +8,38 @@ import { PedidoPizza } from '../../models/pedido-pizza';
   styleUrls: ['./chosen-pizza.component.scss']
 })
 export class ChosenPizzaComponent{
-  @Input() pedidoPizza: PedidoPizza | any;
+  @Input() pedidoPizza!: PedidoPizza;
   @Output() quantityChanged = new EventEmitter<number>();
+  @Output() removeProduct = new EventEmitter<number>();
+  @Output() priceCalculated = new EventEmitter<number>();
+  @Input() quantity: number = 1;
+
+  constructor(private router: Router) { }
 
   increaseQuantity(): void {
-    this.pedidoPizza.qtdePedida++;
-    this.quantityChanged.emit(this.pedidoPizza.qtdePedida);
+    this.quantity++;
+    this.quantityChanged.emit(this.quantity);
   }
 
   decreaseQuantity(): void {
-    if (this.pedidoPizza.qtdePedida > 1) {
-      this.pedidoPizza.qtdePedida--;
-      this.quantityChanged.emit(this.pedidoPizza.qtdePedida);
+    if (this.quantity > 0) {
+      this.quantity--;
+      this.quantityChanged.emit(this.quantity);
     }
   }
 
-  calcularPreco() {
+  calculatePrice(): number {
+    const price = this.pedidoPizza.pizza.preco * this.quantity;
+    this.priceCalculated.emit(price);
+    return price;
   }
 
-  excluirProduto() {
-    // Implement your logic here for removing a pizza at index
+  removeProduto(): void {
+    this.removeProduct.emit(this.pedidoPizza.id);
   }
 
-  editarProduto() {
-    // Implement your logic here for editing a pizza at index
+  editarProduto(): void {
   }
-
 
   getFilledSabores(sabores: any[]): any[] {
     const filledSabores = [];
