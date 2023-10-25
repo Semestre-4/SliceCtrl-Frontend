@@ -9,6 +9,8 @@
     background: var(--Gray-2, #F7F6FA);
     height: 170px;
     position: relative;
+    justify-content: space-between;
+
 }
 
 
@@ -53,7 +55,7 @@
     line-height: normal;
     letter-spacing: -0.56px;
     width: 161px;
-    height: 26px;
+    height: 36px;
 }
 
 .ingredients,

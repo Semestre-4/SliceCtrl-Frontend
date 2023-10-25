@@ -196,7 +196,6 @@ export class MenuPedidoComponent implements OnInit {
   addPizzaToPedido(pizza: any): void {
 
     this.pedidoService.pedidosEmAndamento.push(this.pedido);
-
     this.router.navigate(['/pedidos/sabores-pedido', this.pedidoId], {
       queryParams: {
         pedidoId: this.pedidoId,
