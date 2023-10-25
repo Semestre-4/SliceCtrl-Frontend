@@ -1,3 +1,4 @@
+
 <div class="menu-pedido d-flex flex-row align-items-stretch w-100 h-100">
     <div class="menu d-flex flex-column align-items-start mt-3">
         <p class="type-title">Sabores</p>
@@ -12,7 +13,7 @@
               <p class="type-title">Montagem</p>
               <div class="d-flex flex-row justify-content-between">
                 <p class="type-subtitle">TAMANHO</p>
-                <p class="type-subtitlee">{{pizzaTamnho}}</p> 
+                <p class="type-subtitlee">{{pedidoPizza.pizza.tamanho}}</p> 
               </div>
               <div class="d-flex flex-row justify-content-between">
                 <p class="type-subtitle">SABORES PERMITIDOS</p>
@@ -22,18 +23,18 @@
           </div>          
         <div class="variable-content">
           <div class="variable-content">
-            <app-chosen-sabores *ngFor="let sabor of saboresSelecionados" [sabor]="sabor"   (removeSabor)="removeSaborFromPizza($event)"></app-chosen-sabores>
+            <app-chosen-sabores *ngFor="let sabor of pedidoPizza.sabores" [sabor]="sabor"   (removeSabor)="removeSaborFromPizza($event)"></app-chosen-sabores>
           </div>
         </div>
         <div class="form-group p-2">
             <label for="exampleFormControlTextarea1">Observações</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="observacao"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="pedidoPizza.observacao"></textarea>
           </div>
         <div class="checkout">
             <div class="checkout-content d-flex flex-column">
                 <div class="d-flex flex-row justify-content-between">
                     <p class="type-subtitle">VALOR PIZZA</p>
-                    <p class="type-subtitlee">R$ {{valorPizza}}</p>
+                    <p class="type-subtitlee">R$ {{pedidoPizza.valor}}</p>
                 </div>
                 <div class="btns d-flex flex-row gap-1">
                     <button class="btn btn-sm btn-block">Cancelar</button>

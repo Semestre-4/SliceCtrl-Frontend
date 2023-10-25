@@ -1,18 +1,24 @@
 import { Component } from '@angular/core';
+import { Cliente } from '../cliente';
 import { ClienteService } from '../service/cliente.service';
 import { Router } from '@angular/router';
-import { Cliente } from '../cliente';
-import { HttpClient } from '@angular/common/http';
+import { Location } from '@angular/common';
 import { Endereco } from 'src/app/shared/models/endereco/endereco';
+import { HttpClient } from '@angular/common/http';
+import { EnderecoService } from 'src/app/shared/models/endereco/service/endereco.service';
+
+
 
 @Component({
-  selector: 'app-registar-clientes',
-  templateUrl: './registar-clientes.component.html',
-  styleUrls: ['./registar-clientes.component.scss']
+  selector: 'app-edit-cliente',
+  templateUrl: './edit-cliente.component.html',
+  styleUrls: ['./edit-cliente.component.scss']
 })
-export class RegistarClientesComponent {
+export class EditClienteComponent {
   
   cliente = new Cliente('', '', '', '', [], []);
+
+  id!: string;
 
   mensagem: string = '';
   type: string= '';
@@ -20,23 +26,40 @@ export class RegistarClientesComponent {
 
   enderecos = new Endereco('', 0, '', '', '', '','', '');
 
+  constructor(private service: ClienteService, private router: Router, private location: Location, private http: HttpClient, private enderecoService: EnderecoService){
+    const path = location.path();
+    const parts = path.split('/');
+    this.id = parts[parts.length - 1];
+    this.getClienteById(this.id);
+  }
 
-  constructor(private service: ClienteService, private router: Router, private http: HttpClient){}
+  getClienteById(id: string){
+    this.service.getClienteById(Number(id)).subscribe({
+      next: success => {
+        this.cliente = success
+        this.enderecos.id = this.cliente.enderecos[0].id;
+        this.enderecos = this.cliente.enderecos[0]
+      }});
+  }
+
 
   submit(){
 
+    
     this.cliente.enderecos[0] = this.enderecos;
 
-    this.service.cadastrarCliente(this.cliente).subscribe({
+    console.log(this.cliente.enderecos[0]);
+
+    this.service.editarCliente(Number(this.id), this.cliente).subscribe({
       next: (newClientes) => {
-        this.mensagem = 'Cadastrado com sucesso!';
+        this.mensagem = 'Editado com sucesso!';
         this.type = 'success';
 
         this.router.navigate(["/clientes/listar"])
       },
       error: (erro) => {
         if (erro.status === 200) {
-          this.mensagem = 'Cadastrado com sucesso!';
+          this.mensagem = 'Editado com sucesso!';
           this.type = 'success';
           this.router.navigate(["/clientes/listar"])
                 }else{
