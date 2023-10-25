@@ -25,6 +25,7 @@ export class TableComponent implements OnInit {
   @Input() pedidoStatus: string = ''; 
   @Output() buttonClick = new EventEmitter<string>();
   @Output() editButtonClick = new EventEmitter<any>();
+  @Output() editButtonEndClick = new EventEmitter<any>();
   data: any[] = [];
   carregando: boolean = true;
 
@@ -100,19 +101,20 @@ export class TableComponent implements OnInit {
   }
 
   onViewClick(item: any) {
-    const entityId = item.id;
-    this.p.getPedidoById(entityId).subscribe({
-      next: (pedido) => {
-        this.pedidoStatus = pedido.status;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
-      if(this.pedidoStatus == Status.PENDENTE){
+  const entityId = item.id;
+  this.p.getPedidoById(entityId).subscribe({
+    next: (pedido) => {
+      this.pedidoStatus = pedido.status;
+      if (this.pedidoStatus !== Status.PENDENTE) {
+        this.editButtonEndClick.emit(item);
+      } else {
         this.router.navigate([`/pedidos/finalizar-pedido`, entityId]);
-
-  }
+}
+    },
+    error: (error) => {
+      console.log(error);
+    },
+  });
   }
   
 }

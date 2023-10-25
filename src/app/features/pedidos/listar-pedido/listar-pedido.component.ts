@@ -53,6 +53,11 @@ export class ListarPedidoComponent implements OnInit{
     this.isErro = true;
   }
 
+  handleEditButtonEndClick(item: any) {
+    this.mensagem = 'Pedido não pode ser finalizado pois já foi finalizado!';
+    this.isErro = true;
+  }
+
 
   apiUrlPath(){
     return 'http://localhost:8080/api/pedido/all';  
