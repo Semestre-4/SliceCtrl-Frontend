@@ -37,10 +37,10 @@ export class RegistrarPizzasComponent {
             this.router.navigate(["/cardapio/pizzas/listar"])
             }else{
             if(erro.error.tamanho){
-              this.mensagem = `${erro.error.tamanho}`
+              this.mensagem = ${erro.error.tamanho}
             }
             if(erro.error.preco){
-              this.mensagem = `${erro.error.preco}`
+              this.mensagem = ${erro.error.preco}
             }
   
             if(!erro.error.tamanho && !erro.error.preco){

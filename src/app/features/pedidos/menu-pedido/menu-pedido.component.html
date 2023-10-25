@@ -4,6 +4,11 @@
     <app-menu-chips
       (categorySelected)="onCategorySelected($event)"
     ></app-menu-chips>
+    <div [ngClass]="{
+      'alert alert-success':'!isErro',
+      'alert alert-danger':'isErro'}" *ngIf="mensagem" role="alert" class="error">
+  {{mensagem}}
+</div>
     <div class="products">
       <app-product-display
         *ngFor="let product of filteredProducts"
