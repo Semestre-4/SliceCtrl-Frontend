@@ -65,10 +65,13 @@
         </div>
 
         <div class="col-md-3 check mt-5 ms-4">
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" [(ngModel)]="produto.disponivel" checked>
-                <label for="produtoDisponivel" class="form-label labels">Produto Disponivel</label>
+          <div class="form-check form-switch ps-0 d-flex flex-row justify-content-between w-100 ms-5">
+
+            <div class="d-flex mb-3 isAtiv w-75">
+                <input class="form-check-input mb-1 tamanho" type="checkbox" id="flexSwitchCheckChecked" [(ngModel)]="produto.disponivel" checked>
+                <label for="produtoDisponivel" class="form-label labels font ms-2">Produto Disponivel</label>
             </div>              
+        </div>
         </div>
     </div>
 

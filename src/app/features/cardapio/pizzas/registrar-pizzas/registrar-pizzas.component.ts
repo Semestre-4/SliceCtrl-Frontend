@@ -36,9 +36,20 @@ export class RegistrarPizzasComponent {
             this.type = 'success';
             this.router.navigate(["/cardapio/pizzas/listar"])
             }else{
-            this.mensagem = erro.error.response;
+            if(erro.error.tamanho){
+              this.mensagem = `${erro.error.tamanho}`
+            }
+            if(erro.error.preco){
+              this.mensagem = `${erro.error.preco}`
+            }
+  
+            if(!erro.error.tamanho && !erro.error.preco){
+              this.mensagem = erro.error
+  
+            }
+  
             this.type = 'danger';
-          }
+            }
       }
       }
     );

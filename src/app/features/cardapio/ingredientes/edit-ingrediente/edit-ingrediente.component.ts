@@ -51,7 +51,17 @@ submit(){
           this.type = 'success';
           setTimeout(() => {this.router.navigate(["/cardapio/ingredientes/listar"])}, 1000 )  
         }else{
-          this.mensagem = erro.error;
+          if(erro.error.nomeIngrediente){
+            this.mensagem = `${erro.error.nomeIngrediente}`
+          }
+          if(erro.error.qtdeIngrediente){
+            this.mensagem = `${erro.error.qtdeIngrediente}`
+          }
+
+          if(!erro.error.nomeIngrediente && !erro.error.qtdeIngrediente){
+            this.mensagem = erro.error
+  
+          } 
           this.type = 'danger';
         }
     }
