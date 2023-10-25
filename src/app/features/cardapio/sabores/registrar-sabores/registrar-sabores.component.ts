@@ -55,14 +55,12 @@ submit(){
         this.mensagem = 'Cadastrado com sucesso!';
         this.type = 'success';
 
-        setTimeout(() => {this.router.navigate(["/cardapio/sabores/listar"])}, 1000 )  
-      },
+        this.router.navigate(["/cardapio/sabores/listar"])      },
       error: erro => {
         if (erro.status === 200) {
           this.mensagem = 'Cadastrado com sucesso!';
           this.type = 'success';
-          setTimeout(() => {this.router.navigate(["/cardapio/sabores/listar"])}, 1000 )  
-        }else{
+          this.router.navigate(["/cardapio/sabores/listar"])        }else{
           this.mensagem = erro.error;
           this.type = 'danger';
         }

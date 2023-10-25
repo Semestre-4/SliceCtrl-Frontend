@@ -24,6 +24,7 @@ import { EditPizzaComponent } from './features/cardapio/pizzas/edit-pizza/edit-p
 import { EditSaborComponent } from './features/cardapio/sabores/edit-sabor/edit-sabor.component';
 import { EditIngredienteComponent } from './features/cardapio/ingredientes/edit-ingrediente/edit-ingrediente.component';
 import { EditFuncionarioComponent } from './features/funcionarios/edit-funcionario/edit-funcionario.component';
+import { EditClienteComponent } from './features/clientes/edit-cliente/edit-cliente.component';
 
 const routes: Routes = [
   {
@@ -90,7 +91,9 @@ const routes: Routes = [
   path: 'clientes',
   children: [
     { path: 'listar', component: ListarClientesComponent },
-    { path: 'register', component: RegistarClientesComponent }
+    { path: 'register', component: RegistarClientesComponent },
+    { path: 'edit/:id', component: EditClienteComponent}
+
   ]
 },
 {

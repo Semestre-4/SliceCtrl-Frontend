@@ -38,8 +38,6 @@ export class ChosenPizzaComponent{
     this.removeProduct.emit(this.pedidoPizza.id);
   }
 
-  editarProduto(): void {
-  }
 
   getFilledSabores(sabores: any[]): any[] {
     const filledSabores = [];
