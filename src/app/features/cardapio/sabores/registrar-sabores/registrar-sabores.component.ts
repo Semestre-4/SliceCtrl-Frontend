@@ -61,7 +61,22 @@ submit(){
           this.mensagem = 'Cadastrado com sucesso!';
           this.type = 'success';
           this.router.navigate(["/cardapio/sabores/listar"])        }else{
-          this.mensagem = erro.error;
+
+          if(erro.error.nomeSabor){
+
+            this.mensagem = `${erro.error.nomeSabor}`
+
+          }
+          if(erro.error.ingredientesDTOS){
+            this.mensagem = `${erro.error.ingredientesDTOS}`
+
+          }
+
+          if(!erro.error.ingredientesDTOS && !erro.error.nomeSabor){
+            this.mensagem = erro.error
+
+          }
+            
           this.type = 'danger';
         }
     }
