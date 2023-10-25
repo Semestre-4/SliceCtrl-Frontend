@@ -54,11 +54,47 @@ import { PizzaDisplayComponent } from './features/pedidos/components/pizza-displ
 import { ChosenProductComponent } from './features/pedidos/components/chosen-product/chosen-product.component';
 import { ChosenSaboresComponent } from './features/pedidos/components/chosen-sabores/chosen-sabores.component';
 import { EditClienteComponent } from './features/clientes/edit-cliente/edit-cliente.component';
-
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
   declarations: [
+    AppComponent,
+    DashboardComponent,
+    TamanhoPizzaPipe,
+    StatusPedidoPipe,
+    FormatarPrecoPipe,
+    ListarPedidoComponent,
+    PrePedidoComponent,
+    MenuPedidoComponent,
+    FinalizarPedidoComponent,
+    SaboresPedidoComponent,
+    ListarClientesComponent,
+    RegistarClientesComponent,
+    ListarProdutosComponent,
+    RegistrarProdutosComponent,
+    ListarPizzasComponent,
+    RegistrarPizzasComponent,
+    ListarSaboresComponent,
+    FormatarDataPipe,
+    RegistrarSaboresComponent,
+    ListarIngredientesComponent,
+    RegistrarIngredientesComponent,
+    GeneralStatsComponent,
+    SearchBarComponent,
+    MenuChipsComponent,
+    NewPedidoComponent,
+    SidebarComponent,
+    ListarFuncionariosComponent,
+    RegisterFuncionariosComponent,
+    ProductDisplayComponent,
+    SaborDisplayComponent,
+    ChosenPizzaComponent,
+    SaborDisplayComponent,
+    CardapioNavbarComponent,
+    CardapioNewRegisterComponent,
+    TableComponent,
+    EditPedidoComponent,
     AppComponent,
     DashboardComponent,
     TamanhoPizzaPipe,
@@ -104,7 +140,8 @@ import { EditClienteComponent } from './features/clientes/edit-cliente/edit-clie
     ChosenProductComponent,
     ChosenSaboresComponent,
     EditClienteComponent
-    ],
+    ChosenSaboresComponent],
+  
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -115,7 +152,7 @@ import { EditClienteComponent } from './features/clientes/edit-cliente/edit-clie
     MatSelectModule, 
     FormsModule, 
     ReactiveFormsModule,
-    
+    NgChartsModule,
 
   ],
   providers: [PedidoService,ProdutosService,PizzasService,
