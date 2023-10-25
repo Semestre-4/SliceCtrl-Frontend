@@ -24,6 +24,8 @@ export class SaboresPedidoComponent implements OnInit {
   loading: boolean = true;
   sabores: Sabores[] = [];
   saboresPermitidos: number = 0;
+  searchTerm: string = '';
+
 
   pedidoId: number = 0;
 
@@ -57,6 +59,10 @@ export class SaboresPedidoComponent implements OnInit {
       this.carregarObjetos(+params['pizzaId']);
     });
 
+  }
+
+  onSearch(searchTerm: string): void {
+    this.sabores = this.sabores.filter(s => s.nomeSabor.includes(searchTerm));
   }
 
   carregarObjetos(pizzaId: number) {

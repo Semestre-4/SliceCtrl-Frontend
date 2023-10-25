@@ -2,7 +2,7 @@
 <div class="menu-pedido d-flex flex-row align-items-stretch w-100 h-100">
     <div class="menu d-flex flex-column align-items-start mt-3">
         <p class="type-title">Sabores</p>
-        <app-search-bar class="align-selft-center"></app-search-bar>
+        <app-search-bar class="align-self-center" (searchEvent)="onSearch($event)"></app-search-bar>
         <div class="sabores d-flex flex-row gap-2">
         <app-sabor-display class=" mt-3" *ngFor="let sabor of sabores" [sabor]="sabor" (addToPizza)="addSaborToPizza($event)"></app-sabor-display> 
       </div>     

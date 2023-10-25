@@ -139,7 +139,7 @@ import { NgChartsModule } from 'ng2-charts';
     PizzaDisplayComponent,
     ChosenProductComponent,
     ChosenSaboresComponent,
-    EditClienteComponent
+    EditClienteComponent,
     ChosenSaboresComponent],
   
   imports: [
