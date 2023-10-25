@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormatarDataPipe } from '../../pipes/formatar-data/formatar-data.pipe';
 import { FormatarPrecoPipe } from '../../pipes/formatar-preco/formatar-preco.pipe';
 import { TableHeader } from './table-header';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PedidoService } from 'src/app/features/pedidos/service/pedido.service';
 import { Status } from '../../models/enums/status-pedido';
 import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
@@ -33,7 +33,8 @@ export class TableComponent implements OnInit {
     private datePipe: FormatarDataPipe,
     private numberPipe: FormatarPrecoPipe,
     private p:PedidoService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
     ) {}
 
   ngOnInit(): void {
@@ -49,19 +50,26 @@ export class TableComponent implements OnInit {
 
   onEditClick(item: any) {
     const entityId = item.id;
-    this.p.getPedidoById(entityId).subscribe({
-      next: (pedido) => {
-        this.pedidoStatus = pedido.status;
-        if (this.pedidoStatus !== Status.PENDENTE) {
-          this.editButtonClick.emit(item);
-        } else {
-          this.router.navigate([`/${this.editPath}`, entityId]);
-        }
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+    const urlSegments = this.route.snapshot.url.map(segment => segment.path);
+    
+    if(urlSegments.includes('pedido') || urlSegments.includes('pedidos')){
+        this.p.getPedidoById(entityId).subscribe({
+          next: (pedido) => {
+            this.pedidoStatus = pedido.status;
+            if (this.pedidoStatus !== Status.PENDENTE) {
+              this.editButtonClick.emit(item);
+            } else {
+              this.router.navigate([`/${this.editPath}`, entityId]);
+            }
+          },
+          error: (error) => {
+            this.router.navigate([`/${this.editPath}`, entityId]);
+          },
+        });
+    } else {
+      this.editButtonClick.emit(item);
+      this.router.navigate([`/${this.editPath}`, entityId]);
+    }
   }
 
 
