@@ -26,7 +26,6 @@ export class EditClienteComponent {
 
   enderecos = new Endereco('', 0, '', '', '', '','', '');
 
-
   constructor(private service: ClienteService, private router: Router, private location: Location, private http: HttpClient, private enderecoService: EnderecoService){
     const path = location.path();
     const parts = path.split('/');
@@ -38,12 +37,18 @@ export class EditClienteComponent {
     this.service.getClienteById(Number(id)).subscribe({
       next: success => {
         this.cliente = success
+        this.enderecos.id = this.cliente.enderecos[0].id;
+        this.enderecos = this.cliente.enderecos[0]
       }});
   }
 
+
   submit(){
 
+    
     this.cliente.enderecos[0] = this.enderecos;
+
+    console.log(this.cliente.enderecos[0]);
 
     this.service.editarCliente(Number(this.id), this.cliente).subscribe({
       next: (newClientes) => {
