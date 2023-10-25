@@ -207,11 +207,12 @@ export class MenuPedidoComponent implements OnInit {
     } else {
         // Product doesn't exist, add new entry
         this.pedido.produtos.push(pedidoProduct);
-      this.valorPedido += pedidoProduct.produto.preco; // Add the product price to valorPedido
+    }
+
+          this.valorPedido += pedidoProduct.produto.preco; // Add the product price to valorPedido
       this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
       this.pricePipe.transform(this.valorTotal);
       this.pricePipe.transform(this.valorPedido);
-    }
 
     // // Update valorPedido and valorTotal
     // this.valorPedido += this.pedido.produtos.; // Add the product price to valorPedido
@@ -247,10 +248,29 @@ export class MenuPedidoComponent implements OnInit {
 
     if (index !== -1) {
       const removedProduct = this.pedido.produtos.splice(index, 1)[0];
-      this.valorPedido -= removedProduct.produto.preco * removedProduct.qtdePedida; // Subtract the removed product's price from valorPedido
-      this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
+      this.pedido.produtos[index].qtdePedida--;
+    
+    this.valorPedido -= removedProduct.produto.preco * removedProduct.qtdePedida; // Subtract the removed product's price from valorPedido
+    this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
     }
   }
+
+  // const pedidoProduct = this.transformProdutoToPedidoProduto(product, 1);
+  // const isAlreadyAddedIndex = this.pedido.produtos.findIndex(item => item.produto.id === product.id);
+
+  // if (isAlreadyAddedIndex !== -1) {
+  //     // Product already exists, update quantity
+  //     this.pedido.produtos[isAlreadyAddedIndex].qtdePedida++;
+  // } else {
+  //     // Product doesn't exist, add new entry
+  //     this.pedido.produtos.push(pedidoProduct);
+  // }
+
+  // this.valorPedido += pedidoProduct.produto.preco; // Add the product price to valorPedido
+  // this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
+  // this.pricePipe.transform(this.valorTotal);
+  // this.pricePipe.transform(this.valorPedido);
+
 
 
 
