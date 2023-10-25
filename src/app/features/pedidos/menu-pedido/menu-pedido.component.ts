@@ -223,8 +223,6 @@ export class MenuPedidoComponent implements OnInit {
       const removedProduct = this.pedido.produtos.splice(index, 1)[0];
       this.valorPedido -= removedProduct.produto.preco * removedProduct.qtdePedida; // Subtract the removed product's price from valorPedido
       this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
-      //this.pricePipe.transform(this.valorTotal);
-      //this.pricePipe.transform(this.valorPedido);
     }
   }
 
@@ -289,10 +287,8 @@ export class MenuPedidoComponent implements OnInit {
        this.router.navigate(['/pedidos/finalizar-pedido', this.pedido.id]);
       },
       error: (erro) => {
-        alert('400');
         console.log(erro);
         if (erro.status === 200) {
-
           this.router.navigate(['/pedidos/finalizar-pedido', this.pedido.id]);
         } else {
           console.log(this.pedido);

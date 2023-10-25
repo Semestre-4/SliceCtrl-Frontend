@@ -25,28 +25,10 @@ export class SaboresPedidoComponent implements OnInit {
   sabores: Sabores[] = [];
   saboresPermitidos: number = 0;
 
-  //pizzaId: number = 0;
   pedidoId: number = 0;
-  //pizzaTamnho: Tamanho = Tamanho.P;
-  //saboresSelecionados: Sabores[] = [];
-  //valorPizza: number = 0;
-  //observacao: string = '';
 
-  pizza: Pizzas = new Pizzas(); //PIZZA SELECIONADA NA ETAPA ANTERIOR
-  /*pedido: Pedido = new Pedido(
-    new Cliente('', '', '', '', [], []),
-    new Funcionario,
-    [],
-    [],
-    new Pagamento(),
-    0,
-    0,
-    0,
-    Status.PENDENTE,
-    FormaDeEntrega.LOCAL
-  );*/
+  pizza: Pizzas = new Pizzas();
 
-  //OBJETO QUE VAI SER INSERIDO NO PEDIDO
   pedidoPizza: PedidoPizza = new PedidoPizza(new Pizzas(), [], new Pedido(
     new Cliente('', '', '', '', [], []),
     new Funcionario,
@@ -75,15 +57,6 @@ export class SaboresPedidoComponent implements OnInit {
       this.carregarObjetos(+params['pizzaId']);
     });
 
-
-
-    // this.pedidoService.getPedidoById(this.pedidoId).subscribe({
-    //   next: pedidoInfo => {
-    //     this.pedido = pedidoInfo;
-    //   },
-    //   error: err => console.log('Error', err)
-    // });
-
   }
 
   carregarObjetos(pizzaId: number) {
@@ -94,9 +67,7 @@ export class SaboresPedidoComponent implements OnInit {
         this.pedidoPizza.valor = this.pizza.preco;
         this.pedidoPizza.pizza = this.pizza;
         this.pedidoPizza.qtdePedida = 1;
-        // this.pizzaTamnho = pizzaInfo.tamanho;
         this.saboresPermitidosChanged(this.pizza.tamanho);
-        //this.valorPizza = pizzaInfo.preco;
         this.loading = false;
       },
       error: err => console.log('Error', err)
@@ -145,27 +116,6 @@ export class SaboresPedidoComponent implements OnInit {
 
     this.pedidoService.incluirPedidoPizza(this.pedidoPizza, this.pedidoId);
     this.router.navigate(['/pedidos/menu-pedido', this.pedidoId]);
-
-
-    //localStorage.setItem('pedidoPizza', JSON.stringify([this.pizza, this.saboresSelecionados, this.pedido, this.observacao]));
-    //   const pedidoPizzaObject = new PedidoPizza(
-    //     this.pizza,
-    //     this.saboresSelecionados,
-    //     this.pedido,
-    //     0,
-    //     this.observacao
-    //   );
-    //   this.pedidoService.addPizzaPedido(this.pedidoId,pedidoPizzaObject).subscribe({
-    //     next: (pedido) => {
-    //       console.log(pedido);
-    //     this.router.navigate(['/pedidos/menu-pedido', this.pedidoId]);
-    // },
-    //     error: (erro) => {
-    //       if (erro.status === 200) {
-    //         this.router.navigate(['/pedidos/menu-pedido', this.pedidoId]);
-    //       }
-    //       }
-    //   });
   }
 
 }
