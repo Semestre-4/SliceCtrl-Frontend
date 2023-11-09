@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ClienteService } from '../service/cliente.service';
 import { Router } from '@angular/router';
 import { Cliente } from '../cliente';
+import { HttpClient } from '@angular/common/http';
+import { Endereco } from 'src/app/shared/models/endereco/endereco';
 
 @Component({
   selector: 'app-registar-clientes',
@@ -14,30 +16,68 @@ export class RegistarClientesComponent {
 
   mensagem: string = '';
   type: string= '';
+  isAddressDisabled: boolean = true;
 
-  constructor(private service: ClienteService, private router: Router){}
+  enderecos = new Endereco('', 0, '', '', '', '','', '');
+
+
+  constructor(private service: ClienteService, private router: Router, private http: HttpClient){}
 
   submit(){
+
+    this.cliente.enderecos[0] = this.enderecos;
 
     this.service.cadastrarCliente(this.cliente).subscribe({
       next: (newClientes) => {
         this.mensagem = 'Cadastrado com sucesso!';
         this.type = 'success';
 
-        setTimeout(() => {this.router.navigate(["/clientes/listar"])}, 1000 )  
-
+        this.router.navigate(["/clientes/listar"])
       },
       error: (erro) => {
         if (erro.status === 200) {
           this.mensagem = 'Cadastrado com sucesso!';
           this.type = 'success';
-          setTimeout(() => {this.router.navigate(["/clintes/listar"])}, 1000 )  
-        }else{
-          this.mensagem = erro.error;
+          this.router.navigate(["/clientes/listar"])
+                }else{
+          if(erro.error.nome){
+            this.mensagem = `${erro.error.nome}`
+          }
+          if(erro.error.cpf){
+            this.mensagem = `${erro.error.cpf}`
+          }
+          if(erro.error.telefone){
+            this.mensagem = `${erro.error.telefone}`
+          }
+          if(erro.error.email){
+            this.mensagem = `${erro.error.email}`
+          }
+          if(erro.error.enderecos){
+            this.mensagem = `${erro.error.enderecos}`
+          }
+          if(!erro.error.nome && !erro.error.cpf && !erro.error.telefone && !erro.error.email && !erro.error.enderecos ){
+            this.mensagem = erro.error
+
+          }
           this.type = 'danger';
 
         }
         }
+    });
+  }
+
+  fetchAddressDetails(cep: string) {
+    console.log(`fetch: ${cep}`)
+
+    const apiUrl = `https://viacep.com.br/ws/${cep}/json/`;
+  
+    this.http.get(apiUrl).subscribe((data: any) => {
+      this.enderecos.rua = data.logradouro;
+      this.enderecos.bairro = data.bairro;
+      this.enderecos.cidade = data.localidade;
+      this.enderecos.estado = data.uf;
+      this.enderecos.complemento = data.complemento;
+      this.enderecos.pais = 'Brasil';
     });
   }
 }

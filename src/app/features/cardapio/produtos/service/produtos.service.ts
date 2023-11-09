@@ -35,6 +35,10 @@ export class ProdutosService {
     return this.http.get<Produtos[]>(`${this.baseURL}/disponivel`);
   }
 
+  getByAtivo(ativo: boolean): Observable<Produtos[]>{
+    return this.http.get<Produtos[]>(`${this.baseURL}/ativo/${ativo}`);
+  }
+
   save(produto: Produtos): Observable<HttpStatusCode>{
     return this.http.post<HttpStatusCode>(`${this.baseURL}`, produto)
   }

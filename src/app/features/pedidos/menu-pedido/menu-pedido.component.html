@@ -4,6 +4,11 @@
     <app-menu-chips
       (categorySelected)="onCategorySelected($event)"
     ></app-menu-chips>
+    <div [ngClass]="{
+      'alert alert-success':'!isErro',
+      'alert alert-danger':'isErro'}" *ngIf="mensagem" role="alert" class="error">
+  {{mensagem}}
+</div>
     <div class="products">
       <app-product-display
         *ngFor="let product of filteredProducts"
@@ -47,7 +52,9 @@
         <app-chosen-pizza
           *ngFor="let pizza of pedido.pizzas; let i = index"
           [pedidoPizza]="pizza"
-          (quantityChanged)="onQuantityChanged($event, i)"
+          (priceCalculated)="onPriceCalculatedPizza($event)"
+          (quantityChanged)="onQuantityChangedPizza($event, i)"
+          (removeProduct)="removePizzaFromPedido($event)"
         >
         </app-chosen-pizza>
       </div>
@@ -56,15 +63,15 @@
       <div class="checkout-content d-flex flex-column">
         <div class="d-flex flex-row justify-content-between">
           <p class="type-subtitle">VALOR DO PEDIDO</p>
-          <p class="type-subtitlee">R$ {{ valorPedido }}</p>
+          <p class="type-subtitlee">{{ valorPedido | formatarPreco }}</p>
         </div>
         <div class="d-flex flex-row justify-content-between">
           <p class="type-subtitle">TAXA DE ENTREGA</p>
-          <p class="type-subtitlee">R$ {{ valorEntrega }}</p>
+          <p class="type-subtitlee">{{ valorEntrega | formatarPreco }}</p>
         </div>
         <div class="d-flex flex-row justify-content-between">
           <p class="type-subtitle">VALOR TOTAL</p>
-          <p class="type-subtitlee">{{ valorTotal}}</p>
+          <p class="type-subtitlee">{{ valorTotal | formatarPreco}}</p>
         </div>
         <div class="btns d-flex flex-row gap-1">
           <button

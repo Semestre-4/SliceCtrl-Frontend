@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProdutosService } from '../service/produtos.service';
 import { TableHeader } from 'src/app/shared/components/table/table-header';
+import { Location } from '@angular/common';
+import { TableComponent } from 'src/app/shared/components/table/table.component';
 
 @Component({
   selector: 'app-listar-produtos',
@@ -8,9 +10,13 @@ import { TableHeader } from 'src/app/shared/components/table/table-header';
   styleUrls: ['./listar-produtos.component.scss']
 })
 export class ListarProdutosComponent implements OnInit{
+  @ViewChild(TableComponent) tableComponent!: TableComponent;
+
   data: any[] = [];
 
-  constructor(private service: ProdutosService) { }
+  isAtivo: boolean = true;
+
+  constructor(private service: ProdutosService, private location: Location) { }
 
   ngOnInit(): void {
     this.service.getAll().subscribe(
@@ -22,10 +28,9 @@ export class ListarProdutosComponent implements OnInit{
       }
     );
   }
-  
 
   apiUrlPath(){
-    return 'http://localhost:8080/api/produtos/all';  
+    return `http://localhost:8080/api/produtos/ativo/${this.isAtivo}`;  
   }
 
   callHeaders(){
@@ -40,6 +45,11 @@ export class ListarProdutosComponent implements OnInit{
     console.log(this.data[0].nomeProduto)
 
     return tableHeaders;
+  }
+
+  findAtivo(){
+    this.isAtivo = !this.isAtivo;
+    this.tableComponent.loadData();
   }
 
 

@@ -33,7 +33,7 @@ export class ClienteService {
   }
 
   editarCliente(id: number, cliente: Cliente): Observable<string> {
-    return this.http.put<string>(`${this.baseUrl}/${id}`, cliente);
+    return this.http.put<string>(`${this.baseUrl}/${cliente.id}`, cliente);
   }
 
   excluirCliente(id: number): Observable<string> {

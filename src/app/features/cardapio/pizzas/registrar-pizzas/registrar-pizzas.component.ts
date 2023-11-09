@@ -29,17 +29,27 @@ export class RegistrarPizzasComponent {
           this.mensagem = 'Cadastrado com sucesso!';
           this.type = 'success';
   
-          setTimeout(() => {this.router.navigate(["/cardapio/pizzas/listar"])}, 1000 )  
-        },
+          this.router.navigate(["/cardapio/pizzas/listar"])        },
         error: erro => {
           if (erro.status == 201) {
             this.mensagem = 'Cadastrado com sucesso!';
             this.type = 'success';
-            setTimeout(() => {this.router.navigate(["/cardapio/pizzas/listar"])}, 1000 )  
-          }else{
-            this.mensagem = erro.error.response;
+            this.router.navigate(["/cardapio/pizzas/listar"])
+            }else{
+            if(erro.error.tamanho){
+              this.mensagem = erro.error.tamanho;
+            }
+            if(erro.error.preco){
+              this.mensagem = erro.error.preco;
+            }
+  
+            if(!erro.error.tamanho && !erro.error.preco){
+              this.mensagem = erro.error;
+  
+            }
+  
             this.type = 'danger';
-          }
+            }
       }
       }
     );

@@ -28,17 +28,33 @@ export class RegistrarProdutosComponent {
         this.mensagem = 'Cadastrado com sucesso!';
         this.type = 'success';
 
-        setTimeout(() => {this.router.navigate(["/cardapio/produtos/listar"])}, 1000 )  
+        this.router.navigate(["/cardapio/produtos/listar"])
 
       },
       error: (erro) => {
         if (erro.status === 200) {
           this.mensagem = 'Cadastrado com sucesso!';
           this.type = 'success';
-          setTimeout(() => {this.router.navigate(["/cardapio/produtos/listar"])}, 1000 )  
+          this.router.navigate(["/cardapio/produtos/listar"])
         }else{
-          this.mensagem = erro.error;
-          this.type = 'danger';
+        if(erro.error.nomeProduto){
+          this.mensagem = `${erro.error.nomeProduto}`
+        }
+        if(erro.error.preco){
+          this.mensagem = `${erro.error.preco}`
+        }
+        if(erro.error.qtdeEstoque){
+          this.mensagem = `${erro.error.qtdeEstoque}`
+        }
+        if(erro.error.disponivel){
+          this.mensagem = `${erro.error.disponivel}`
+        }
+        if(!erro.error.nomeProduto && !erro.error.preco && !erro.error.disponivel && !erro.error.qtdeEstoque){
+          this.mensagem = erro.error
+
+        }
+
+        this.type = 'danger';
         }
         }
     });

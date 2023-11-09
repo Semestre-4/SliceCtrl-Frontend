@@ -103,6 +103,10 @@ export class PrePedidoComponent implements OnInit {
   }
   }
 
+  editClient(){
+    this.router.navigate(['/clientes/edit', this.pedido.cliente.enderecos]);
+  }
+
   submitForm(form: NgForm): void {
     if (form.valid) {
       this.pedidoService
@@ -120,7 +124,7 @@ export class PrePedidoComponent implements OnInit {
             if (erro.status === 200) {
               this.router.navigate(['/pedidos/menu-pedido', this.pedido.id]);
             }else{
-              this.mensagem = erro.error;
+              this.mensagem = 'Um pedido já foi aberto para esse cliente';
               this.isErro = true;
             }
             }

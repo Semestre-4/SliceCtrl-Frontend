@@ -3,26 +3,37 @@
         <h1>Pizza</h1>
         <hr>
     </div>
+
+
     
     <form class="needs-validation">
-        <div class="row g-3">
+
+        <div [ngClass]="{
+            'alert alert-success':'!isErro',
+            'alert alert-danger':'isErro'}" *ngIf="mensagem" role="alert">
+            {{mensagem}}
+          </div>
+
+        <div class="row g-3 ms-3">
     
-            <div class="col-md-3">
+            <div class="col-md-4">
               <label for="tamanhoPizza" class="form-label marginleft margintop">Tamanho da Pizza</label>
               <select
                 type="text"
                 class="form-control marginleft inputs"
                 id="tamanhoPizza"
                 name="tamanhoPizza"
-                [(ngModel)]="pizza.tamanho"          >  
+                [(ngModel)]="pizza.tamanho"
+                          >
+                <option value="" disabled>Escolha ...</option>  
                 <option *ngFor="let tamanho of tamanhoOption">{{ tamanho }}</option>
                 </select>
         </div>
     
         </div>
     
-        <div class="row g-3 margintop">
-            <div class="col-md-3">
+        <div class="row g-3 ms-3">
+            <div class="col-md-4 mt-5">
                 <label for="precoPizza" class="form-label marginleft">Preço da Pizza</label>
                 <input
                 type="number"
@@ -41,10 +52,7 @@
             <button class="btn btn-secondary" type="submit" (click)="submit()">Continuar</button>
           </div>
     
-          <div class="aviso d-flex align-items-center" id="alert" [ngClass]="{'alert alert-success': type === 'success', 'alert alert-danger': type === 'danger' }">
-            <p>{{mensagem}}</p>
-        </div>
-      
+
     
     </form>  
     </div>

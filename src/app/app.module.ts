@@ -53,6 +53,7 @@ import { EditFuncionarioComponent } from './features/funcionarios/edit-funcionar
 import { PizzaDisplayComponent } from './features/pedidos/components/pizza-display/pizza-display.component';
 import { ChosenProductComponent } from './features/pedidos/components/chosen-product/chosen-product.component';
 import { ChosenSaboresComponent } from './features/pedidos/components/chosen-sabores/chosen-sabores.component';
+import { EditClienteComponent } from './features/clientes/edit-cliente/edit-cliente.component';
 import { NgChartsModule } from 'ng2-charts';
 
 
@@ -137,7 +138,10 @@ import { NgChartsModule } from 'ng2-charts';
     EditFuncionarioComponent,
     PizzaDisplayComponent,
     ChosenProductComponent,
+    ChosenSaboresComponent,
+    EditClienteComponent,
     ChosenSaboresComponent],
+  
   imports: [
     BrowserModule,
     AppRoutingModule,

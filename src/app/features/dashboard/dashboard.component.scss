@@ -7,3 +7,46 @@
     line-height: 24px; /* 120% */
     padding-top: 10px;
 }
+
+.app-new-pedido{
+    flex: 20%;
+}
+
+.topper{
+    flex:80%
+}
+
+.header h1{
+    color: var(--gray-800, #212B36);
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 120% */
+    padding-top: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  padding: 12px;
+
+
+  th,
+  td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+      font-weight: 500;
+  }
+
+  th {
+      background: #165BAA;
+      color: #fff;
+      text-align: center;
+  }
+
+  tbody tr:nth-child(even) {
+      background-color: #f5f5f5;
+  }
+}

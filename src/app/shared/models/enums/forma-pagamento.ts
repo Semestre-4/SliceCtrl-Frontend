@@ -1,5 +1,5 @@
 export enum FormaDePagamento{
-    DINHERO = 'DINHEIRO',
+    DINHERO = 'DINHERO',
     PIX = 'PIX',
     CREDITO = 'CREDITO',
     DEBITO = 'DEBITO'

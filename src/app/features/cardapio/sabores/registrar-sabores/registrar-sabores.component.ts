@@ -55,15 +55,28 @@ submit(){
         this.mensagem = 'Cadastrado com sucesso!';
         this.type = 'success';
 
-        setTimeout(() => {this.router.navigate(["/cardapio/sabores/listar"])}, 1000 )  
-      },
+        this.router.navigate(["/cardapio/sabores/listar"])      },
       error: erro => {
         if (erro.status === 200) {
           this.mensagem = 'Cadastrado com sucesso!';
           this.type = 'success';
-          setTimeout(() => {this.router.navigate(["/cardapio/sabores/listar"])}, 1000 )  
-        }else{
-          this.mensagem = erro.error;
+          this.router.navigate(["/cardapio/sabores/listar"])        }else{
+
+          if(erro.error.nomeSabor){
+
+            this.mensagem = `${erro.error.nomeSabor}`
+
+          }
+          if(erro.error.ingredientesDTOS){
+            this.mensagem = `${erro.error.ingredientesDTOS}`
+
+          }
+
+          if(!erro.error.ingredientesDTOS && !erro.error.nomeSabor){
+            this.mensagem = erro.error
+
+          }
+            
           this.type = 'danger';
         }
     }

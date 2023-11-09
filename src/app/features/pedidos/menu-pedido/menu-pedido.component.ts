@@ -20,6 +20,9 @@ import { FormatarPrecoPipe } from 'src/app/shared/pipes/formatar-preco/formatar-
 })
 export class MenuPedidoComponent implements OnInit {
 
+  @Input() isErro: boolean = true;
+  @Input() mensagem: string = '';
+
   // Properties
   products: any[] = [];
   pizzas: any[] = [];
@@ -111,6 +114,13 @@ export class MenuPedidoComponent implements OnInit {
     this.pedidoService.getPedidoById(pedidoId).subscribe({
       next: (pedido) => {
         this.pedido = pedido;
+
+        let pedidoAUX = this.pedidoService.verificarPedidoEmAndamento(pedidoId);
+        if (pedidoAUX != null) {
+          this.pedido = pedidoAUX;
+          this.calcularTotalPedido();
+        }
+
       },
       error: (error) => {
         console.error('Error fetching pedido: ', error);
@@ -118,11 +128,28 @@ export class MenuPedidoComponent implements OnInit {
     });
   }
 
+  calcularTotalPedido() {
+    if (this.pedido.produtos == null)
+      this.pedido.produtos = [];
+
+    if (this.pedido.pizzas == null)
+      this.pedido.pizzas = [];
+
+    for (let i = 0; i < this.pedido.pizzas.length; i++) {
+      this.valorPedido += this.pedido.pizzas[i].valor * this.pedido.pizzas[i].qtdePedida;
+    }
+    for (let i = 0; i < this.pedido.produtos.length; i++) {
+      this.valorPedido += this.pedido.produtos[i].produto.preco * this.pedido.produtos[i].qtdePedida;
+    }
+
+    this.valorTotal = this.valorEntrega + this.valorPedido;
+  }
+
   onSearch(searchTerm: string): void {
     this.filteredProducts = this.products.filter(product => product.nomeProduto.includes(searchTerm));
     this.filteredPizzas = this.pizzas.filter(pizza => pizza.tamanho.includes(searchTerm));
   }
-  
+
   // Adds price to calculatedPrices
   onPriceCalculated(price: number): void {
     this.calculatedPrices.push(price);
@@ -153,23 +180,50 @@ export class MenuPedidoComponent implements OnInit {
     }
   }
 
-  // Adds a product to productsSelected and updates local storage
+  // // Adds a product to productsSelected and updates local storage
+  // addToPedido(product: any): void {
+  //   const pedidoProduct = this.transformProdutoToPedidoProduto(product, 1);
+  //   const isAlreadyAdded = this.pedido.produtos.some(item => item.id === product.id);
+
+  //   if (!isAlreadyAdded) {
+  //     this.pedido.produtos.push(pedidoProduct);
+  //     this.valorPedido += pedidoProduct.produto.preco; // Add the product price to valorPedido
+  //     this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
+  //     this.pricePipe.transform(this.valorTotal);
+  //     this.pricePipe.transform(this.valorPedido);
+  //   }else{
+  //     this.mensagem = 'Produto já adicionado , acresenta a qtde.';
+  //     this.isErro = true;
+  //   }
+  // }
+
   addToPedido(product: any): void {
     const pedidoProduct = this.transformProdutoToPedidoProduto(product, 1);
-    const isAlreadyAdded = this.pedido.produtos.some(item => item.id === product.id);
-  
-    if (!isAlreadyAdded) {
-      this.pedido.produtos.push(pedidoProduct);
-      this.valorPedido += pedidoProduct.produto.preco; // Add the product price to valorPedido
+    const isAlreadyAddedIndex = this.pedido.produtos.findIndex(item => item.produto.id === product.id);
+
+    if (isAlreadyAddedIndex !== -1) {
+        // Product already exists, update quantity
+        this.pedido.produtos[isAlreadyAddedIndex].qtdePedida++;
+    } else {
+        // Product doesn't exist, add new entry
+        this.pedido.produtos.push(pedidoProduct);
+    }
+
+          this.valorPedido += pedidoProduct.produto.preco; // Add the product price to valorPedido
       this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
       this.pricePipe.transform(this.valorTotal);
       this.pricePipe.transform(this.valorPedido);
-    }
-  }
-  
+
+    // // Update valorPedido and valorTotal
+    // this.valorPedido += this.pedido.produtos.; // Add the product price to valorPedido
+    // this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
+    // this.pricePipe.transform(this.valorTotal);
+    // this.pricePipe.transform(this.valorPedido);
+}
 
   // Adds a pizza to pizzaSelected
   addPizzaToPedido(pizza: any): void {
+    this.pedidoService.pedidosEmAndamento.push(this.pedido);
     this.router.navigate(['/pedidos/sabores-pedido', this.pedidoId], {
       queryParams: {
         pedidoId: this.pedidoId,
@@ -191,22 +245,38 @@ export class MenuPedidoComponent implements OnInit {
   // Removes a product from productsSelected
   removeProdutoFromPedido(idProduto: number): void {
     const index = this.pedido.produtos.findIndex(item => item.id === idProduto);
-  
+
     if (index !== -1) {
       const removedProduct = this.pedido.produtos.splice(index, 1)[0];
-      this.valorPedido -= removedProduct.produto.preco * removedProduct.qtdePedida; // Subtract the removed product's price from valorPedido
-      this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
-      this.pricePipe.transform(this.valorTotal);
-      this.pricePipe.transform(this.valorPedido);
+      this.pedido.produtos[index].qtdePedida--;
+    
+    this.valorPedido -= removedProduct.produto.preco * removedProduct.qtdePedida; // Subtract the removed product's price from valorPedido
+    this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
     }
   }
-  
-  
+
+  // const pedidoProduct = this.transformProdutoToPedidoProduto(product, 1);
+  // const isAlreadyAddedIndex = this.pedido.produtos.findIndex(item => item.produto.id === product.id);
+
+  // if (isAlreadyAddedIndex !== -1) {
+  //     // Product already exists, update quantity
+  //     this.pedido.produtos[isAlreadyAddedIndex].qtdePedida++;
+  // } else {
+  //     // Product doesn't exist, add new entry
+  //     this.pedido.produtos.push(pedidoProduct);
+  // }
+
+  // this.valorPedido += pedidoProduct.produto.preco; // Add the product price to valorPedido
+  // this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
+  // this.pricePipe.transform(this.valorTotal);
+  // this.pricePipe.transform(this.valorPedido);
+
+
+
 
   // Get quantity of a product
   getQuantity(productId: number): number {
     const storedProductsSelected = JSON.parse(localStorage.getItem('pedidoProduto') || '[]');
-    console.log(storedProductsSelected);
     const product = storedProductsSelected.find((item: { productId: number; }) => item.productId === productId);
     return product ? product.quantity : 0;
   }
@@ -214,38 +284,85 @@ export class MenuPedidoComponent implements OnInit {
   onQuantityChanged(newQuantity: number, index: number): void {
     const oldQuantity = this.pedido.produtos[index].qtdePedida;
     const productPrice = this.pedido.produtos[index].produto.preco;
-    
+
     this.valorPedido += (newQuantity - oldQuantity) * productPrice;
     this.valorTotal = this.valorPedido + this.valorEntrega;
-    
+
     this.pedido.produtos[index].qtdePedida = newQuantity;
     this.pricePipe.transform(this.valorTotal);
     this.pricePipe.transform(this.valorPedido);
   }
-  
+
+  onQuantityChangedPizza(newQuantity: number, index: number): void {
+    const oldQuantity = this.pedido.pizzas[index].qtdePedida;
+    const productPrice = this.pedido.pizzas[index].valor;
+
+    this.valorPedido += (newQuantity - oldQuantity) * productPrice;
+    this.valorTotal = this.valorPedido + this.valorEntrega;
+
+    this.pedido.pizzas[index].qtdePedida = newQuantity;
+    this.pricePipe.transform(this.valorTotal);
+    this.pricePipe.transform(this.valorPedido);
+  }
+
+  removePizzaFromPedido(idPizza: number): void {
+    const index = this.pedido.pizzas.findIndex(item => item.id === idPizza);
+
+    if (index !== -1) {
+      const removedProduct = this.pedido.pizzas.splice(index, 1)[0];
+      this.valorPedido -= removedProduct.pizza.preco * removedProduct.qtdePedida; // Subtract the removed product's price from valorPedido
+      this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
+      this.pricePipe.transform(this.valorTotal);
+      this.pricePipe.transform(this.valorPedido);
+    }
+  }
+
+  onPriceCalculatedPizza(price: number): void {
+
+  }
 
   //Saves added products and pizzas to pedido on DB
   savePedido(): void {
-    //Loop through productsSelected and foreach product, save it to pedido
-      this.pedido.produtos.forEach(pedidoProduto => {
-        console.log(pedidoProduto);
-        console.log(this.pedido.id);
 
-        this.pedidoService.addProdutoToPedido(this.pedido.id, pedidoProduto).subscribe({
-          next: (pedido) => {
-            console.log(pedido);
+    this.pedido.produtos.forEach(pedidoProduto => {
+      pedidoProduto.pedido = null;
+    });
+
+    this.pedidoService.updateOrderByUser(this.pedido).subscribe({
+      next: (pedido) => {
+       this.router.navigate(['/pedidos/finalizar-pedido', this.pedido.id]);
+      },
+      error: (erro) => {
+        this.mensagem = 'Erro em processar o pedido tente novamente';
+        this.isErro = true;
+        if (erro.status === 200) {
+          this.router.navigate(['/pedidos/finalizar-pedido', this.pedido.id]);
+        } else {
+          console.log(this.pedido);
+        }
+      }
+    });
+
+    //Loop through productsSelected and foreach product, save it to pedido
+    /*this.pedido.produtos.forEach(pedidoProduto => {
+      console.log(pedidoProduto);
+      console.log(this.pedido.id);
+
+      this.pedidoService.addProdutoToPedido(this.pedido.id, pedidoProduto).subscribe({
+        next: (pedido) => {
+          console.log(pedido);
+          this.router.navigate(['/pedidos/finalizar-pedido', this.pedido.id]);
+        },
+        error: (erro) => {
+          if (erro.status === 200) {
+            console.log(erro);
             this.router.navigate(['/pedidos/finalizar-pedido', this.pedido.id]);
-          },
-          error: (erro) => {
-            if (erro.status === 200) {
-              console.log(erro);
-              this.router.navigate(['/pedidos/finalizar-pedido', this.pedido.id]);
-            }else{
-              console.log(this.pedido);
-            }
+          } else {
+            console.log(this.pedido);
           }
-        });
+        }
       });
+    });*/
 
   }
 }
