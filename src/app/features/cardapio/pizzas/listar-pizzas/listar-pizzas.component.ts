@@ -18,14 +18,14 @@ export class ListarPizzasComponent implements OnInit{
   constructor(private service: PizzasService) { }
 
   ngOnInit(): void {
-    this.service.getAll().subscribe(
-      (response: any[]) => {
+    this.service.getAll().subscribe({
+      next: (response) => {
         this.data = response;
       },
-      (error) => {
-        console.error('Error fetching data:', error);
+      error: (error) => {
+        console.log(error);
       }
-    );
+    })
   }
   
 
@@ -35,12 +35,8 @@ export class ListarPizzasComponent implements OnInit{
 
   callHeaders(){
     let tableHeaders : TableHeader[] = [];
-    tableHeaders.push(new TableHeader('', ''));
-    tableHeaders.push(new TableHeader('', ''));
     tableHeaders.push(new TableHeader('Tamanho', 'tamanho'));
-    tableHeaders.push(new TableHeader('', ''));
     tableHeaders.push(new TableHeader('Preço', 'preco'));
-    tableHeaders.push(new TableHeader('', ''));
     tableHeaders.push(new TableHeader('Data', 'cadastro'));
 
     console.log(this.data[0].nomeProduto)

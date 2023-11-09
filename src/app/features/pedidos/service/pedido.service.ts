@@ -30,10 +30,8 @@ export class PedidoService {
     if (index == -1)
       return null;
     else
-      return this.pedidosEmAndamento[index]; //VERIFICAR SE TENHOQ  TIRAR O PEDIDO DA LISTA
+      return this.pedidosEmAndamento[index]; 
   }
-
-
 
   private baseUrl = 'http://localhost:8080/api/pedido';
 
