@@ -55,6 +55,8 @@ import { ChosenProductComponent } from './features/pedidos/components/chosen-pro
 import { ChosenSaboresComponent } from './features/pedidos/components/chosen-sabores/chosen-sabores.component';
 import { EditClienteComponent } from './features/clientes/edit-cliente/edit-cliente.component';
 import { NgChartsModule } from 'ng2-charts';
+import { ConfiguracoesComponent } from './features/configuracoes/configuracoes.component';
+import { PerfilComponent } from './features/perfil/perfil.component';
 
 
 @NgModule({
@@ -140,7 +142,9 @@ import { NgChartsModule } from 'ng2-charts';
     ChosenProductComponent,
     ChosenSaboresComponent,
     EditClienteComponent,
-    ChosenSaboresComponent],
+    ChosenSaboresComponent,
+    ConfiguracoesComponent,
+    PerfilComponent],
   
   imports: [
     BrowserModule,

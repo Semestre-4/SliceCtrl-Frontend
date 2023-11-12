@@ -1,8 +1,7 @@
 <app-cardapio-navbar></app-cardapio-navbar>
-<div class="form-check form-switch ps-0 d-flex flex-row justify-content-between ms-0">
-  <app-cardapio-new-register></app-cardapio-new-register>
-
-  <div class="d-flex align-items-end mb-3 isAtiv ">
+<div class="form-check form-switch d-flex flex-row justify-content-between">
+  <app-cardapio-new-register [componenteTexto]="'Novo Sabor'" [navigateUrl]="'/cardapio/sabores/register'"></app-cardapio-new-register>
+  <div class="d-flex align-items-end isAtiv ">
     <input class="form-check-input mb-1 tamanho" type="checkbox" id="flexSwitchCheckChecked" (click)="findAtivo()" checked>
     <label for="produtoDisponive" class="form-label labels m-0 ms-2 font ">Sabores Inativos</label>
   </div>
