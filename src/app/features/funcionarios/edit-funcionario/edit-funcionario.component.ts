@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Funcionario } from '../funcionario';
+import { Usuario } from '../funcionario';
 import { FuncionarioService } from '../service/funcionario.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 })
 export class EditFuncionarioComponent {
   
-  funcionario: Funcionario = new Funcionario();
+  funcionario: Usuario = new Usuario();
 
   id: string ='';
 

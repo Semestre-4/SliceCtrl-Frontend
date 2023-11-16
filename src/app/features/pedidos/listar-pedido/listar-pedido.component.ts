@@ -3,7 +3,7 @@ import { PedidoService } from '../service/pedido.service';
 import { Status } from 'src/app/shared/models/enums/status-pedido';
 import { Pedido } from '../models/pedido';
 import { Cliente } from '../../clientes/cliente';
-import { Funcionario } from '../../funcionarios/funcionario';
+import { Usuario } from '../../funcionarios/funcionario';
 import { Pagamento } from '../models/pagamento';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 import { TableHeader } from 'src/app/shared/components/table/table-header';
@@ -21,7 +21,7 @@ export class ListarPedidoComponent implements OnInit{
 
   p: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
-    new Funcionario(),
+    new Usuario(),
     [],
     [],
     new Pagamento(),

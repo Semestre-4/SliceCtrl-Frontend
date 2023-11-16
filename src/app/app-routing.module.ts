@@ -27,94 +27,103 @@ import { EditFuncionarioComponent } from './features/funcionarios/edit-funcionar
 import { EditClienteComponent } from './features/clientes/edit-cliente/edit-cliente.component';
 import { ConfiguracoesComponent } from './features/configuracoes/configuracoes.component';
 import { PerfilComponent } from './features/perfil/perfil.component';
+import { IndexComponent } from './core/index/index.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'web', pathMatch: 'full' },
   {
-  path: '',
-  redirectTo: '/dashboard',
-  pathMatch: 'full'
-},
-{
-  path: 'dashboard', 
-  component: DashboardComponent
-},
-{
-  path: 'cardapio',
-  children: [
-    {
-      path: 'sabores',
-      children: [
-        { path: 'listar', component: ListarSaboresComponent },
-        { path: 'register', component: RegistrarSaboresComponent },
-        { path: 'edit/:id', component: EditSaborComponent}
+    path: 'web',
+    component: IndexComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: '/dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      },
+      {
+        path: 'cardapio',
+        children: [
+          {
+            path: 'sabores',
+            children: [
+              { path: 'listar', component: ListarSaboresComponent },
+              { path: 'register', component: RegistrarSaboresComponent },
+              { path: 'edit/:id', component: EditSaborComponent }
 
-      ]
-    },
-    {
-      path: 'ingredientes',
-      children: [
-        { path: 'listar', component: ListarIngredientesComponent },
-        { path: 'register', component: RegistrarIngredientesComponent },
-        { path: 'edit/:id', component: EditIngredienteComponent}
+            ]
+          },
+          {
+            path: 'ingredientes',
+            children: [
+              { path: 'listar', component: ListarIngredientesComponent },
+              { path: 'register', component: RegistrarIngredientesComponent },
+              { path: 'edit/:id', component: EditIngredienteComponent }
 
-      ]
-    },
-    {
-      path: 'pizzas',
-      children: [
-        { path: 'listar', component: ListarPizzasComponent },
-        { path: 'register', component: RegistrarPizzasComponent },
-        { path: 'edit/:id', component: EditPizzaComponent}
-      ]
-    },
-    {
-      path: 'produtos',
-      children: [
-        { path: 'listar', component: ListarProdutosComponent },
-        { path: 'register', component: RegistrarProdutosComponent },
-        { path: 'edit/:id', component: EditProdutoComponent}
+            ]
+          },
+          {
+            path: 'pizzas',
+            children: [
+              { path: 'listar', component: ListarPizzasComponent },
+              { path: 'register', component: RegistrarPizzasComponent },
+              { path: 'edit/:id', component: EditPizzaComponent }
+            ]
+          },
+          {
+            path: 'produtos',
+            children: [
+              { path: 'listar', component: ListarProdutosComponent },
+              { path: 'register', component: RegistrarProdutosComponent },
+              { path: 'edit/:id', component: EditProdutoComponent }
 
-      ]
-    }
-  ]
-},
-{
-  path: 'pedidos',
-  children: [
-    { path: 'listar-pedido', component: ListarPedidoComponent },
-    { path: 'pre-pedido', component: PrePedidoComponent },
-    { path: 'menu-pedido/:id', component: MenuPedidoComponent },
-    { path: 'sabores-pedido/:id', component: SaboresPedidoComponent },
-    { path: 'finalizar-pedido/:id', component: FinalizarPedidoComponent },
-    { path: 'edit/:id', component: EditPedidoComponent}
-  ]
-},
-{
-  path: 'clientes',
-  children: [
-    { path: 'listar', component: ListarClientesComponent },
-    { path: 'register', component: RegistarClientesComponent },
-    { path: 'edit/:id', component: EditClienteComponent}
+            ]
+          }
+        ]
+      },
+      {
+        path: 'pedidos',
+        children: [
+          { path: 'listar-pedido', component: ListarPedidoComponent },
+          { path: 'pre-pedido', component: PrePedidoComponent },
+          { path: 'menu-pedido/:id', component: MenuPedidoComponent },
+          { path: 'sabores-pedido/:id', component: SaboresPedidoComponent },
+          { path: 'finalizar-pedido/:id', component: FinalizarPedidoComponent },
+          { path: 'edit/:id', component: EditPedidoComponent }
+        ]
+      },
+      {
+        path: 'clientes',
+        children: [
+          { path: 'listar', component: ListarClientesComponent },
+          { path: 'register', component: RegistarClientesComponent },
+          { path: 'edit/:id', component: EditClienteComponent }
 
-  ]
-},
-{
-  path: 'funcionarios',
-  children: [
-    { path: 'listar', component: ListarFuncionariosComponent },
-    { path: 'register', component: RegisterFuncionariosComponent },
-    { path: 'edit/:id', component: EditFuncionarioComponent}
+        ]
+      },
+      {
+        path: 'funcionarios',
+        children: [
+          { path: 'listar', component: ListarFuncionariosComponent },
+          { path: 'register', component: RegisterFuncionariosComponent },
+          { path: 'edit/:id', component: EditFuncionarioComponent }
 
-  ]
-},
-{
-  path: 'configuracoes',
-  component: ConfiguracoesComponent
-},
-{
-  path: 'perfil',
-  component: PerfilComponent
-}
+        ]
+      },
+      {
+        path: 'configuracoes',
+        component: ConfiguracoesComponent
+      },
+      {
+        path: 'perfil',
+        component: PerfilComponent
+      }
+    ],
+  },
+
 ];
 
 @NgModule({

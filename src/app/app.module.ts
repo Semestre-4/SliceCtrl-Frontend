@@ -57,6 +57,7 @@ import { EditClienteComponent } from './features/clientes/edit-cliente/edit-clie
 import { NgChartsModule } from 'ng2-charts';
 import { ConfiguracoesComponent } from './features/configuracoes/configuracoes.component';
 import { PerfilComponent } from './features/perfil/perfil.component';
+import { IndexComponent } from './core/index/index.component';
 
 
 @NgModule({
@@ -144,7 +145,8 @@ import { PerfilComponent } from './features/perfil/perfil.component';
     EditClienteComponent,
     ChosenSaboresComponent,
     ConfiguracoesComponent,
-    PerfilComponent],
+    PerfilComponent,
+    IndexComponent],
   
   imports: [
     BrowserModule,
