@@ -58,6 +58,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { ConfiguracoesComponent } from './features/configuracoes/configuracoes.component';
 import { PerfilComponent } from './features/perfil/perfil.component';
 import { IndexComponent } from './core/index/index.component';
+import { LoginComponent } from './core/login/login.component';
 
 
 @NgModule({
@@ -146,7 +147,8 @@ import { IndexComponent } from './core/index/index.component';
     ChosenSaboresComponent,
     ConfiguracoesComponent,
     PerfilComponent,
-    IndexComponent],
+    IndexComponent,
+    LoginComponent],
   
   imports: [
     BrowserModule,

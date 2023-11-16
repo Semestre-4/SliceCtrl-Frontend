@@ -28,11 +28,12 @@ import { EditClienteComponent } from './features/clientes/edit-cliente/edit-clie
 import { ConfiguracoesComponent } from './features/configuracoes/configuracoes.component';
 import { PerfilComponent } from './features/perfil/perfil.component';
 import { IndexComponent } from './core/index/index.component';
+import { LoginComponent } from './core/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'web', pathMatch: 'full' },
   {
-    path: 'web',
+    path: '',
     component: IndexComponent,
     children: [
       {
@@ -123,7 +124,11 @@ const routes: Routes = [
       }
     ],
   },
-
+  {
+    path: 'login',
+    component: LoginComponent,
+    
+  }
 ];
 
 @NgModule({
