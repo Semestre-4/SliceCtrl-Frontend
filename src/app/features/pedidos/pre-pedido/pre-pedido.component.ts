@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Pedido } from '../models/pedido';
 import { Cliente } from '../../clientes/cliente';
-import { Funcionario } from '../../funcionarios/funcionario';
+import { Usuario } from '../../funcionarios/funcionario';
 import { Pagamento } from '../models/pagamento';
 import { Status } from 'src/app/shared/models/enums/status-pedido';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
@@ -23,7 +23,7 @@ export class PrePedidoComponent implements OnInit {
 
   pedido: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
-    new Funcionario(),
+    new Usuario(),
     [],
     [],
     new Pagamento(),
@@ -103,6 +103,10 @@ export class PrePedidoComponent implements OnInit {
   }
   }
 
+  editClient(){
+    this.router.navigate(['/clientes/edit', this.pedido.cliente.enderecos]);
+  }
+
   submitForm(form: NgForm): void {
     if (form.valid) {
       this.pedidoService
@@ -120,7 +124,7 @@ export class PrePedidoComponent implements OnInit {
             if (erro.status === 200) {
               this.router.navigate(['/pedidos/menu-pedido', this.pedido.id]);
             }else{
-              this.mensagem = erro.error;
+              this.mensagem = 'Um pedido já foi aberto para esse cliente';
               this.isErro = true;
             }
             }

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TableHeader } from 'src/app/shared/components/table/table-header';
 import { ClienteService } from '../service/cliente.service';
+import { TableComponent } from 'src/app/shared/components/table/table.component';
 
 @Component({
   selector: 'app-listar-clientes',
@@ -8,7 +9,11 @@ import { ClienteService } from '../service/cliente.service';
   styleUrls: ['./listar-clientes.component.scss']
 })
 export class ListarClientesComponent implements OnInit{
+  @ViewChild(TableComponent) tableComponent!: TableComponent;
+
   data: any[] = [];
+
+  isAtivo: boolean = true;
 
   constructor(private service: ClienteService) { }
 
@@ -25,7 +30,7 @@ export class ListarClientesComponent implements OnInit{
   
 
   apiUrlPath(){
-    return 'http://localhost:8080/api/cliente/all';  
+    return `http://localhost:8080/api/cliente/ativo/${this.isAtivo}`;  
   }
 
   callHeaders(){
@@ -39,6 +44,11 @@ export class ListarClientesComponent implements OnInit{
     console.log(this.data[0].nomeProduto)
 
     return tableHeaders;
+  }
+
+  findAtivo(){
+    this.isAtivo = !this.isAtivo;
+    this.tableComponent.loadData();
   }
 
 

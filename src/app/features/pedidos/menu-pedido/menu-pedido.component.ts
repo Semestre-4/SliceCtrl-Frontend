@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PedidoService } from '../service/pedido.service';
 import { Pedido } from '../models/pedido';
 import { Cliente } from '../../clientes/cliente';
-import { Funcionario } from '../../funcionarios/funcionario';
+import { Usuario } from '../../funcionarios/funcionario';
 import { Pagamento } from '../models/pagamento';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 import { Status } from 'src/app/shared/models/enums/status-pedido';
@@ -19,6 +19,9 @@ import { FormatarPrecoPipe } from 'src/app/shared/pipes/formatar-preco/formatar-
   styleUrls: ['./menu-pedido.component.scss']
 })
 export class MenuPedidoComponent implements OnInit {
+
+  @Input() isErro: boolean = true;
+  @Input() mensagem: string = '';
 
   // Properties
   products: any[] = [];
@@ -34,7 +37,7 @@ export class MenuPedidoComponent implements OnInit {
   pedidoId: number = 0;
   pedido: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
-    new Funcionario,
+    new Usuario,
     [],
     [],
     new Pagamento(),
@@ -177,26 +180,50 @@ export class MenuPedidoComponent implements OnInit {
     }
   }
 
-  // Adds a product to productsSelected and updates local storage
+  // // Adds a product to productsSelected and updates local storage
+  // addToPedido(product: any): void {
+  //   const pedidoProduct = this.transformProdutoToPedidoProduto(product, 1);
+  //   const isAlreadyAdded = this.pedido.produtos.some(item => item.id === product.id);
+
+  //   if (!isAlreadyAdded) {
+  //     this.pedido.produtos.push(pedidoProduct);
+  //     this.valorPedido += pedidoProduct.produto.preco; // Add the product price to valorPedido
+  //     this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
+  //     this.pricePipe.transform(this.valorTotal);
+  //     this.pricePipe.transform(this.valorPedido);
+  //   }else{
+  //     this.mensagem = 'Produto já adicionado , acresenta a qtde.';
+  //     this.isErro = true;
+  //   }
+  // }
+
   addToPedido(product: any): void {
     const pedidoProduct = this.transformProdutoToPedidoProduto(product, 1);
-    const isAlreadyAdded = this.pedido.produtos.some(item => item.id === product.id);
+    const isAlreadyAddedIndex = this.pedido.produtos.findIndex(item => item.produto.id === product.id);
 
-    if (!isAlreadyAdded) {
-      this.pedido.produtos.push(pedidoProduct);
-      this.valorPedido += pedidoProduct.produto.preco; // Add the product price to valorPedido
+    if (isAlreadyAddedIndex !== -1) {
+        // Product already exists, update quantity
+        this.pedido.produtos[isAlreadyAddedIndex].qtdePedida++;
+    } else {
+        // Product doesn't exist, add new entry
+        this.pedido.produtos.push(pedidoProduct);
+    }
+
+          this.valorPedido += pedidoProduct.produto.preco; // Add the product price to valorPedido
       this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
       this.pricePipe.transform(this.valorTotal);
       this.pricePipe.transform(this.valorPedido);
-    }
-  }
 
+    // // Update valorPedido and valorTotal
+    // this.valorPedido += this.pedido.produtos.; // Add the product price to valorPedido
+    // this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
+    // this.pricePipe.transform(this.valorTotal);
+    // this.pricePipe.transform(this.valorPedido);
+}
 
   // Adds a pizza to pizzaSelected
   addPizzaToPedido(pizza: any): void {
-
     this.pedidoService.pedidosEmAndamento.push(this.pedido);
-
     this.router.navigate(['/pedidos/sabores-pedido', this.pedidoId], {
       queryParams: {
         pedidoId: this.pedidoId,
@@ -221,10 +248,29 @@ export class MenuPedidoComponent implements OnInit {
 
     if (index !== -1) {
       const removedProduct = this.pedido.produtos.splice(index, 1)[0];
-      this.valorPedido -= removedProduct.produto.preco * removedProduct.qtdePedida; // Subtract the removed product's price from valorPedido
-      this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
+      this.pedido.produtos[index].qtdePedida--;
+    
+    this.valorPedido -= removedProduct.produto.preco * removedProduct.qtdePedida; // Subtract the removed product's price from valorPedido
+    this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
     }
   }
+
+  // const pedidoProduct = this.transformProdutoToPedidoProduto(product, 1);
+  // const isAlreadyAddedIndex = this.pedido.produtos.findIndex(item => item.produto.id === product.id);
+
+  // if (isAlreadyAddedIndex !== -1) {
+  //     // Product already exists, update quantity
+  //     this.pedido.produtos[isAlreadyAddedIndex].qtdePedida++;
+  // } else {
+  //     // Product doesn't exist, add new entry
+  //     this.pedido.produtos.push(pedidoProduct);
+  // }
+
+  // this.valorPedido += pedidoProduct.produto.preco; // Add the product price to valorPedido
+  // this.valorTotal = this.valorPedido + this.valorEntrega; // Update valorTotal
+  // this.pricePipe.transform(this.valorTotal);
+  // this.pricePipe.transform(this.valorPedido);
+
 
 
 
@@ -287,7 +333,8 @@ export class MenuPedidoComponent implements OnInit {
        this.router.navigate(['/pedidos/finalizar-pedido', this.pedido.id]);
       },
       error: (erro) => {
-        console.log(erro);
+        this.mensagem = 'Erro em processar o pedido tente novamente';
+        this.isErro = true;
         if (erro.status === 200) {
           this.router.navigate(['/pedidos/finalizar-pedido', this.pedido.id]);
         } else {

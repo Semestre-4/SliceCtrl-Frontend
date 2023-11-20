@@ -55,7 +55,17 @@ export class EditPizzaComponent {
             this.type = 'success';
             setTimeout(() => {this.router.navigate(["/cardapio/pizzas/listar"])}, 1000 )  
           }else{
-            this.mensagem = erro.error.response;
+            if(erro.error.tamanho){
+              this.mensagem = `${erro.error.tamanho}`
+            }
+            if(erro.error.preco){
+              this.mensagem = `${erro.error.preco}`
+            }
+  
+            if(!erro.error.tamanho && !erro.error.preco){
+              this.mensagem = erro.error
+            }
+  
             this.type = 'danger';
           }
       }

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TableHeader } from 'src/app/shared/components/table/table-header';
 import { SaboresService } from '../service/sabores.service';
+import { TableComponent } from 'src/app/shared/components/table/table.component';
 
 @Component({
   selector: 'app-listar-sabores',
@@ -8,7 +9,11 @@ import { SaboresService } from '../service/sabores.service';
   styleUrls: ['./listar-sabores.component.scss']
 })
 export class ListarSaboresComponent implements OnInit{
+  @ViewChild(TableComponent) tableComponent!: TableComponent;
+
   data: any[] = [];
+
+  isAtivo: boolean = true;
 
   constructor(private service: SaboresService) { }
 
@@ -25,13 +30,12 @@ export class ListarSaboresComponent implements OnInit{
   
 
   apiUrlPath(){
-    return 'http://localhost:8080/api/sabores/all';  
+    return `http://localhost:8080/api/sabores/ativo/${this.isAtivo}`;  
   }
 
   callHeaders(){
     let tableHeaders : TableHeader[] = [];
     tableHeaders.push(new TableHeader('Nome do Sabor', 'nomeSabor'));
-    tableHeaders.push(new TableHeader('Ingredientes', 'ingredientes.nomeIngrediente'));
     tableHeaders.push(new TableHeader('Valor Adicional', 'valorAdicional'));
     tableHeaders.push(new TableHeader('Data','cadastro'));
     tableHeaders.push(new TableHeader('Descrição','descricao'));
@@ -41,6 +45,11 @@ export class ListarSaboresComponent implements OnInit{
     return tableHeaders;
   }
 
+  findAtivo(){
+    this.isAtivo = !this.isAtivo;
+    this.tableComponent.loadData();
+  }
 
 }
+
 

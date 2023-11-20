@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Sabores } from '../../cardapio/sabores/sabor';
 import { SaboresService } from '../../cardapio/sabores/service/sabores.service';
@@ -10,7 +10,7 @@ import { PedidoService } from '../service/pedido.service';
 import { Pizzas } from '../../cardapio/pizzas/pizza';
 import { Pedido } from '../models/pedido';
 import { Cliente } from '../../clientes/cliente';
-import { Funcionario } from '../../funcionarios/funcionario';
+import { Usuario } from '../../funcionarios/funcionario';
 import { Pagamento } from '../models/pagamento';
 import { Status } from 'src/app/shared/models/enums/status-pedido';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
@@ -24,6 +24,10 @@ export class SaboresPedidoComponent implements OnInit {
   loading: boolean = true;
   sabores: Sabores[] = [];
   saboresPermitidos: number = 0;
+  searchTerm: string = '';
+  @Input() isErro: boolean = true;
+  @Input() mensagem: string = '';
+
 
   pedidoId: number = 0;
 
@@ -31,7 +35,7 @@ export class SaboresPedidoComponent implements OnInit {
 
   pedidoPizza: PedidoPizza = new PedidoPizza(new Pizzas(), [], new Pedido(
     new Cliente('', '', '', '', [], []),
-    new Funcionario,
+    new Usuario,
     [],
     [],
     new Pagamento(),
@@ -57,6 +61,10 @@ export class SaboresPedidoComponent implements OnInit {
       this.carregarObjetos(+params['pizzaId']);
     });
 
+  }
+
+  onSearch(searchTerm: string): void {
+    this.sabores = this.sabores.filter(s => s.nomeSabor.includes(searchTerm));
   }
 
   carregarObjetos(pizzaId: number) {
@@ -102,6 +110,7 @@ export class SaboresPedidoComponent implements OnInit {
 
     if (this.pedidoPizza.sabores == null)
       this.pedidoPizza.sabores = [];
+  
 
     this.pedidoPizza.sabores.push(sabor);
     this.pedidoPizza.valor += sabor.valorAdicional;
@@ -113,9 +122,19 @@ export class SaboresPedidoComponent implements OnInit {
   }
 
   salvar() {
-
-    this.pedidoService.incluirPedidoPizza(this.pedidoPizza, this.pedidoId);
-    this.router.navigate(['/pedidos/menu-pedido', this.pedidoId]);
+    if(this.pedidoPizza.sabores.length > this.saboresPermitidos){
+      this.mensagem = 'Qtde. de sabores invalida para o tamanho da pizza';
+      this.isErro = true;
+    }else{
+      console.log(this.pedidoPizza)
+      this.pedidoService.incluirPedidoPizza(this.pedidoPizza, this.pedidoId);
+      this.router.navigate(['/pedidos/menu-pedido', this.pedidoId]);
+    }
   }
+
+// Helper function to compare arrays for equality
+areArraysEqual(arr1: any[], arr2: any[]): boolean {
+    return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
+}
 
 }

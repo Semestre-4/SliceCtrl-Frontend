@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PedidoPizza } from '../models/pedido-pizza';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,6 +23,8 @@ export class FinalizarPedidoComponent implements OnInit {
   formaDePagamento = Object.values(FormaDePagamento);
   selectedFormaDePagamento: string = '';
   isAddressDisabled: boolean = true;
+  @Input() isErro: boolean = true;
+  @Input() mensagem: string = '';
 
   constructor(private http: HttpClient,private route:ActivatedRoute,private ps:PedidoService,private cs:ClienteService,private en:EnderecoService,private router:Router) {}
 
@@ -108,7 +110,13 @@ export class FinalizarPedidoComponent implements OnInit {
         
       },
       error: (error) => {
-        console.log('Error finalizando Pedido:', error);
+        if(error.status == 404){
+          this.mensagem = 'Preencha a forma de pagamento';
+          this.isErro = true;
+        }else{
+          this.mensagem = 'Pedido não finalizado , tente novamente';
+          this.isErro = true;
+        }
       },
     });
   }

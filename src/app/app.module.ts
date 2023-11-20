@@ -55,6 +55,10 @@ import { ChosenProductComponent } from './features/pedidos/components/chosen-pro
 import { ChosenSaboresComponent } from './features/pedidos/components/chosen-sabores/chosen-sabores.component';
 import { EditClienteComponent } from './features/clientes/edit-cliente/edit-cliente.component';
 import { NgChartsModule } from 'ng2-charts';
+import { ConfiguracoesComponent } from './features/configuracoes/configuracoes.component';
+import { PerfilComponent } from './features/perfil/perfil.component';
+import { IndexComponent } from './core/index/index.component';
+import { LoginComponent } from './core/login/login.component';
 
 
 @NgModule({
@@ -139,8 +143,12 @@ import { NgChartsModule } from 'ng2-charts';
     PizzaDisplayComponent,
     ChosenProductComponent,
     ChosenSaboresComponent,
-    EditClienteComponent
-    ChosenSaboresComponent],
+    EditClienteComponent,
+    ChosenSaboresComponent,
+    ConfiguracoesComponent,
+    PerfilComponent,
+    IndexComponent,
+    LoginComponent],
   
   imports: [
     BrowserModule,

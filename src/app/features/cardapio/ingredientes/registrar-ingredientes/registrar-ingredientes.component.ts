@@ -33,7 +33,17 @@ submit(){
           this.mensagem = 'Cadastrado com sucesso!';
           this.type = 'success';
           this.router.navigate(["/cardapio/ingredientes/listar"])        }else{
-          this.mensagem = erro.error;
+          if(erro.error.nomeIngrediente){
+            this.mensagem = `${erro.error.nomeIngrediente}`
+          }
+          if(erro.error.qtdeIngrediente){
+            this.mensagem = `${erro.error.qtdeIngrediente}`
+          }
+
+          if(!erro.error.nomeIngrediente && !erro.error.qtdeIngrediente){
+            this.mensagem = erro.error
+  
+          } 
           this.type = 'danger';
         }
     }
