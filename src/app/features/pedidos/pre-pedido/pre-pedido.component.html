@@ -54,7 +54,7 @@
         class="form-control"
         id="cpfFunc"
         name="cpfFunc"
-        [(ngModel)]="pedido.funcionario.cpf"
+        [(ngModel)]="pedido.usuario.cpf"
         (ngModelChange)="getFuncByCPF()"
         required
       />
@@ -67,7 +67,7 @@
         class="form-control"
         id="nomeFunc"
         name="nomeFunc"
-        [(ngModel)]="pedido.funcionario.nome"
+        [(ngModel)]="pedido.usuario.nome"
         disabled
       />
     </div>

@@ -12,6 +12,7 @@ import { Status } from 'src/app/shared/models/enums/status-pedido';
 import { PedidoProduto } from '../models/pedido-produto';
 import { FormatarPrecoPipe } from 'src/app/shared/pipes/formatar-preco/formatar-preco.pipe';
 import { Usuario } from '../../usuarios/usario';
+import { Role } from 'src/app/shared/models/enums/role';
 
 @Component({
   selector: 'app-menu-pedido',
@@ -37,7 +38,7 @@ export class MenuPedidoComponent implements OnInit {
   pedidoId: number = 0;
   pedido: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
-    new Usuario,
+    new Usuario('', '', '', Role.FUNCIONARIO, '', 0, []),
     [],
     [],
     new Pagamento(),
@@ -60,6 +61,7 @@ export class MenuPedidoComponent implements OnInit {
   // Initialize component
   ngOnInit(): void {
     this.fetchData(); // Fetches products and pizzas
+    
   }
 
   // Fetches products and pizzas
@@ -71,6 +73,8 @@ export class MenuPedidoComponent implements OnInit {
     if (this.pedidoId !== null) {
       this.loadPedidoById(this.pedidoId);
     }
+
+    console.log(this.pedido)
 
   }
 

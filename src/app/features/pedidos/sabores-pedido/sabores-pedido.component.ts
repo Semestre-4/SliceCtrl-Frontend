@@ -13,6 +13,7 @@ import { Pagamento } from '../models/pagamento';
 import { Status } from 'src/app/shared/models/enums/status-pedido';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 import { Usuario } from '../../usuarios/usario';
+import { Role } from 'src/app/shared/models/enums/role';
 
 @Component({
   selector: 'app-sabores-pedido',
@@ -34,7 +35,7 @@ export class SaboresPedidoComponent implements OnInit {
 
   pedidoPizza: PedidoPizza = new PedidoPizza(new Pizzas(), [], new Pedido(
     new Cliente('', '', '', '', [], []),
-    new Usuario,
+    new Usuario('', '', '', Role.FUNCIONARIO, '', 0, []),
     [],
     [],
     new Pagamento(),

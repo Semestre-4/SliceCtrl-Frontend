@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { Usuario } from '../../usuarios/usario';
 import { UsuarioService } from '../../usuarios/service/usuario.service';
+import { Role } from 'src/app/shared/models/enums/role';
 
 @Component({
   selector: 'app-pre-pedido',
@@ -23,7 +24,7 @@ export class PrePedidoComponent implements OnInit {
 
   pedido: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
-    new Usuario(),
+    new Usuario('', '', '', Role.FUNCIONARIO, '', 0, []),
     [],
     [],
     new Pagamento(),
@@ -63,8 +64,8 @@ export class PrePedidoComponent implements OnInit {
   }
 
   reformatCPF() {
-    const cpf = this.pedido.funcionario.cpf.replace(/\D/g, '');
-    this.pedido.funcionario.cpf =
+    const cpf = this.pedido.usuario.cpf.replace(/\D/g, '');
+    this.pedido.usuario.cpf =
       cpf.substring(0, 3) +
       '.' +
       cpf.substring(3, 6) +
@@ -90,17 +91,19 @@ export class PrePedidoComponent implements OnInit {
 
   getFuncByCPF() {
     this.reformatCPF();
-    const cpf = this.pedido.funcionario.cpf;
+    const cpf = this.pedido.usuario.cpf;
     this.isErro = false;
-    if(cpf.length == 14){
+  
     this.funcionarioService.getUsuarioByCPF(cpf).subscribe({
       next: (funcionario) => {
+        console.log(funcionario);
         if (funcionario) {
-          this.pedido.funcionario = funcionario;
+          this.pedido.usuario = funcionario;
+          console.log(this.pedido.usuario);
         }
       }
     });
-  }
+  
   }
 
   editClient(){
@@ -109,15 +112,15 @@ export class PrePedidoComponent implements OnInit {
 
   submitForm(form: NgForm): void {
     if (form.valid) {
+      console.log(this.pedido.usuario);
       this.pedidoService
         .abrirPedido(
           this.pedido.cliente.id,
-          this.pedido.funcionario.id,
+          this.pedido.usuario.id,
           this.selectedFormaDeRetirada
         )
         .subscribe({
           next: (pedido) => {
-            console.log(pedido);
            this.router.navigate(['/pedidos/menu-pedido', pedido.id]);
           },
           error: (erro) => {

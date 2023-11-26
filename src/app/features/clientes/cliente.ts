@@ -6,7 +6,6 @@ export class Cliente extends AbstractEntity {
     nome: string;
     cpf: string;
     telefone: string;
-    email: string;
     pedidos: Pedido[];
     enderecos: Endereco[];
 
@@ -15,7 +14,6 @@ export class Cliente extends AbstractEntity {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
-        this.email = email;
         this.pedidos = pedidos;
         this.enderecos = enderecos;
     }
