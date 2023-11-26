@@ -1,16 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Pedido } from '../models/pedido';
 import { Cliente } from '../../clientes/cliente';
-import { Usuario } from '../../funcionarios/usuario';
 import { Pagamento } from '../models/pagamento';
 import { Status } from 'src/app/shared/models/enums/status-pedido';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 import { NgForm } from '@angular/forms';
 import { PedidoService } from '../service/pedido.service';
 import { ClienteService } from '../../clientes/service/cliente.service';
-import { FuncionarioService } from '../../funcionarios/service/funcionario.service';
 import { Router } from '@angular/router';
 import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { Usuario } from '../../usuarios/usario';
+import { UsuarioService } from '../../usuarios/service/usuario.service';
 
 @Component({
   selector: 'app-pre-pedido',
@@ -42,7 +42,7 @@ export class PrePedidoComponent implements OnInit {
   constructor(
     private pedidoService: PedidoService,
     private clienteService: ClienteService,
-    private funcionarioService: FuncionarioService,
+    private funcionarioService: UsuarioService,
     private router: Router
   ) {}
 
@@ -93,7 +93,7 @@ export class PrePedidoComponent implements OnInit {
     const cpf = this.pedido.funcionario.cpf;
     this.isErro = false;
     if(cpf.length == 14){
-    this.funcionarioService.getFuncionarioByCPF(cpf).subscribe({
+    this.funcionarioService.getUsuarioByCPF(cpf).subscribe({
       next: (funcionario) => {
         if (funcionario) {
           this.pedido.funcionario = funcionario;

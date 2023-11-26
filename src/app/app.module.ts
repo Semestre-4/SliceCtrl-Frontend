@@ -31,8 +31,6 @@ import { PedidoService } from './features/pedidos/service/pedido.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NewPedidoComponent } from './features/pedidos/components/new-pedido/new-pedido.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
-import { ListarFuncionariosComponent } from './features/funcionarios/listar-funcionarios/listar-funcionarios.component';
-import { RegisterFuncionariosComponent } from './features/funcionarios/register-funcionarios/register-funcionarios.component';
 import { ProductDisplayComponent } from './features/pedidos/components/product-display/product-display.component';
 import { SaborDisplayComponent } from './features/pedidos/components/sabor-display/sabor-display.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -49,7 +47,6 @@ import { EditProdutoComponent } from './features/cardapio/produtos/edit-produto/
 import { EditPizzaComponent } from './features/cardapio/pizzas/edit-pizza/edit-pizza.component';
 import { EditSaborComponent } from './features/cardapio/sabores/edit-sabor/edit-sabor.component';
 import { EditIngredienteComponent } from './features/cardapio/ingredientes/edit-ingrediente/edit-ingrediente.component';
-import { EditFuncionarioComponent } from './features/funcionarios/edit-funcionario/edit-funcionario.component';
 import { PizzaDisplayComponent } from './features/pedidos/components/pizza-display/pizza-display.component';
 import { ChosenProductComponent } from './features/pedidos/components/chosen-product/chosen-product.component';
 import { ChosenSaboresComponent } from './features/pedidos/components/chosen-sabores/chosen-sabores.component';
@@ -59,6 +56,9 @@ import { IndexComponent } from './core/index/index.component';
 import { LoginComponent } from './core/login/login-component/login.component';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { httpInterceptorProviders } from './core/interceptor/http-interceptor/http-request.interceptor';
+import { ListarUsuarioComponent } from './features/usuarios/listar-usuario/listar-usuario.component';
+import { RegisterUsuarioComponent } from './features/usuarios/register-usuario/register-usuario.component';
+import { EditUsuarioComponent } from './features/usuarios/edit-usuario/edit-usuario.component';
 
 
 @NgModule({
@@ -89,8 +89,6 @@ import { httpInterceptorProviders } from './core/interceptor/http-interceptor/ht
     MenuChipsComponent,
     NewPedidoComponent,
     SidebarComponent,
-    ListarFuncionariosComponent,
-    RegisterFuncionariosComponent,
     ProductDisplayComponent,
     SaborDisplayComponent,
     ChosenPizzaComponent,
@@ -125,8 +123,6 @@ import { httpInterceptorProviders } from './core/interceptor/http-interceptor/ht
     MenuChipsComponent,
     NewPedidoComponent,
     SidebarComponent,
-    ListarFuncionariosComponent,
-    RegisterFuncionariosComponent,
     ProductDisplayComponent,
     SaborDisplayComponent,
     ChosenPizzaComponent,
@@ -139,14 +135,16 @@ import { httpInterceptorProviders } from './core/interceptor/http-interceptor/ht
     EditPizzaComponent,
     EditSaborComponent,
     EditIngredienteComponent,
-    EditFuncionarioComponent,
     PizzaDisplayComponent,
     ChosenProductComponent,
     ChosenSaboresComponent,
     EditClienteComponent,
     ChosenSaboresComponent,
     IndexComponent,
-    LoginComponent],
+    LoginComponent,
+    ListarUsuarioComponent,
+    RegisterUsuarioComponent,
+    EditUsuarioComponent],
   
   imports: [
     BrowserModule,

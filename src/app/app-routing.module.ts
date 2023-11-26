@@ -16,17 +16,17 @@ import { MenuPedidoComponent } from './features/pedidos/menu-pedido/menu-pedido.
 import { SaboresPedidoComponent } from './features/pedidos/sabores-pedido/sabores-pedido.component';
 import { FinalizarPedidoComponent } from './features/pedidos/finalizar-pedido/finalizar-pedido.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { ListarFuncionariosComponent } from './features/funcionarios/listar-funcionarios/listar-funcionarios.component';
 import { EditPedidoComponent } from './features/pedidos/edit-pedido/edit-pedido.component';
 import { EditProdutoComponent } from './features/cardapio/produtos/edit-produto/edit-produto.component';
 import { EditPizzaComponent } from './features/cardapio/pizzas/edit-pizza/edit-pizza.component';
 import { EditSaborComponent } from './features/cardapio/sabores/edit-sabor/edit-sabor.component';
 import { EditIngredienteComponent } from './features/cardapio/ingredientes/edit-ingrediente/edit-ingrediente.component';
-import { EditFuncionarioComponent } from './features/funcionarios/edit-funcionario/edit-funcionario.component';
 import { EditClienteComponent } from './features/clientes/edit-cliente/edit-cliente.component';
 import { IndexComponent } from './core/index/index.component';
 import { LoginComponent } from './core/login/login-component/login.component';
-import { RegisterFuncionariosComponent } from './features/funcionarios/register-funcionarios/register-funcionarios.component';
+import { ListarUsuarioComponent } from './features/usuarios/listar-usuario/listar-usuario.component';
+import { RegisterUsuarioComponent } from './features/usuarios/register-usuario/register-usuario.component';
+import { EditUsuarioComponent } from './features/usuarios/edit-usuario/edit-usuario.component';
 
 const routes: Routes = [
   {
@@ -113,11 +113,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'funcionarios',
+        path: 'usuario',
         children: [
-          { path: 'listar', component: ListarFuncionariosComponent },
-          { path: 'register', component: RegisterFuncionariosComponent },
-          { path: 'edit/:id', component: EditFuncionarioComponent }
+          { path: 'listar', component: ListarUsuarioComponent },
+          { path: 'register', component: RegisterUsuarioComponent },
+          { path: 'edit/:id', component: EditUsuarioComponent }
 
         ]
       },

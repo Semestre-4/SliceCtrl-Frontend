@@ -1,24 +1,22 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { TableHeader } from 'src/app/shared/components/table/table-header';
-import { FuncionarioService } from '../service/funcionario.service';
 import { TableComponent } from 'src/app/shared/components/table/table.component';
+import { UsuarioService } from '../service/usuario.service';
 
 @Component({
-  selector: 'app-listar-funcionarios',
-  templateUrl: './listar-funcionarios.component.html',
-  styleUrls: ['./listar-funcionarios.component.scss']
+  selector: 'app-listar-usuario',
+  templateUrl: './listar-usuario.component.html',
+  styleUrls: ['./listar-usuario.component.scss']
 })
-export class ListarFuncionariosComponent implements OnInit {
+export class ListarUsuarioComponent {
   @ViewChild(TableComponent) tableComponent!: TableComponent;
-
   data: any[] = [];
-
   isAtivo: boolean = true;
 
-  constructor(private service: FuncionarioService) { }
+  constructor(private service: UsuarioService) { }
 
   ngOnInit(): void {
-    this.service.getAllFuncionarios().subscribe(
+    this.service.getAllUsuarios().subscribe(
       (response: any[]) => {
         this.data = response;
       },
@@ -29,17 +27,17 @@ export class ListarFuncionariosComponent implements OnInit {
   }
 
   apiUrlPath() {
-    return `http://localhost:8080/api/funcionario/ativo/${this.isAtivo}`;
+    return `http://localhost:8080/api/usuario/ativo/${this.isAtivo}`;
   }
 
   callHeaders() {
     let tableHeaders: TableHeader[] = [];
-    tableHeaders.push(new TableHeader('Nome do Funcionario', 'nome'));
+    tableHeaders.push(new TableHeader('Nome do Usuario', 'nome'));
     tableHeaders.push(new TableHeader('', ''));
     tableHeaders.push(new TableHeader('CPF', 'cpf'));
     tableHeaders.push(new TableHeader('', ''));
     tableHeaders.push(new TableHeader('Telefone', 'telefone'));
-    tableHeaders.push(new TableHeader('Data', 'cadastro'));
+    tableHeaders.push(new TableHeader('Role', 'role'));
     tableHeaders.push(new TableHeader('', ''));
     return tableHeaders;
   }

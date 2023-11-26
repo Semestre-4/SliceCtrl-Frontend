@@ -1,11 +1,11 @@
 import { AbstractEntity } from "src/app/shared/models/abstract-entity";
 import { Cliente } from "../../clientes/cliente";
-import { Usuario } from "../../funcionarios/usuario";
 import { PedidoProduto } from "./pedido-produto";
 import { PedidoPizza } from "./pedido-pizza";
 import { Pagamento } from "./pagamento";
 import { Status } from "src/app/shared/models/enums/status-pedido";
 import { FormaDeEntrega } from "src/app/shared/models/enums/forma-entrega";
+import { Usuario } from "../../usuarios/usario";
 
 export class Pedido extends AbstractEntity {
     cliente: Cliente;

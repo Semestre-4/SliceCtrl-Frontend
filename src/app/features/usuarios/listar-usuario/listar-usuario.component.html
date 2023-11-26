@@ -1,0 +1,40 @@
+<div class="header">
+    <h1>Usuarios</h1>
+    <hr />
+  </div>
+  
+  <div
+    class="form-check form-switch ps-0 d-flex flex-row justify-content-between ms-0"
+  >
+    <app-cardapio-new-register
+      [componenteTexto]="'Novo Usuario'"
+      [navigateUrl]="'/usuario/register'"
+    ></app-cardapio-new-register>
+  
+    <div class="d-flex align-items-end mb-3 isAtiv">
+      <input
+        class="form-check-input mb-1 tamanho"
+        type="checkbox"
+        id="flexSwitchCheckChecked"
+        (click)="findAtivo()"
+        checked
+      />
+      <label for="produtoDisponive" class="form-label labels m-0 ms-2 font"
+        >Usuarios Inativos</label
+      >
+    </div>
+  </div> 
+  
+  <div class="listar-funcionarios">
+    <div class="body">
+      <app-table
+        [headers]="callHeaders()"
+        [apiUrl]="apiUrlPath()"
+        [editPath]="'usuario/edit'"
+        [entityName]="'usuario'"
+        [showDeleteButton]="true"
+        [showEndButton]="false"
+      >
+      </app-table>
+    </div>
+  </div>

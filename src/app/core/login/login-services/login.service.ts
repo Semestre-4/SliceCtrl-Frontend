@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Login } from '../login';
 import { Observable } from 'rxjs';
-import { Usuario } from 'src/app/features/funcionarios/usuario';
+import { UsuarioModule } from 'src/app/core/usuario/usuario.module';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 
 @Injectable({
@@ -15,8 +15,8 @@ export class LoginService {
 
   constructor() {}
 
-  public authenticate(login: Login) : Observable<Usuario>{
-    return this.http.post<Usuario>(`${this.baseUrl}/authenticate`, login);
+  public authenticate(login: Login) : Observable<UsuarioModule>{
+    return this.http.post<UsuarioModule>(`${this.baseUrl}/authenticate`, login);
   }
 
   public logout(): Observable<any> {
@@ -45,7 +45,7 @@ export class LoginService {
   }
 
   hasPermission(role: string) {
-    let user = this.jwtDecode() as Usuario;
+    let user = this.jwtDecode() as UsuarioModule;
     if (user.role == role)
       return true;
     else

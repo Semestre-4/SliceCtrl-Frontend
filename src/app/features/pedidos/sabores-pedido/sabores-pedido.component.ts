@@ -5,15 +5,14 @@ import { SaboresService } from '../../cardapio/sabores/service/sabores.service';
 import { PizzasService } from '../../cardapio/pizzas/service/pizzas.service';
 import { Tamanho } from 'src/app/shared/models/enums/tamanho-pizza';
 import { PedidoPizza } from '../models/pedido-pizza';
-import { PedidoDataService } from '../service/pedido-data.service';
 import { PedidoService } from '../service/pedido.service';
 import { Pizzas } from '../../cardapio/pizzas/pizza';
 import { Pedido } from '../models/pedido';
 import { Cliente } from '../../clientes/cliente';
-import { Usuario } from '../../funcionarios/usuario';
 import { Pagamento } from '../models/pagamento';
 import { Status } from 'src/app/shared/models/enums/status-pedido';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
+import { Usuario } from '../../usuarios/usario';
 
 @Component({
   selector: 'app-sabores-pedido',
