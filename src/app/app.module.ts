@@ -58,6 +58,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { IndexComponent } from './core/index/index.component';
 import { LoginComponent } from './core/login/login-component/login.component';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { httpInterceptorProviders } from './core/interceptor/http-interceptor/http-request.interceptor';
 
 
 @NgModule({
@@ -161,7 +162,7 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
     NgxMaskDirective,
     NgxMaskPipe,
   ],
-  providers: [PedidoService,ProdutosService,PizzasService,
+  providers: [PedidoService,ProdutosService,PizzasService,httpInterceptorProviders,
     FormatarPrecoPipe,
     FormatarDataPipe],
   bootstrap: [AppComponent]
