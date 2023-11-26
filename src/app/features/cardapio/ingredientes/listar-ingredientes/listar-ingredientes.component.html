@@ -1,23 +1,35 @@
 <app-cardapio-navbar></app-cardapio-navbar>
-<div class="form-check form-switch ps-0 d-flex flex-row justify-content-between ms-0">
-  <app-cardapio-new-register [componenteTexto]="'Novo Ingrediente'" [navigateUrl]="'/cardapio/ingredientes/register'"></app-cardapio-new-register>
-  <div class="d-flex align-items-end mb-3 isAtiv ">
-    <input class="form-check-input mb-1 tamanho" type="checkbox" id="flexSwitchCheckChecked" (click)="findAtivo()" checked>
-    <label for="produtoDisponive" class="form-label labels m-0 ms-2 font ">Ingredientes Inativos</label>
+<div
+  class="form-check form-switch ps-0 d-flex flex-row justify-content-between ms-0"
+>
+  <app-cardapio-new-register
+    [componenteTexto]="'Novo Ingrediente'"
+    [navigateUrl]="'/cardapio/ingredientes/register'"
+  ></app-cardapio-new-register>
+  <div class="d-flex align-items-end mb-3 isAtiv">
+    <input
+      class="form-check-input mb-1 tamanho"
+      type="checkbox"
+      id="flexSwitchCheckChecked"
+      (click)="findAtivo()"
+      checked
+    />
+    <label for="produtoDisponive" class="form-label labels m-0 ms-2 font"
+      >Ingredientes Inativos</label
+    >
   </div>
 </div>
 
-
 <div class="listar-ingredientes">
-    <div class="body">
-      <app-table
+  <div class="body">
+    <app-table
       [headers]="callHeaders()"
       [apiUrl]="apiUrlPath()"
       [editPath]="'cardapio/ingredientes/edit'"
-      [entityName]="'ingredientes'" 
+      [entityName]="'ingredientes'"
       [showDeleteButton]="true"
       [showEndButton]="false"
-      >
-    </app-table>  
+    >
+    </app-table>
   </div>
-  </div> 
+</div>

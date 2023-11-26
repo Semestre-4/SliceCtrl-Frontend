@@ -8,7 +8,7 @@ import { TableComponent } from 'src/app/shared/components/table/table.component'
   templateUrl: './listar-sabores.component.html',
   styleUrls: ['./listar-sabores.component.scss']
 })
-export class ListarSaboresComponent implements OnInit{
+export class ListarSaboresComponent implements OnInit {
   @ViewChild(TableComponent) tableComponent!: TableComponent;
 
   data: any[] = [];
@@ -27,25 +27,22 @@ export class ListarSaboresComponent implements OnInit{
       }
     );
   }
-  
 
-  apiUrlPath(){
-    return `http://localhost:8080/api/sabores/ativo/${this.isAtivo}`;  
+
+  apiUrlPath() {
+    return `http://localhost:8080/api/sabores/ativo/${this.isAtivo}`;
   }
 
-  callHeaders(){
-    let tableHeaders : TableHeader[] = [];
+  callHeaders() {
+    let tableHeaders: TableHeader[] = [];
     tableHeaders.push(new TableHeader('Nome do Sabor', 'nomeSabor'));
     tableHeaders.push(new TableHeader('Valor Adicional', 'valorAdicional'));
-    tableHeaders.push(new TableHeader('Data','cadastro'));
-    tableHeaders.push(new TableHeader('Descrição','descricao'));
-  
-    console.log(this.data[0].nomeProduto)
-
+    tableHeaders.push(new TableHeader('Data', 'cadastro'));
+    tableHeaders.push(new TableHeader('Descrição', 'descricao'));
     return tableHeaders;
   }
 
-  findAtivo(){
+  findAtivo() {
     this.isAtivo = !this.isAtivo;
     this.tableComponent.loadData();
   }
