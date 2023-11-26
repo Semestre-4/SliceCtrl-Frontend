@@ -55,6 +55,10 @@ import { ChosenProductComponent } from './features/pedidos/components/chosen-pro
 import { ChosenSaboresComponent } from './features/pedidos/components/chosen-sabores/chosen-sabores.component';
 import { EditClienteComponent } from './features/clientes/edit-cliente/edit-cliente.component';
 import { NgChartsModule } from 'ng2-charts';
+import { IndexComponent } from './core/index/index.component';
+import { LoginComponent } from './core/login/login-component/login.component';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { httpInterceptorProviders } from './core/interceptor/http-interceptor/http-request.interceptor';
 
 
 @NgModule({
@@ -140,7 +144,9 @@ import { NgChartsModule } from 'ng2-charts';
     ChosenProductComponent,
     ChosenSaboresComponent,
     EditClienteComponent,
-    ChosenSaboresComponent],
+    ChosenSaboresComponent,
+    IndexComponent,
+    LoginComponent],
   
   imports: [
     BrowserModule,
@@ -153,9 +159,10 @@ import { NgChartsModule } from 'ng2-charts';
     FormsModule, 
     ReactiveFormsModule,
     NgChartsModule,
-
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
-  providers: [PedidoService,ProdutosService,PizzasService,
+  providers: [PedidoService,ProdutosService,PizzasService,httpInterceptorProviders,
     FormatarPrecoPipe,
     FormatarDataPipe],
   bootstrap: [AppComponent]

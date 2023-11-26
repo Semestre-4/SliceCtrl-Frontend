@@ -8,7 +8,7 @@ import { TableComponent } from 'src/app/shared/components/table/table.component'
   templateUrl: './listar-clientes.component.html',
   styleUrls: ['./listar-clientes.component.scss']
 })
-export class ListarClientesComponent implements OnInit{
+export class ListarClientesComponent implements OnInit {
   @ViewChild(TableComponent) tableComponent!: TableComponent;
 
   data: any[] = [];
@@ -27,26 +27,23 @@ export class ListarClientesComponent implements OnInit{
       }
     );
   }
-  
 
-  apiUrlPath(){
-    return `http://localhost:8080/api/cliente/ativo/${this.isAtivo}`;  
+
+  apiUrlPath() {
+    return `http://localhost:8080/api/cliente/ativo/${this.isAtivo}`;
   }
 
-  callHeaders(){
-    let tableHeaders : TableHeader[] = [];
+  callHeaders() {
+    let tableHeaders: TableHeader[] = [];
     tableHeaders.push(new TableHeader('Cliente', 'nome'));
     tableHeaders.push(new TableHeader('CPF', 'cpf'));
     tableHeaders.push(new TableHeader('Telefone', 'telefone'));
     tableHeaders.push(new TableHeader('E-Mail', 'email'));
-    tableHeaders.push(new TableHeader('Data','cadastro'));
-
-    console.log(this.data[0].nomeProduto)
-
+    tableHeaders.push(new TableHeader('Data', 'cadastro'));
     return tableHeaders;
   }
 
-  findAtivo(){
+  findAtivo() {
     this.isAtivo = !this.isAtivo;
     this.tableComponent.loadData();
   }

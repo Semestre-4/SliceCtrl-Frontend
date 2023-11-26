@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { ElementRef, Renderer2 } from '@angular/core';
+import { LoginService } from 'src/app/core/login/login-services/login.service';
 
 
 @Component({
@@ -8,6 +9,8 @@ import { ElementRef, Renderer2 } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
+
+  login = inject(LoginService);
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
@@ -22,6 +25,10 @@ export class SidebarComponent {
       this.renderer.addClass(sidebar, 'collapsed-sidebar');
       this.renderer.addClass(content, 'expanded-content');
     }
+  }
+
+  logout(){
+    this.login.logout();
   }
 
 

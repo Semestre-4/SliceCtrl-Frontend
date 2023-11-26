@@ -8,7 +8,7 @@ import { TableComponent } from 'src/app/shared/components/table/table.component'
   templateUrl: './listar-funcionarios.component.html',
   styleUrls: ['./listar-funcionarios.component.scss']
 })
-export class ListarFuncionariosComponent implements OnInit{
+export class ListarFuncionariosComponent implements OnInit {
   @ViewChild(TableComponent) tableComponent!: TableComponent;
 
   data: any[] = [];
@@ -27,29 +27,25 @@ export class ListarFuncionariosComponent implements OnInit{
       }
     );
   }
-  
 
-  apiUrlPath(){
-    return `http://localhost:8080/api/funcionario/ativo/${this.isAtivo}`;  
+  apiUrlPath() {
+    return `http://localhost:8080/api/funcionario/ativo/${this.isAtivo}`;
   }
 
-  callHeaders(){
-    let tableHeaders : TableHeader[] = [];
+  callHeaders() {
+    let tableHeaders: TableHeader[] = [];
     tableHeaders.push(new TableHeader('Nome do Funcionario', 'nome'));
-    tableHeaders.push(new TableHeader('',''));
+    tableHeaders.push(new TableHeader('', ''));
     tableHeaders.push(new TableHeader('CPF', 'cpf'));
-    tableHeaders.push(new TableHeader('',''));
+    tableHeaders.push(new TableHeader('', ''));
     tableHeaders.push(new TableHeader('Telefone', 'telefone'));
-    tableHeaders.push(new TableHeader('Data','cadastro'));
-    tableHeaders.push(new TableHeader('',''));
-    
-    console.log(this.data[0].nomeProduto)
-
+    tableHeaders.push(new TableHeader('Data', 'cadastro'));
+    tableHeaders.push(new TableHeader('', ''));
     return tableHeaders;
   }
 
 
-  findAtivo(){
+  findAtivo() {
     this.isAtivo = !this.isAtivo;
     this.tableComponent.loadData();
   }

@@ -1,4 +1,4 @@
-<div class="novo d-flex align-items-center" (click)="navigateTo()" id="new" [ngClass]="{'ingrediente-class': componenteTexto === 'Novo Ingrediente', 'produto-class': componenteTexto === 'Novo Produto', 'funcionario-class': componenteTexto === 'Novo Funcionario', 'clientes-class': componenteTexto === 'Novo Cliente' }">
+<div class="novo d-flex align-items-center mt-4">
     <i class="bi bi-plus-circle-fill"></i>
-    <p>{{componenteTexto}}</p>
-</div>
+    <p [routerLink]="navigateUrl">{{componenteTexto}}</p>
+  </div>

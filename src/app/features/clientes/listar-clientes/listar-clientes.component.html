@@ -1,27 +1,40 @@
 <div class="header">
-    <h1>Clientes</h1>
-    <hr>
+  <h1>Clientes</h1>
+  <hr />
 </div>
 
-<div class="form-check form-switch ps-0 d-flex flex-row justify-content-between ms-0">
-  <app-cardapio-new-register></app-cardapio-new-register>
+<div
+  class="form-check form-switch ps-0 d-flex flex-row justify-content-between ms-0"
+>
+<app-cardapio-new-register
+[componenteTexto]="'Novo Cliente'"
+[navigateUrl]="'/clientes/register'"
+></app-cardapio-new-register>
 
-  <div class="d-flex align-items-end mb-3 isAtiv ">
-    <input class="form-check-input mb-1 tamanho" type="checkbox" id="flexSwitchCheckChecked" (click)="findAtivo()" checked>
-    <label for="produtoDisponive" class="form-label labels m-0 ms-2 font ">Clientes Inativos</label>
+  <div class="d-flex align-items-end mb-3 isAtiv">
+    <input
+      class="form-check-input mb-1 tamanho"
+      type="checkbox"
+      id="flexSwitchCheckChecked"
+      (click)="findAtivo()"
+      checked
+    />
+    <label for="produtoDisponive" class="form-label labels m-0 ms-2 font"
+      >Clientes Inativos</label
+    >
   </div>
 </div>
 
 <div class="listar-clientes">
-    <div class="body">
-      <app-table
+  <div class="body">
+    <app-table
       [headers]="callHeaders()"
       [apiUrl]="apiUrlPath()"
       [editPath]="'clientes/edit'"
-      [entityName]="'cliente'" 
+      [entityName]="'cliente'"
       [showDeleteButton]="true"
       [showEndButton]="false"
-      >
-    </app-table>  
+    >
+    </app-table>
   </div>
-  </div> 
+</div>

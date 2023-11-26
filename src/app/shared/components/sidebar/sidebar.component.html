@@ -40,15 +40,28 @@
   <p class="caption">Configurações</p>
   <ul class="d-flex flex-column align-items-start justify-content-center">
       <li>
-        <a routerLink="/settings" class="d-flex align-items-center gap-1"
+        <a routerLink="/configuracoes" class="d-flex align-items-center gap-1"
           ><i class="bi bi-gear"></i>
           <p class="sub-link">Configurações</p></a
         >
       </li>
+      <li>
+        <a routerLink="/perfil" class="d-flex align-items-center gap-1"
+          ><i class="bi bi-person-circle"></i>
+          <p class="sub-link">Minha Conta</p></a
+        >
+      </li>
   </ul>
 </div>
+<div class="logout">
+  <p class="caption">Sair</p>
+  <ul class="d-flex flex-column align-items-end justify-content-end">
+    <li>
+      <a href="/login" class="d-flex align-items-center gap-1"
+        ><i class="bi bi-box-arrow-right"></i>
+        <p class="sub-link">Sair</p></a
+      >
+    </li>
+  </ul>
 </div>
-
-<div class="content">
-<router-outlet></router-outlet>
 </div>
