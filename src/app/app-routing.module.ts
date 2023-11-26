@@ -29,6 +29,15 @@ import { LoginComponent } from './core/login/login-component/login.component';
 import { RegisterFuncionariosComponent } from './features/funcionarios/register-funcionarios/register-funcionarios.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
   { path: '', redirectTo: 'web', pathMatch: 'full' },
   {
     path: '',
@@ -114,11 +123,6 @@ const routes: Routes = [
       },
     ],
   },
-  {
-    path: 'login',
-    component: LoginComponent,
-    
-  }
 ];
 
 @NgModule({

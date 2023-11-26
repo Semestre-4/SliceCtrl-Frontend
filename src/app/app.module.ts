@@ -57,6 +57,7 @@ import { EditClienteComponent } from './features/clientes/edit-cliente/edit-clie
 import { NgChartsModule } from 'ng2-charts';
 import { IndexComponent } from './core/index/index.component';
 import { LoginComponent } from './core/login/login-component/login.component';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 
 @NgModule({
@@ -157,7 +158,8 @@ import { LoginComponent } from './core/login/login-component/login.component';
     FormsModule, 
     ReactiveFormsModule,
     NgChartsModule,
-
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
   providers: [PedidoService,ProdutosService,PizzasService,
     FormatarPrecoPipe,

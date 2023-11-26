@@ -28,7 +28,8 @@
   }
   
   .principal,
-  .config {
+  .config,
+  .logout {
       display: flex;
       flex-direction: column;
       align-content: flex-start;
@@ -75,7 +76,7 @@
       letter-spacing: 0.4px;
       text-transform: uppercase;
   }
-  
+
   .sidebar ul {
       list-style-type: none;
       padding: 0;
@@ -103,6 +104,7 @@
       line-height: 20px;
       letter-spacing: -0.28px;
       margin-left: 10px;
+      cursor: pointer;
   }
   
   .sidebar a {
@@ -144,4 +146,8 @@
   
   .collapsed-sidebar .title {
     justify-content: center;
+  }
+
+  .logout{
+    align-self: flex-end;
   }
