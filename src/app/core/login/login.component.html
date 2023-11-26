@@ -1,1 +1,41 @@
-<p>login works!</p>
+<div class="container d-flex justify-content-between">
+  <div class="login-form d-flex flex-column justify-content-evenly">
+    <div class="login-header d-flex flex-column justify-content-start align-items-start">
+      <p class="header-p">Comece Agora.</p>
+      <p class="sub-p">Digite suas credenciais para acessar sua conta.</p>
+    </div>
+    <form (ngSubmit)="authenticate()" class="mt-3">
+      <div class="form-group">
+        <label for="cpf">CPF</label>
+        <input
+          type="text"
+          class="form-control"
+          name="cpf"
+          [(ngModel)]="usuario.cpf"
+          placeholder="CPF"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Password"
+          name="senha"
+          [(ngModel)]="usuario.password"
+        />
+        </div>
+      <button
+        type="submit"
+        class="btn btn-primary"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+  <div class="login-market">
+    <img src="assets/Project management, teamwork and integration.png" alt="pizza" />
+  </div>
+
+
+</div>

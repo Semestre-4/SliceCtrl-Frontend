@@ -25,7 +25,6 @@ import { EditSaborComponent } from './features/cardapio/sabores/edit-sabor/edit-
 import { EditIngredienteComponent } from './features/cardapio/ingredientes/edit-ingrediente/edit-ingrediente.component';
 import { EditFuncionarioComponent } from './features/funcionarios/edit-funcionario/edit-funcionario.component';
 import { EditClienteComponent } from './features/clientes/edit-cliente/edit-cliente.component';
-import { ConfiguracoesComponent } from './features/configuracoes/configuracoes.component';
 import { PerfilComponent } from './features/perfil/perfil.component';
 import { IndexComponent } from './core/index/index.component';
 import { LoginComponent } from './core/login/login.component';
@@ -114,14 +113,6 @@ const routes: Routes = [
 
         ]
       },
-      {
-        path: 'configuracoes',
-        component: ConfiguracoesComponent
-      },
-      {
-        path: 'perfil',
-        component: PerfilComponent
-      }
     ],
   },
   {
