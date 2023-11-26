@@ -11,7 +11,7 @@ import { Role } from 'src/app/shared/models/enums/role';
   styleUrls: ['./edit-usuario.component.scss']
 })
 export class EditUsuarioComponent {
-  usuario: Usuario = new Usuario();
+  usuario: Usuario =     new Usuario('', '', '', Role.FUNCIONARIO, '', 0, []);
   id: string = '';
   mensagem: string = '';
   type: string = '';

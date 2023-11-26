@@ -11,7 +11,8 @@ import { Role } from 'src/app/shared/models/enums/role';
 })
 export class RegisterUsuarioComponent {
 
-  usuario: Usuario = new Usuario();
+  usuario: Usuario = new Usuario('', '', '', Role.FUNCIONARIO, '', 0, [])
+  ;
   role = Object.values(Role);
   mensagem: string = '';
   type: string = '';

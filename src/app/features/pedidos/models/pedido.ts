@@ -9,7 +9,7 @@ import { Usuario } from "../../usuarios/usario";
 
 export class Pedido extends AbstractEntity {
     cliente: Cliente;
-    funcionario: Usuario;
+    usuario: Usuario;
     produtos: PedidoProduto[];
     pizzas: PedidoPizza[];
     pagamento: Pagamento;
@@ -19,10 +19,10 @@ export class Pedido extends AbstractEntity {
     status: Status;
     formaDeEntrega: FormaDeEntrega;
 
-    constructor(cliente: Cliente, funcionario: Usuario, produtos: PedidoProduto[], pizzas: PedidoPizza[], pagamento: Pagamento, valorPedido: number, valorEntrega: number, valorTotal: number, status: Status, formaDeEntrega: FormaDeEntrega){
+    constructor(cliente: Cliente, usuario: Usuario, produtos: PedidoProduto[], pizzas: PedidoPizza[], pagamento: Pagamento, valorPedido: number, valorEntrega: number, valorTotal: number, status: Status, formaDeEntrega: FormaDeEntrega){
         super();
         this.cliente = cliente;
-        this.funcionario = funcionario;
+        this.usuario = usuario;
         this.produtos = produtos;
         this.pizzas = pizzas;
         this.pagamento = pagamento;
