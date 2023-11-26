@@ -53,7 +53,7 @@ describe('RegistrarProdutosComponent', () => {
 
   it('Teste input categoria.', () => {
     let elemento = fixture.debugElement.query(By.css('input[name="categoriaProduto"]'));
-    expect(elemento.nativeElement.ngModel).toEqual(Categoria.BEBIDAS);
+    expect(elemento.nativeElement.ngModel).toEqual("BEBIDAS");
   });
 
   it('Teste input preco.', () => {
