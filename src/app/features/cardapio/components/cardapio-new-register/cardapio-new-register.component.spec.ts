@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CardapioNewRegisterComponent } from './cardapio-new-register.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('CardapioNewRegisterComponent', () => {
   let component: CardapioNewRegisterComponent;
@@ -8,7 +10,9 @@ describe('CardapioNewRegisterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CardapioNewRegisterComponent]
+      declarations: [CardapioNewRegisterComponent],
+      imports: [HttpClientTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(CardapioNewRegisterComponent);
     component = fixture.componentInstance;

@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PrePedidoComponent } from './pre-pedido.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('PrePedidoComponent', () => {
   let component: PrePedidoComponent;
@@ -8,7 +10,9 @@ describe('PrePedidoComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PrePedidoComponent]
+      declarations: [PrePedidoComponent],
+      imports: [HttpClientTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(PrePedidoComponent);
     component = fixture.componentInstance;
