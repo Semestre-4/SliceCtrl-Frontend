@@ -38,7 +38,6 @@ export class ListarClientesComponent implements OnInit {
     tableHeaders.push(new TableHeader('Cliente', 'nome'));
     tableHeaders.push(new TableHeader('CPF', 'cpf'));
     tableHeaders.push(new TableHeader('Telefone', 'telefone'));
-    tableHeaders.push(new TableHeader('E-Mail', 'email'));
     tableHeaders.push(new TableHeader('Data', 'cadastro'));
     return tableHeaders;
   }

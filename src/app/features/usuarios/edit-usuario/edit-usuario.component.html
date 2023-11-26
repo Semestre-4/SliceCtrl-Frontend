@@ -71,6 +71,19 @@
           <option *ngFor="let r of role">{{ r }}</option>
         </select>
       </div>
+
+      <div class="col-md-3 ms-3">
+        <label for="pass" class="form-label margintop marginleft"
+          >Senha</label
+        >
+        <input
+          type="password"
+          class="form-control inputs marginleft"
+          id="pass"
+          name="pass"
+          [(ngModel)]="usuario.password"
+        />
+      </div>
     </div>
 
     <div class="actions d-flex flex-row gap-1">

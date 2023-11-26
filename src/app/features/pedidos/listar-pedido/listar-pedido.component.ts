@@ -68,7 +68,7 @@ export class ListarPedidoComponent implements OnInit{
   callHeaders(){
     let tableHeaders : TableHeader[] = [];
     tableHeaders.push(new TableHeader('Cliente', 'cliente.nome'));
-    tableHeaders.push(new TableHeader('Funcionario', 'usuarioDTO.nome'));
+    tableHeaders.push(new TableHeader('Funcionario', 'usuario.nome'));
     tableHeaders.push(new TableHeader('Data','cadastro'));
     tableHeaders.push(new TableHeader('Forma de Retirada','formaDeEntrega'));
     tableHeaders.push(new TableHeader('Status','status'));
