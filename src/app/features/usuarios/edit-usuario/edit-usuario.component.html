@@ -1,0 +1,85 @@
+<div class="registrar">
+  <div class="header">
+    <h1>Usuario</h1>
+    <hr />
+  </div>
+
+  <form class="needs-validation">
+    <div
+      class="aviso d-flex align-items-center ms-4"
+      id="alert"
+      [ngClass]="{
+        'alert alert-success': type === 'success',
+        'alert alert-danger': type === 'danger'
+      }"
+    >
+      <p>{{ mensagem }}</p>
+    </div>
+
+    <div class="row g-3 ms-3">
+      <div class="col-md-3">
+        <label for="nome" class="form-label marginleft margintop"
+          >Nome do Usuario</label
+        >
+        <input
+          type="text"
+          class="form-control marginleft inputs"
+          id="nome"
+          name="nome"
+          placeholder="Digite aqui..."
+          [(ngModel)]="usuario.nome"
+        />
+      </div>
+
+      <div class="col-md-3 ms-3">
+        <label for="cpf" class="form-label margintop marginleft">CPF</label>
+        <input
+          type="text"
+          class="form-control marginleft inputs"
+          id="cpf"
+          name="cpf"
+          placeholder="Digite aqui..."
+          [(ngModel)]="usuario.cpf"
+        />
+      </div>
+
+      <div class="col-md-3 ms-3">
+        <label for="telefone" class="form-label margintop marginleft"
+          >Telefone</label
+        >
+        <input
+          type="text"
+          class="form-control inputs marginleft"
+          id="telefone"
+          name="telefone"
+          placeholder="Digite aqui..."
+          [(ngModel)]="usuario.telefone"
+        />
+      </div>
+
+      <div class="col-md-3">
+        <label for="role" class="form-label marginleft margintop"
+          >Role</label
+        >
+        <select
+          type="text"
+          class="form-control marginleft inputs"
+          id="role"
+          name="role"
+          [(ngModel)]="usuario.role"
+        >
+          <option *ngFor="let r of role">{{ r }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="actions d-flex flex-row gap-1">
+      <button class="btn btn-primary" routerLink="/usuario/listar">
+        Cancelar
+      </button>
+      <button class="btn btn-secondary" type="submit" (click)="submit()">
+        Continuar
+      </button>
+    </div>
+  </form>
+</div>

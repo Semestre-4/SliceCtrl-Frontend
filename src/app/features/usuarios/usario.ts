@@ -5,11 +5,11 @@ import { Role } from "src/app/shared/models/enums/role";
 export class Usuario extends AbstractEntity{
     
     nome!: string;
-    password !: string;
     cpf!: string;
+    password!: string;
     role!: Role;
     telefone!: string;
     salario!: number;
-    token!: string;
+    pedidos!: Pedido[];
 
 }
