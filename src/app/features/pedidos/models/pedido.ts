@@ -1,6 +1,6 @@
 import { AbstractEntity } from "src/app/shared/models/abstract-entity";
 import { Cliente } from "../../clientes/cliente";
-import { Usuario } from "../../funcionarios/funcionario";
+import { Usuario } from "../../funcionarios/usuario";
 import { PedidoProduto } from "./pedido-produto";
 import { PedidoPizza } from "./pedido-pizza";
 import { Pagamento } from "./pagamento";

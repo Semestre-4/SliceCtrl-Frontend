@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Pedido } from '../models/pedido';
 import { Cliente } from '../../clientes/cliente';
-import { Usuario } from '../../funcionarios/funcionario';
+import { Usuario } from '../../funcionarios/usuario';
 import { Pagamento } from '../models/pagamento';
 import { Status } from 'src/app/shared/models/enums/status-pedido';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';

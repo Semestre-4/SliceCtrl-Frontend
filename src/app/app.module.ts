@@ -56,7 +56,7 @@ import { ChosenSaboresComponent } from './features/pedidos/components/chosen-sab
 import { EditClienteComponent } from './features/clientes/edit-cliente/edit-cliente.component';
 import { NgChartsModule } from 'ng2-charts';
 import { IndexComponent } from './core/index/index.component';
-import { LoginComponent } from './core/login/login.component';
+import { LoginComponent } from './core/login/login-component/login.component';
 
 
 @NgModule({

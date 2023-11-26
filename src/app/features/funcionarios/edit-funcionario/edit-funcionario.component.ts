@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Usuario } from '../funcionario';
+import { Usuario } from '../usuario';
 import { FuncionarioService } from '../service/funcionario.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';

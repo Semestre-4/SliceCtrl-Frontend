@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FuncionarioService } from '../service/funcionario.service';
 import { Router } from '@angular/router';
-import { Usuario } from '../funcionario';
+import { Usuario } from '../usuario';
 
 @Component({
   selector: 'app-register-funcionarios',

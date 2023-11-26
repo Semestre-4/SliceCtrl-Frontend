@@ -10,6 +10,6 @@ export class Usuario extends AbstractEntity{
     role!: Role;
     telefone!: string;
     salario!: number;
-    pedidos!: Pedido[];
+    token!: string;
 
 }
