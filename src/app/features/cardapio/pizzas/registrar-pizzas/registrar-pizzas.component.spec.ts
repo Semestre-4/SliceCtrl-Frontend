@@ -43,7 +43,7 @@ describe('RegistrarPizzasComponent', () => {
   });
 
   it('Teste input tamanho pizza.', () => {
-    let elemento = fixture.debugElement.query(By.css('input[name="tamanhoPizza"]'));
-    expect(elemento.nativeElement.ngModel).toEqual('M');
+    let elemento = fixture.debugElement.query(By.css('select[name="tamanhoPizza"]'));
+    expect(elemento.nativeElement.ngModel).toEqual(Tamanho.M);
   });
 });

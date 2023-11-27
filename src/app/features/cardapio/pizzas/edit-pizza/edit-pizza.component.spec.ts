@@ -41,7 +41,7 @@ describe('EditPizzaComponent', () => {
   });
 
   it('Teste input tamanho pizza.', () => {
-    let elemento = fixture.debugElement.query(By.css('input[name="tamanhoPizza"]'));
+    let elemento = fixture.debugElement.query(By.css('select[name="tamanhoPizza"]'));
     expect(elemento.nativeElement.ngModel).toEqual('M');
   });
 });

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Sabores } from '../sabor';
 import { Ingredientes } from '../../ingredientes/ingrediente';
 import { IngredientesService } from '../../ingredientes/service/ingredientes.service';
