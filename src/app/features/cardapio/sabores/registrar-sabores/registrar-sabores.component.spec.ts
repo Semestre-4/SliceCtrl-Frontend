@@ -29,18 +29,18 @@ describe('RegistrarSaboresComponent', () => {
   beforeEach(() => {
     let sabor = new Sabores();
     let ingrediente = new Ingredientes();
-    let ingredientes!: Ingredientes[];
-    
+    let ingredientes = []; // Inicialize ingredientes como um array vazio
+  
     ingrediente.nomeIngrediente = 'Ingrediente';
     ingrediente.qtdeIngrediente = 5;
-
+  
     ingredientes.push(ingrediente);
-
-    sabor.nomeSabor ='Sabor';
-    sabor.descricao = 'Descrição'
-    sabor.valorAdicional= 5.50;
+  
+    sabor.nomeSabor = 'Sabor';
+    sabor.descricao = 'Descrição';
+    sabor.valorAdicional = 5.50;
     sabor.ingredientesDTOS = ingredientes;
-    
+  
     component.sabor = sabor;
     fixture.detectChanges();
   });
@@ -73,6 +73,5 @@ describe('RegistrarSaboresComponent', () => {
     let elemento = fixture.debugElement.query(By.css('input[name="ingredientesSabor"]'));
     expect(elemento.nativeElement.ngModel).toEqual(ingredientes);
   });
-
 
 });
