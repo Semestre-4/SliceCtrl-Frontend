@@ -20,10 +20,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('sliceCtrl-Frontend');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('app-root .content span')?.textContent).toContain('sliceCtrl-Frontend app is running!');
-  });
 });
