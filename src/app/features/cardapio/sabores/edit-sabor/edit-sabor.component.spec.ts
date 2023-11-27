@@ -5,6 +5,8 @@ import { EditSaborComponent } from './edit-sabor.component';
 import { By } from '@angular/platform-browser';
 import { Ingredientes } from '../../ingredientes/ingrediente';
 import { Sabores } from '../sabor';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('EditSaborComponent', () => {
   let component: EditSaborComponent;
@@ -13,12 +15,8 @@ describe('EditSaborComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [EditSaborComponent],
-      imports: [
-        HttpClientTestingModule
-      ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      imports: [HttpClientTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(EditSaborComponent);
     component = fixture.componentInstance;

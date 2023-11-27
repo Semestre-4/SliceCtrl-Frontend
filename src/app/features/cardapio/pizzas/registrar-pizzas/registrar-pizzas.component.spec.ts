@@ -5,6 +5,9 @@ import { RegistrarPizzasComponent } from './registrar-pizzas.component';
 import { Pizzas } from '../pizza';
 import { Tamanho } from 'src/app/shared/models/enums/tamanho-pizza';
 import { By } from '@angular/platform-browser';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+
 
 describe('RegistrarPizzasComponent', () => {
   let component: RegistrarPizzasComponent;
@@ -13,12 +16,8 @@ describe('RegistrarPizzasComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [RegistrarPizzasComponent],
-      imports: [
-        HttpClientTestingModule
-      ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      imports: [HttpClientTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(RegistrarPizzasComponent);
     component = fixture.componentInstance;

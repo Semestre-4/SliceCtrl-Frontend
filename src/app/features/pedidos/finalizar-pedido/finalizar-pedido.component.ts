@@ -43,7 +43,7 @@ export class FinalizarPedidoComponent implements OnInit {
       next: (pedido) => {
         this.clienteInfo = pedido.cliente;
         this.endereco = pedido.cliente.enderecos[0];
-        this.funcionarioInfo = pedido.funcionario;
+        this.funcionarioInfo = pedido.usuario;
         this.produtos = pedido.produtos;
         this.pizzas = pedido.pizzas;
       },

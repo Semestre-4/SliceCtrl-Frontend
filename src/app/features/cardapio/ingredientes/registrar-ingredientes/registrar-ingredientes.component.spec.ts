@@ -5,6 +5,8 @@ import { RegistrarIngredientesComponent } from './registrar-ingredientes.compone
 import { Ingredientes } from '../ingrediente';
 import { Sabores } from '../../sabores/sabor';
 import { By } from '@angular/platform-browser';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('RegistrarIngredientesComponent', () => {
   let component: RegistrarIngredientesComponent;
@@ -13,12 +15,8 @@ describe('RegistrarIngredientesComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [RegistrarIngredientesComponent],
-      imports: [
-        HttpClientTestingModule
-      ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      imports: [HttpClientTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(RegistrarIngredientesComponent);
     component = fixture.componentInstance;

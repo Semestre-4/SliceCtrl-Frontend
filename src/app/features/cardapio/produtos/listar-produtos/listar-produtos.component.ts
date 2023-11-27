@@ -41,9 +41,6 @@ export class ListarProdutosComponent implements OnInit{
     tableHeaders.push(new TableHeader('Data','cadastro'));
     tableHeaders.push(new TableHeader('Preço','preco'));
     tableHeaders.push(new TableHeader('Disponivel','disponivel'));
-  
-    console.log(this.data[0].nomeProduto)
-
     return tableHeaders;
   }
 

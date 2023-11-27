@@ -4,6 +4,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { EditIngredienteComponent } from './edit-ingrediente.component';
 import { By } from '@angular/platform-browser';
 import { Ingredientes } from '../ingrediente';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('EditIngredienteComponent', () => {
   let component: EditIngredienteComponent;
@@ -12,12 +14,8 @@ describe('EditIngredienteComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [EditIngredienteComponent],
-      imports: [
-        HttpClientTestingModule
-      ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      imports: [HttpClientTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(EditIngredienteComponent);
     component = fixture.componentInstance;

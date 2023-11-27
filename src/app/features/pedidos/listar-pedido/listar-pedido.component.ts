@@ -7,6 +7,7 @@ import { Pagamento } from '../models/pagamento';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 import { TableHeader } from 'src/app/shared/components/table/table-header';
 import { Usuario } from '../../usuarios/usario';
+import { Role } from 'src/app/shared/models/enums/role';
 
 @Component({
   selector: 'app-listar-pedido',
@@ -21,7 +22,7 @@ export class ListarPedidoComponent implements OnInit{
 
   p: Pedido = new Pedido(
     new Cliente('', '', '', '', [], []),
-    new Usuario(),
+    new Usuario('', '', '', Role.FUNCIONARIO, '', 0, []),
     [],
     [],
     new Pagamento(),
@@ -41,6 +42,7 @@ export class ListarPedidoComponent implements OnInit{
       (response: any[]) => {
         this.data = response;
         this.status = this.data.map((pedido) => pedido.status);
+        console.log(this.data);
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -66,7 +68,7 @@ export class ListarPedidoComponent implements OnInit{
   callHeaders(){
     let tableHeaders : TableHeader[] = [];
     tableHeaders.push(new TableHeader('Cliente', 'cliente.nome'));
-    tableHeaders.push(new TableHeader('Funcionario', 'funcionario.nome'));
+    tableHeaders.push(new TableHeader('Funcionario', 'usuario.nome'));
     tableHeaders.push(new TableHeader('Data','cadastro'));
     tableHeaders.push(new TableHeader('Forma de Retirada','formaDeEntrega'));
     tableHeaders.push(new TableHeader('Status','status'));
