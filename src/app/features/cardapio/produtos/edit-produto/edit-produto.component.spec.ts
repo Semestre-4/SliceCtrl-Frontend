@@ -46,7 +46,7 @@ describe('EditProdutoComponent', () => {
   });
 
   it('Teste input categoria.', () => {
-    let elemento = fixture.debugElement.query(By.css('input[name="categoriaProduto"]'));
+    let elemento = fixture.debugElement.query(By.css('select[name="categoriaProduto"]'));
     expect(elemento.nativeElement.ngModel).toEqual("BEBIDAS");
   });
 

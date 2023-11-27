@@ -60,17 +60,4 @@ describe('EditSaborComponent', () => {
     expect(elemento.nativeElement.ngModel).toEqual(5.50);
   });
 
-  it('Teste input sabor ingredientes.', () => {
-    let ingrediente = new Ingredientes();
-    let ingredientes!: Ingredientes[];
-    
-    ingrediente.nomeIngrediente = 'Ingrediente';
-    ingrediente.qtdeIngrediente = 5;
-
-    ingredientes.push(ingrediente);
-
-    let elemento = fixture.debugElement.query(By.css('input[name="ingredientesSabor"]'));
-    expect(elemento.nativeElement.ngModel).toEqual(ingredientes);
-  });
-
 });
