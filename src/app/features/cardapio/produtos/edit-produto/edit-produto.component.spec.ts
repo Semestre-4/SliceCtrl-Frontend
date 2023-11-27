@@ -5,8 +5,6 @@ import { EditProdutoComponent } from './edit-produto.component';
 import { By } from '@angular/platform-browser';
 import { Produtos } from '../produto';
 import { Categoria } from 'src/app/shared/models/enums/categoria';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('EditProdutoComponent', () => {
   let component: EditProdutoComponent;

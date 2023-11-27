@@ -5,8 +5,6 @@ import { RegistrarSaboresComponent } from './registrar-sabores.component';
 import { Sabores } from '../sabor';
 import { Ingredientes } from '../../ingredientes/ingrediente';
 import { By } from '@angular/platform-browser';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('RegistrarSaboresComponent', () => {
   let component: RegistrarSaboresComponent;
