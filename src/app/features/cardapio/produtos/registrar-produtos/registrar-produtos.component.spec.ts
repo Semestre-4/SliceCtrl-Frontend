@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { RegistrarProdutosComponent } from './registrar-produtos.component';
-import { ProdutosService } from '../service/produtos.service';
 import { Produtos } from '../produto';
 import { Categoria } from 'src/app/shared/models/enums/categoria';
 import { By } from '@angular/platform-browser';
@@ -24,14 +23,12 @@ describe('RegistrarProdutosComponent', () => {
     fixture = TestBed.createComponent(RegistrarProdutosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  
+
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-
 
   beforeEach(() => {
     let produto = new Produtos();
@@ -41,20 +38,30 @@ describe('RegistrarProdutosComponent', () => {
     produto.qtdeEstoque = 5;
 
     component.produto = produto;
-    
+
     fixture.detectChanges();
   });
 
 
   it('Teste input produto.', () => {
+    fixture.detectChanges(); 
     let elemento = fixture.debugElement.query(By.css('input[name="nomeProduto"]'));
-    expect(elemento.nativeElement.ngModel).toEqual('Produto');
+    expect(elemento.nativeElement.value).toEqual('');
+  
+    elemento.nativeElement.value = 'Produto';
+    elemento.nativeElement.dispatchEvent(new Event('input'));
+  
+    fixture.detectChanges();
+  
+    expect(component.produto.nomeProduto).toEqual('Produto');
   });
-
+  
   it('Teste input categoria.', () => {
-    let elemento = fixture.debugElement.query(By.css('input[name="categoriaProduto"]'));
-    expect(elemento.nativeElement.ngModel).toEqual(Categoria.BEBIDAS);
+    fixture.detectChanges();
+    let elemento = fixture.debugElement.query(By.css('select[name="categoriaProduto"]'));
+    expect(elemento.nativeElement.value).toEqual(Categoria.BEBIDAS);
   });
+  
 
   it('Teste input preco.', () => {
     let elemento = fixture.debugElement.query(By.css('input[name="precoProduto"]'));
