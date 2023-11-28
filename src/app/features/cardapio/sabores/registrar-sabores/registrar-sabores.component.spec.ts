@@ -47,7 +47,7 @@ describe('RegistrarSaboresComponent', () => {
     sabor.descricao = 'Descrição';
     sabor.valorAdicional = 5.50;
     sabor.ingredientesDTOS = ingredientes;
-  
+
     component.sabor = sabor;
 
 
@@ -75,7 +75,6 @@ describe('RegistrarSaboresComponent', () => {
     component.submit();
     expect(component.submit).toHaveBeenCalled();
   }));
-
     
   afterEach(() => {
     fixture.destroy();

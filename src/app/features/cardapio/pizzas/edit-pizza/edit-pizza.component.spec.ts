@@ -45,7 +45,7 @@ describe('EditPizzaComponent', () => {
     expect(elemento.nativeElement.ngModel).toEqual('M');
   });
 
-  it('deve chamar o método save ao enviar o formulário', fakeAsync(() => { //colocar o fakeAsync toda vez que rolar coisa assíncrona
+  it('deve chamar o método save ao enviar o formulário', (() => { //colocar o fakeAsync toda vez que rolar coisa assíncrona
     spyOn(component, 'submit'); 
     component.submit();
     expect(component.submit).toHaveBeenCalled();

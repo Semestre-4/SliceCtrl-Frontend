@@ -36,7 +36,6 @@ describe('RegistrarProdutosComponent', () => {
     produto.categoria = Categoria.BEBIDAS;
     produto.preco = 29.90;
     produto.qtdeEstoque = 5;
-
     component.produto = produto;
 
     fixture.detectChanges();
@@ -73,6 +72,7 @@ describe('RegistrarProdutosComponent', () => {
     expect(elemento.nativeElement.ngModel).toEqual(5);
   });
 
+ 
   it('deve chamar o método save ao enviar o formulário', fakeAsync(() => { //colocar o fakeAsync toda vez que rolar coisa assíncrona
     spyOn(component, 'submit'); 
     component.submit();
