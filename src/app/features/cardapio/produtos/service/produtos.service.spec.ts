@@ -39,18 +39,12 @@ describe('ProdutosService', () => {
     service.getById(1).subscribe((prod) => {
       expect(prod).toEqual(expectProd); // Check if the returned product matches the expected product
     });
-
     const req = httpTestingController.expectOne('http://localhost:8080/api/produtos/id/1');
     expect(req.request.method).toEqual('GET');
     req.flush(expectProd);
-
     tick();
-
-    
   }));
-
   afterEach(() => {
     httpTestingController.verify();
   });
-
 });
