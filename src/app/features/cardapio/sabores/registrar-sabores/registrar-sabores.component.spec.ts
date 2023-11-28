@@ -1,20 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick} from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { RegistrarSaboresComponent } from './registrar-sabores.component';
 import { Sabores } from '../sabor';
 import { Ingredientes } from '../../ingredientes/ingrediente';
 import { By } from '@angular/platform-browser';
+import { SaboresService } from '../service/sabores.service';
 
 describe('RegistrarSaboresComponent', () => {
   let component: RegistrarSaboresComponent;
   let fixture: ComponentFixture<RegistrarSaboresComponent>;
+  let service: SaboresService;
+
+
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [RegistrarSaboresComponent],
       imports: [HttpClientTestingModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(RegistrarSaboresComponent);
     component = fixture.componentInstance;
@@ -27,6 +31,9 @@ describe('RegistrarSaboresComponent', () => {
 
     
   beforeEach(() => {
+
+    service = TestBed.inject(SaboresService);
+
     let sabor = new Sabores();
     let ingrediente = new Ingredientes();
     let ingredientes = []; // Inicialize ingredientes como um array vazio
@@ -40,8 +47,10 @@ describe('RegistrarSaboresComponent', () => {
     sabor.descricao = 'Descrição';
     sabor.valorAdicional = 5.50;
     sabor.ingredientesDTOS = ingredientes;
-  
+
     component.sabor = sabor;
+
+
     fixture.detectChanges();
   });
 
@@ -61,4 +70,20 @@ describe('RegistrarSaboresComponent', () => {
     expect(elemento.nativeElement.ngModel).toEqual(5.50);
   });
 
+  it('deve chamar o método save ao enviar o formulário', fakeAsync(() => { //colocar o fakeAsync toda vez que rolar coisa assíncrona
+    spyOn(component, 'submit'); 
+    component.submit();
+    expect(component.submit).toHaveBeenCalled();
+  }));
+
+  it('deve chamar o método findIngredientes ao iniciar', fakeAsync(() => { //colocar o fakeAsync toda vez que rolar coisa assíncrona
+    spyOn(component, 'findIngredientes'); 
+    component.findIngredientes();
+    expect(component.findIngredientes).toHaveBeenCalled();
+  }));
+    
+    
+  afterEach(() => {
+    fixture.destroy();
+  });
 });

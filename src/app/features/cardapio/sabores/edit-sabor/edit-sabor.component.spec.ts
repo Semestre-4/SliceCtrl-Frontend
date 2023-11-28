@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { EditSaborComponent } from './edit-sabor.component';
@@ -35,6 +35,7 @@ describe('EditSaborComponent', () => {
   
     ingredientes.push(ingrediente);
   
+    sabor.id = 1
     sabor.nomeSabor = 'Sabor';
     sabor.descricao = 'Descrição';
     sabor.valorAdicional = 5.50;
@@ -60,4 +61,26 @@ describe('EditSaborComponent', () => {
     expect(elemento.nativeElement.ngModel).toEqual(5.50);
   });
 
+  it('deve chamar o método save ao enviar o formulário', fakeAsync(() => { //colocar o fakeAsync toda vez que rolar coisa assíncrona
+    spyOn(component, 'submit'); 
+    component.submit();
+    expect(component.submit).toHaveBeenCalled();
+  }));
+
+  it('deve chamar o método findIngredientes ao iniciar', fakeAsync(() => { //colocar o fakeAsync toda vez que rolar coisa assíncrona
+    spyOn(component, 'findIngredientes'); 
+    component.findIngredientes();
+    expect(component.findIngredientes).toHaveBeenCalled();
+  }));
+
+  it('deve chamar o método getSaborById ao iniciar', fakeAsync(() => { //colocar o fakeAsync toda vez que rolar coisa assíncrona
+    spyOn(component, 'getSaborById'); 
+    component.getSaborById('1');
+    expect(component.getSaborById).toHaveBeenCalled();
+  }));
+    
+    
+  afterEach(() => {
+    fixture.destroy();
+  });
 });

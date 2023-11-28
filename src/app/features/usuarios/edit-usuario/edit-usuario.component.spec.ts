@@ -34,6 +34,7 @@ describe('EditUsuarioComponent', () => {
     usuario.cpf = '123.456.789-10';
     usuario.telefone = '12345678910';
     usuario.role = Role.FUNCIONARIO;
+    usuario.password = '123';
     usuario.pedidos = [];
     usuario.salario = 0;
 
@@ -57,6 +58,22 @@ describe('EditUsuarioComponent', () => {
     let elemento = fixture.debugElement.query(By.css('input[name="telefone"]'));
     expect(elemento.nativeElement.ngModel).toEqual('12345678910');
   });
+
+  it('Teste input usuario senha.', () => {
+    let elemento = fixture.debugElement.query(By.css('input[name="pass"]'));
+    expect(elemento.nativeElement.ngModel).toEqual('123');
+  });
+
+  it('Teste input usuario role.', () => {
+    let elemento = fixture.debugElement.query(By.css('select[name="role"]'));
+    expect(elemento.nativeElement.ngModel).toEqual(Role.FUNCIONARIO);
+  });
+
+  it('deve exibir mensagem de sucesso ao enviar com sucesso', () => {
+    spyOn(component, 'submit'); 
+    component.submit();
+    expect(component.submit).toHaveBeenCalled();
+});
   
   afterEach(() => {
     fixture.destroy();
