@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 import { EditIngredienteComponent } from './edit-ingrediente.component';
 import { By } from '@angular/platform-browser';
 import { Ingredientes } from '../ingrediente';
@@ -44,4 +44,10 @@ describe('EditIngredienteComponent', () => {
     let elemento = fixture.debugElement.query(By.css('input[name="qtdeIngrediente"]'));
     expect(elemento.nativeElement.ngModel).toEqual(5);
   });
+
+  it('deve chamar o método save ao enviar o formulário', fakeAsync(() => { //colocar o fakeAsync toda vez que rolar coisa assíncrona
+    spyOn(component, 'submit'); 
+    component.submit();
+    expect(component.submit).toHaveBeenCalled();
+  }));
 });

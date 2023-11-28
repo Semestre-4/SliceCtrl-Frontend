@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { EditPizzaComponent } from './edit-pizza.component';
@@ -44,4 +44,10 @@ describe('EditPizzaComponent', () => {
     let elemento = fixture.debugElement.query(By.css('select[name="tamanhoPizza"]'));
     expect(elemento.nativeElement.ngModel).toEqual('M');
   });
+
+  it('deve chamar o método save ao enviar o formulário', fakeAsync(() => { //colocar o fakeAsync toda vez que rolar coisa assíncrona
+    spyOn(component, 'submit'); 
+    component.submit();
+    expect(component.submit).toHaveBeenCalled();
+  }));
 });
