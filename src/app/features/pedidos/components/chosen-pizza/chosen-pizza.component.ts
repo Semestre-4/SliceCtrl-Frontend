@@ -1,6 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PedidoPizza } from '../../models/pedido-pizza';
 import { Router } from '@angular/router';
+import { Pizzas } from 'src/app/features/cardapio/pizzas/pizza';
+import { Cliente } from 'src/app/features/clientes/cliente';
+import { Usuario } from 'src/app/features/usuarios/usario';
+import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
+import { Role } from 'src/app/shared/models/enums/role';
+import { Status } from 'src/app/shared/models/enums/status-pedido';
+import { Pagamento } from '../../models/pagamento';
+import { Pedido } from '../../models/pedido';
 
 @Component({
   selector: 'app-chosen-pizza',
@@ -8,7 +16,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./chosen-pizza.component.scss']
 })
 export class ChosenPizzaComponent{
-  @Input() pedidoPizza!: PedidoPizza;
+  @Input() pedidoPizza = new PedidoPizza(new Pizzas(), [], new Pedido(
+    new Cliente('', '', '', '', [], []),
+    new Usuario('', '', '', Role.FUNCIONARIO, '', 0, []),
+    [],
+    [],
+    new Pagamento(),
+    0,
+    0,
+    0,
+    Status.PENDENTE,
+    FormaDeEntrega.LOCAL
+  ), 0, '',0);
   @Output() quantityChanged = new EventEmitter<number>();
   @Output() removeProduct = new EventEmitter<number>();
   @Output() priceCalculated = new EventEmitter<number>();

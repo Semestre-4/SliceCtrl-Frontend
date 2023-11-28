@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Pizzas } from 'src/app/features/cardapio/pizzas/pizza';
 
 @Component({
   selector: 'app-pizza-display',
@@ -6,7 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./pizza-display.component.scss']
 })
 export class PizzaDisplayComponent {
-  @Input() pizza: any;
+  @Input() pizza:Pizzas =  new Pizzas();
   @Output() addPizzaToPedido = new EventEmitter<any>();
 
   addToPizzaPedidoClicked() {

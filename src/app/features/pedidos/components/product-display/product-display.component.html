@@ -4,7 +4,7 @@
         <div class="p-name">
             {{ product.isPizza ? 'Pizza - ' + product.tamanho : product.nomeProduto }}
         </div>
-        <div class="p-price">R$ {{ product.preco.toFixed(2) }}</div>
+        <div class="p-price">R$ {{ product.preco }}</div>
     </div>
     <button class="add" (click)="addToPedidoClicked()">Adicionar Produto</button>
 </div>
