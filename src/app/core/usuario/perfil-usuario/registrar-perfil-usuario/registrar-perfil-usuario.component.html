@@ -1,1 +1,75 @@
-<p>registrar-perfil-usuario works!</p>
+<div class="header">
+  <h1>Minha Conta</h1>
+  <hr />
+</div>
+
+<div class="form">
+  <form
+    action="
+    "
+  >
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nome"
+        placeholder="Nome"
+        name="nome"
+        [(ngModel)]="usuario.nome"
+      />
+    </div>
+    <div class="form-group">
+      <label for="cpf">CPF</label>
+      <input
+        type="text"
+        class="form-control"
+        id="cpf"
+        placeholder="CPF"
+        name="cpf"
+        [(ngModel)]="usuario.cpf"
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        placeholder="Email"
+        name="email"
+        [(ngModel)]="usuario.email"
+      />
+    </div>
+    <div class="form-group">
+      <label for="senha">Senha</label>
+      <input
+        type="password"
+        class="form-control"
+        id="senha"
+        placeholder="Senha"
+        name="senha"
+        [(ngModel)]="usuario.senha"
+      />
+    </div>
+    <div class="form-group">
+      <label for="telefone">Telefone</label>
+      <input
+        type="text"
+        class="form-control"
+        id="telefone"
+        placeholder="Telefone"
+        name="telefone"
+        [(ngModel)]="usuario.telefone"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">
+      Salvar
+    </button>
+
+    <button type="button" class="btn btn-danger" (click)="voltar()">
+      Voltar
+    </button>
+    
+</form>
+</div>
