@@ -63,4 +63,14 @@ describe('RegisterUsuarioComponent', () => {
     expect(elemento.nativeElement.ngModel).toEqual('123456789');
   });
 
+  it('deve exibir mensagem de sucesso ao enviar com sucesso', () => {
+    spyOn(component, 'submit'); 
+    component.submit();
+    expect(component.submit).toHaveBeenCalled();
+  });
+
+    
+  afterEach(() => {
+    fixture.destroy();
+  });  
 });

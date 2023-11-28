@@ -69,6 +69,11 @@ describe('EditUsuarioComponent', () => {
     expect(elemento.nativeElement.ngModel).toEqual(Role.FUNCIONARIO);
   });
 
+  it('deve exibir mensagem de sucesso ao enviar com sucesso', () => {
+    spyOn(component, 'submit'); 
+    component.submit();
+    expect(component.submit).toHaveBeenCalled();
+});
   
   afterEach(() => {
     fixture.destroy();

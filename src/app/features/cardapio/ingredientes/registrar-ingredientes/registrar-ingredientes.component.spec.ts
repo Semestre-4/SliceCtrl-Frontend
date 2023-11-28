@@ -52,4 +52,9 @@ describe('RegistrarIngredientesComponent', () => {
     expect(component.submit).toHaveBeenCalled();
   }));
 
+
+    
+  afterEach(() => {
+    fixture.destroy();
+  });
 });

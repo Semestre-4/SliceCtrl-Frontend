@@ -65,4 +65,9 @@ describe('RegistrarPizzasComponent', () => {
     component.submit();
     expect(component.submit).toHaveBeenCalled();
   }));
+
+    
+  afterEach(() => {
+    fixture.destroy();
+  });
 });

@@ -66,4 +66,8 @@ describe('EditProdutoComponent', () => {
     expect(component.submit).toHaveBeenCalled();
   }));
 
+    
+  afterEach(() => {
+    fixture.destroy();
+  });
 });
