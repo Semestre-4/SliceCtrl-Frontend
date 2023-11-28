@@ -35,6 +35,7 @@ describe('EditSaborComponent', () => {
   
     ingredientes.push(ingrediente);
   
+    sabor.id = 1
     sabor.nomeSabor = 'Sabor';
     sabor.descricao = 'Descrição';
     sabor.valorAdicional = 5.50;
@@ -66,6 +67,18 @@ describe('EditSaborComponent', () => {
     expect(component.submit).toHaveBeenCalled();
   }));
 
+  it('deve chamar o método findIngredientes ao iniciar', fakeAsync(() => { //colocar o fakeAsync toda vez que rolar coisa assíncrona
+    spyOn(component, 'findIngredientes'); 
+    component.findIngredientes();
+    expect(component.findIngredientes).toHaveBeenCalled();
+  }));
+
+  it('deve chamar o método getSaborById ao iniciar', fakeAsync(() => { //colocar o fakeAsync toda vez que rolar coisa assíncrona
+    spyOn(component, 'getSaborById'); 
+    component.getSaborById('1');
+    expect(component.getSaborById).toHaveBeenCalled();
+  }));
+    
     
   afterEach(() => {
     fixture.destroy();

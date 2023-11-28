@@ -75,6 +75,13 @@ describe('RegistrarSaboresComponent', () => {
     component.submit();
     expect(component.submit).toHaveBeenCalled();
   }));
+
+  it('deve chamar o método findIngredientes ao iniciar', fakeAsync(() => { //colocar o fakeAsync toda vez que rolar coisa assíncrona
+    spyOn(component, 'findIngredientes'); 
+    component.findIngredientes();
+    expect(component.findIngredientes).toHaveBeenCalled();
+  }));
+    
     
   afterEach(() => {
     fixture.destroy();
