@@ -27,6 +27,8 @@ import { LoginComponent } from './core/login/login-component/login.component';
 import { ListarUsuarioComponent } from './features/usuarios/listar-usuario/listar-usuario.component';
 import { RegisterUsuarioComponent } from './features/usuarios/register-usuario/register-usuario.component';
 import { EditUsuarioComponent } from './features/usuarios/edit-usuario/edit-usuario.component';
+import { ListarPerfilUsuarioComponent } from './core/usuario/perfil-usuario/listar-perfil-usuario/listar-perfil-usuario.component';
+import { RegistrarPerfilUsuarioComponent } from './core/usuario/perfil-usuario/registrar-perfil-usuario/registrar-perfil-usuario.component';
 
 const routes: Routes = [
   {
@@ -121,6 +123,13 @@ const routes: Routes = [
 
         ]
       },
+      {
+        path: 'perfil',
+        children: [
+          { path: 'listar', component: ListarPerfilUsuarioComponent },
+          { path: 'register', component: RegistrarPerfilUsuarioComponent },
+        ]
+      }
     ],
   },
 ];

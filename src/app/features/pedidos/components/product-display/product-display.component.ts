@@ -7,7 +7,7 @@ import { Produtos } from 'src/app/features/cardapio/produtos/produto';
   styleUrls: ['./product-display.component.scss']
 })
 export class ProductDisplayComponent {
-  @Input() product= new Produtos();
+  @Input() product: Produtos | any;
   @Output() addToPedido = new EventEmitter<any>();
 
   addToPedidoClicked() {
