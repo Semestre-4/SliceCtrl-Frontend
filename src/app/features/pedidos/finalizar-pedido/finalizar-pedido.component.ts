@@ -8,7 +8,7 @@ import { Endereco } from 'src/app/shared/models/endereco/endereco';
 import { ClienteService } from '../../clientes/service/cliente.service';
 import { EnderecoService } from 'src/app/shared/models/endereco/service/endereco.service';
 import { Cliente } from '../../clientes/cliente';
-import { Usuario } from '../../usuarios/usario';
+import { Usuario } from '../../usuarios/usuario';
 import { PedidoProduto } from '../models/pedido-produto';
 import { Role } from 'src/app/shared/models/enums/role';
 

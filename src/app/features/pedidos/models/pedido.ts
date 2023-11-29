@@ -5,7 +5,7 @@ import { PedidoPizza } from "./pedido-pizza";
 import { Pagamento } from "./pagamento";
 import { Status } from "src/app/shared/models/enums/status-pedido";
 import { FormaDeEntrega } from "src/app/shared/models/enums/forma-entrega";
-import { Usuario } from "../../usuarios/usario";
+import { Usuario } from "../../usuarios/usuario";
 
 export class Pedido extends AbstractEntity {
     cliente: Cliente;
