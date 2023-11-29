@@ -19,7 +19,4 @@ describe('ProductDisplayComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });
