@@ -9,10 +9,9 @@ import { Endereco } from '../endereco';
 })
 export class EnderecoService {
 
-  private baseURL: string = 'http:localhost:8080/api/enderecos'
-  private http!: HttpClient
+  private baseURL: string = 'http://localhost:8080/api/enderecos';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<Endereco>{
     return this.http.get<Endereco>(`${this.baseURL}/id/${id}`);
