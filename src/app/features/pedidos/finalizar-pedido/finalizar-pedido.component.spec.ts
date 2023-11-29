@@ -11,7 +11,7 @@ import { Status } from 'src/app/shared/models/enums/status-pedido';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 import { Cliente } from '../../clientes/cliente';
 import { Role } from 'src/app/shared/models/enums/role';
-import { Usuario } from '../../usuarios/usario';
+import { Usuario } from '../../usuarios/usuario';
 import { By } from '@angular/platform-browser';
 import { Endereco } from 'src/app/shared/models/endereco/endereco';
 

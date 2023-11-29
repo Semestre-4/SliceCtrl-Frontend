@@ -3,7 +3,7 @@ import { PedidoPizza } from '../../models/pedido-pizza';
 import { Router } from '@angular/router';
 import { Pizzas } from 'src/app/features/cardapio/pizzas/pizza';
 import { Cliente } from 'src/app/features/clientes/cliente';
-import { Usuario } from 'src/app/features/usuarios/usario';
+import { Usuario } from 'src/app/features/usuarios/usuario';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 import { Role } from 'src/app/shared/models/enums/role';
 import { Status } from 'src/app/shared/models/enums/status-pedido';

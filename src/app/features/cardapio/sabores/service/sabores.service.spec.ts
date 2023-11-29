@@ -1,55 +1,118 @@
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
-
-import { SaboresService } from './sabores.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/compiler';
 import { of } from 'rxjs';
-import { UsuarioService } from 'src/app/features/usuarios/service/usuario.service';
+import { SaboresService } from './sabores.service';
 import { Sabores } from '../sabor';
 
 describe('SaboresService', () => {
   let service: SaboresService;
-  let http: HttpClient;
+  let http: HttpTestingController;
   let saborService: SaboresService;
-  let newSabor = new Sabores();
-
-
-
+  let testSabor: Sabores;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule], 
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-
     });
     service = TestBed.inject(SaboresService);
-    http = TestBed.inject(HttpClient);
+    http = TestBed.inject(HttpTestingController);
+  });
+
+  beforeEach(() => {
+    saborService = TestBed.inject(SaboresService);
+
+    testSabor = {
+      id: 1,
+      nomeSabor: 'Test Sabor',
+      descricao: 'Test Descrição',
+      valorAdicional: 0,
+      ingredientesDTOS: [],
+      cadastro: new Date(),
+      edicao: new Date(),
+      ativo: true,
+    };
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  beforeEach(() => {
-    saborService = new SaboresService(http);
-
-    newSabor.ativo = true;
-    newSabor.cadastro = new Date();
-    newSabor.descricao = 'descrição';
-    newSabor.id = 1;
-    newSabor.nomeSabor = 'Sabor';
-
-  });
-
   it('should get a sabor by id', fakeAsync(() => {
-    const createdSabor$ = saborService.getById(1);
-    let createdSabor = new Sabores;
-    createdSabor$.subscribe((sabor) => {
-      createdSabor = sabor;
+    saborService.getById(1).subscribe((sabor) => {
+      expect(sabor).toEqual(testSabor);
     });
-    tick(5000); // Adjust the time based on your expected asynchronous operation time
-    expect(createdSabor).toBeTruthy(); // Check if the created sabor exists
+
+    const req = http.expectOne('http://localhost:8080/api/sabores/id/1');
+    expect(req.request.method).toEqual('GET');
+    req.flush(testSabor);
+    tick();
   }));
 
+  it('should get all sabores', fakeAsync(() => {
+    const expectedSabores: Sabores[] = [testSabor];
+
+    saborService.getAll().subscribe((sabores) => {
+      expect(sabores).toEqual(expectedSabores);
+    });
+
+    const req = http.expectOne('http://localhost:8080/api/sabores/all');
+    expect(req.request.method).toEqual('GET');
+    req.flush(expectedSabores);
+    tick();
+  }));
+
+  it('should get sabor by nome', fakeAsync(() => {
+    saborService.getByNome('Sabor').subscribe((sabor) => {
+      expect(sabor).toEqual(testSabor);
+    });
+
+    const req = http.expectOne('http://localhost:8080/api/sabores/nome/Sabor');
+    expect(req.request.method).toEqual('GET');
+    req.flush(testSabor);
+    tick();
+  }));
+
+  it('should save a sabor', fakeAsync(() => {
+    saborService.save(testSabor).subscribe((result) => {
+      expect(result).toBe('success');
+    });
+
+    const req = http.expectOne('http://localhost:8080/api/sabores');
+    expect(req.request.method).toEqual('POST');
+    req.flush('success');
+    tick();
+  }));
+
+  it('should edit a sabor', fakeAsync(() => {
+    const saborToEdit: Sabores = { ...testSabor, nomeSabor: 'Updated Test Sabor' };
+
+    saborService.edit(saborToEdit).subscribe((result) => {
+      expect(result).toBe(200);
+    });
+
+    const req = http.expectOne(`http://localhost:8080/api/sabores/${saborToEdit.id}`);
+    expect(req.request.method).toEqual('PUT');
+    req.flush(200);
+    tick();
+  }));
+
+  it('should delete a sabor', fakeAsync(() => {
+    const saborIdToDelete = 1;
+
+    saborService.delete(saborIdToDelete).subscribe((result) => {
+      expect(result).toBe(200);
+    });
+
+    const req = http.expectOne(`http://localhost:8080/api/sabores/${saborIdToDelete}`);
+    expect(req.request.method).toEqual('DELETE');
+    req.flush(200);
+    tick();
+  }));
+
+  afterEach(() => {
+    http.verify();
+  });
 });

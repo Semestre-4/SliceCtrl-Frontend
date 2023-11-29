@@ -11,7 +11,7 @@ import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 import { Status } from 'src/app/shared/models/enums/status-pedido';
 import { PedidoProduto } from '../models/pedido-produto';
 import { FormatarPrecoPipe } from 'src/app/shared/pipes/formatar-preco/formatar-preco.pipe';
-import { Usuario } from '../../usuarios/usario';
+import { Usuario } from '../../usuarios/usuario';
 import { Role } from 'src/app/shared/models/enums/role';
 
 @Component({

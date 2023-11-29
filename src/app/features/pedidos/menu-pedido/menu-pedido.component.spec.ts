@@ -10,7 +10,7 @@ import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 import { Role } from 'src/app/shared/models/enums/role';
 import { Status } from 'src/app/shared/models/enums/status-pedido';
 import { Cliente } from '../../clientes/cliente';
-import { Usuario } from '../../usuarios/usario';
+import { Usuario } from '../../usuarios/usuario';
 import { Pagamento } from '../models/pagamento';
 import { Pedido } from '../models/pedido';
 import { Pizzas } from '../../cardapio/pizzas/pizza';
