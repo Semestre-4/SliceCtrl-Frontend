@@ -6,7 +6,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { PedidoProduto } from '../../models/pedido-produto';
 import { Produtos } from 'src/app/features/cardapio/produtos/produto';
 import { Cliente } from 'src/app/features/clientes/cliente';
-import { Usuario } from 'src/app/features/usuarios/usario';
+import { Usuario } from 'src/app/features/usuarios/usuario';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 import { Role } from 'src/app/shared/models/enums/role';
 import { Status } from 'src/app/shared/models/enums/status-pedido';

@@ -9,7 +9,7 @@ import { PedidoService } from '../service/pedido.service';
 import { ClienteService } from '../../clientes/service/cliente.service';
 import { Router } from '@angular/router';
 import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
-import { Usuario } from '../../usuarios/usario';
+import { Usuario } from '../../usuarios/usuario';
 import { UsuarioService } from '../../usuarios/service/usuario.service';
 import { Role } from 'src/app/shared/models/enums/role';
 

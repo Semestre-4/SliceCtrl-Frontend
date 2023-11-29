@@ -12,7 +12,7 @@ import { Cliente } from '../../clientes/cliente';
 import { Pagamento } from '../models/pagamento';
 import { Status } from 'src/app/shared/models/enums/status-pedido';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
-import { Usuario } from '../../usuarios/usario';
+import { Usuario } from '../../usuarios/usuario';
 import { Role } from 'src/app/shared/models/enums/role';
 
 @Component({

@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RegisterUsuarioComponent } from './register-usuario.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { Usuario } from '../usario';
+import { Usuario } from '../usuario';
 import { Role } from 'src/app/shared/models/enums/role';
 import { Pedido } from '../../pedidos/models/pedido';
 import { By } from '@angular/platform-browser';
