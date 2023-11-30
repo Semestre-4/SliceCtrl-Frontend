@@ -3,6 +3,7 @@ import { Categoria } from 'src/app/shared/models/enums/categoria';
 import { Produtos } from '../produto';
 import { ProdutosService } from '../service/produtos.service';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/core/login/login-services/login.service';
 
 @Component({
   selector: 'app-registrar-produtos',
@@ -19,10 +20,14 @@ export class RegistrarProdutosComponent {
 
   categoriaOption = Object.values(Categoria);
 
-  constructor(private service: ProdutosService, private router: Router){}
+  constructor(private service: ProdutosService, private router: Router, private loginService: LoginService){}
 
   submit(){
 
+    let permission: boolean = this.loginService.hasPermission('ADMIN')
+    let permission2: boolean = this.loginService.hasPermission('FUNCIONARIO_CHEF');
+  
+    if(permission || permission2){
     this.service.save(this.produto).subscribe({
       next: (pedido) => {
         this.mensagem = 'Cadastrado com sucesso!';
@@ -57,7 +62,11 @@ export class RegistrarProdutosComponent {
         this.type = 'danger';
         }
         }
-    });
+    });}
+    else{
+      this.type = 'danger';
+      this.mensagem = 'ACESSO NEGADO! Você não tem permissão para realizar essa ação.'
+    }
   }
   
 }

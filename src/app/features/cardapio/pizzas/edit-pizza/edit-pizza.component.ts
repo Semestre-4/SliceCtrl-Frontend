@@ -4,6 +4,7 @@ import { Pizzas } from '../pizza';
 import { PizzasService } from '../service/pizzas.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { LoginService } from 'src/app/core/login/login-services/login.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class EditPizzaComponent {
   mensagem: string = '';
   type: string ='';
 
-  constructor(private service: PizzasService, private router: Router, private location: Location){
+  constructor(private service: PizzasService, private router: Router, private location: Location, private loginService: LoginService){
     const path = location.path();
     const parts = path.split('/');
     this.id = parts[parts.length - 1];
@@ -41,6 +42,12 @@ export class EditPizzaComponent {
   }
 
   submit(){
+
+    let permission: boolean = this.loginService.hasPermission('ADMIN')
+    let permission2: boolean = this.loginService.hasPermission('FUNCIONARIO_CHEF');
+  
+    if(permission || permission2){
+  
     this.service.edit(this.pizza).subscribe(
       {
         next: (i) => { 
@@ -70,6 +77,10 @@ export class EditPizzaComponent {
           }
       }
       }
-    );
+    );}
+    else{
+      this.type = 'danger';
+      this.mensagem = 'ACESSO NEGADO! Você não tem permissão para realizar essa ação.'
+    }
   }
 }

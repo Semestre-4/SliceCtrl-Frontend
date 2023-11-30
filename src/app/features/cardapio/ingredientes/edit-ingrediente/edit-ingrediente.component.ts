@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { IngredientesService } from '../service/ingredientes.service';
 import { Ingredientes } from '../ingrediente';
 import { Location } from '@angular/common';
+import { LoginService } from 'src/app/core/login/login-services/login.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class EditIngredienteComponent {
   mensagem: string = '';
   type: string ='';
 
-constructor(private service: IngredientesService, private router: Router, private location: Location){
+constructor(private service: IngredientesService, private router: Router, private location: Location, private loginService: LoginService){
   const path = location.path();
   const parts = path.split('/');
   this.id = parts[parts.length - 1];
@@ -36,6 +37,12 @@ getIngredientesById(id: string){
 
 
 submit(){
+
+  let permission: boolean = this.loginService.hasPermission('ADMIN')
+  let permission2: boolean = this.loginService.hasPermission('FUNCIONARIO_CHEF');
+
+  if(permission || permission2){
+
 
   this.service.save(this.ingrediente).subscribe(
     {
@@ -65,6 +72,9 @@ submit(){
           this.type = 'danger';
         }
     }
-    });
+    });}else{
+      this.type = 'danger';
+      this.mensagem = 'ACESSO NEGADO! Você não tem permissão para realizar essa ação.'
+    }
 }
 }
