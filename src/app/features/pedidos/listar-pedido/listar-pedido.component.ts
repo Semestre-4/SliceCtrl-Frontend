@@ -6,7 +6,7 @@ import { Cliente } from '../../clientes/cliente';
 import { Pagamento } from '../models/pagamento';
 import { FormaDeEntrega } from 'src/app/shared/models/enums/forma-entrega';
 import { TableHeader } from 'src/app/shared/components/table/table-header';
-import { Usuario } from '../../usuarios/usario';
+import { Usuario } from '../../usuarios/usuario';
 import { Role } from 'src/app/shared/models/enums/role';
 
 @Component({

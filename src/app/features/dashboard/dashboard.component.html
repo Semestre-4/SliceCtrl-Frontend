@@ -41,17 +41,7 @@
   </table>
 </div>
 
-<!-- <div class="bottom d-flex flex-row w-100 gap-2 mt-3">
-<table>
-    <tr>
-        <th>Nome Produto</th>
-        <th>Qtde. Pedida</th>
-    </tr>
-    <tr *ngFor="let item of produtosMaisPedidos">
-        <td>{{item.produto.nomeProduto}}</td>
-        <td>{{item.qtdePedida}}</td>
-    </tr>
-</table>
+<div *ngIf="isAdmin" class="bottom d-flex flex-row w-100 gap-2 mt-3">
 <table>
     <tr>
         <th>Nome Sabor</th>
@@ -62,4 +52,4 @@
         <td>{{item.qtdePedida}}</td>
     </tr>
 </table>
-</div> -->
+</div>

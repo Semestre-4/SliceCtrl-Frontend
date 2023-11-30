@@ -5,16 +5,16 @@
   <div class="title"></div>
 
   <!-- Principal Section -->
-  <div class="principal" *ngIf="isAdmin || isUsarioTecnico || isFuncionario">
+  <div class="principal" *ngIf="isAdmin || isUsarioTecnico || isFuncionario || isFuncionarioChef">
     <p class="caption">principal</p>
     <ul class="d-flex flex-column align-items-start justify-content-center">
-      <li *ngIf="isAdmin || isUsarioTecnico || isFuncionario">
+      <li>
         <a routerLink="/dashboard" class="d-flex align-items-center gap-1"
           ><i class="bi bi-house-fill"></i>
           <p class="sub-link">Dashboard</p></a
         >
       </li>
-      <li *ngIf="isAdmin || isFuncionario">
+      <li>
         <a
           routerLink="/pedidos/listar-pedido"
           class="d-flex align-items-center gap-1"
@@ -22,7 +22,7 @@
           <p class="sub-link">Pedidos</p></a
         >
       </li>
-      <li *ngIf="isAdmin || isFuncionario">
+      <li>
         <a
           routerLink="/cardapio/produtos/listar"
           class="d-flex align-items-center gap-1"
@@ -30,7 +30,7 @@
           <p class="sub-link">Cardápio</p></a
         >
       </li>
-      <li *ngIf="isAdmin || isFuncionario || isUsarioTecnico">
+      <li>
         <a routerLink="/clientes/listar" class="d-flex align-items-center gap-1"
           ><i class="bi bi-person-fill"></i>
           <p class="sub-link">Cliente</p></a
@@ -49,13 +49,7 @@
   <div class="config" *ngIf="isAdmin || isUsarioTecnico || isFuncionario">
     <p class="caption">Configurações</p>
     <ul class="d-flex flex-column align-items-start justify-content-center">
-      <li *ngIf="isAdmin || isUsarioTecnico || isFuncionario">
-        <a routerLink="/configuracoes" class="d-flex align-items-center gap-1"
-          ><i class="bi bi-gear"></i>
-          <p class="sub-link">Configurações</p></a
-        >
-      </li>
-      <li *ngIf="isAdmin || isUsarioTecnico || isFuncionario">
+      <li>
         <a routerLink="/perfil" class="d-flex align-items-center gap-1"
           ><i class="bi bi-person-circle"></i>
           <p class="sub-link">Minha Conta</p></a
@@ -65,7 +59,7 @@
   </div>
 
   <!-- Logout Section -->
-  <div class="logout" *ngIf="isAdmin || isUsarioTecnico || isFuncionario">
+  <div class="logout">
     <p class="caption">Sair</p>
     <ul class="d-flex flex-column align-items-end justify-content-end">
       <li>

@@ -6,6 +6,7 @@ import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SaboresService } from '../service/sabores.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { LoginService } from 'src/app/core/login/login-services/login.service';
 
 @Component({
   selector: 'app-edit-sabor',
@@ -28,7 +29,7 @@ export class EditSaborComponent implements OnInit{
 
   ingredienteSelecionado!: Ingredientes[]
 
-  constructor(private ingredientesService: IngredientesService, private service: SaboresService, private router: Router, private location: Location){
+  constructor(private ingredientesService: IngredientesService, private service: SaboresService, private router: Router, private location: Location, private loginService: LoginService){
     const path = location.path();
     const parts = path.split('/');
     this.id = parts[parts.length - 1];
@@ -63,6 +64,10 @@ export class EditSaborComponent implements OnInit{
   
   
 submit(){
+  let permission: boolean = this.loginService.hasPermission('ADMIN')
+  let permission2: boolean = this.loginService.hasPermission('FUNCIONARIO_CHEF');
+
+  if(permission || permission2){
   this.sabor.ingredientesDTOS = this.ingredienteSelecionado;
   console.log("Submit: ", this.sabor.ingredientesDTOS)
   this.service.edit(this.sabor).subscribe(
@@ -97,5 +102,10 @@ submit(){
         }
     }
     });
+  }
+  else{
+    this.type = 'danger';
+    this.mensagem = 'ACESSO NEGADO! Você não tem permissão para realizar essa ação.'
+  }
 }
 }

@@ -8,6 +8,7 @@ import { Pedido } from '../pedidos/models/pedido';
 import { Router } from '@angular/router';
 import { PedidoProduto } from '../pedidos/models/pedido-produto';
 import { PedidoPizza } from '../pedidos/models/pedido-pizza';
+import { LoginService } from 'src/app/core/login/login-services/login.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,8 +24,11 @@ export class DashboardComponent implements OnInit{
   cash:number=0;
   pedidos: any[]=[];
   nums: number[]=[];
+  isAdmin: boolean = false;
 
-  constructor(private pedidoService: PedidoService,private router: Router) { }
+  constructor(private pedidoService: PedidoService,private router: Router, private log: LoginService) {
+    this.isAdmin = this.log.hasPermission('ADMIN');
+   }
 
   ngOnInit(): void {
     this.updatePieChartData();

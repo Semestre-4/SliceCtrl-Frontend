@@ -7,6 +7,10 @@ import { FormaDePagamento } from 'src/app/shared/models/enums/forma-pagamento';
 import { Endereco } from 'src/app/shared/models/endereco/endereco';
 import { ClienteService } from '../../clientes/service/cliente.service';
 import { EnderecoService } from 'src/app/shared/models/endereco/service/endereco.service';
+import { Cliente } from '../../clientes/cliente';
+import { Usuario } from '../../usuarios/usuario';
+import { PedidoProduto } from '../models/pedido-produto';
+import { Role } from 'src/app/shared/models/enums/role';
 
 @Component({
   selector: 'app-finalizar-pedido',
@@ -14,10 +18,13 @@ import { EnderecoService } from 'src/app/shared/models/endereco/service/endereco
   styleUrls: ['./finalizar-pedido.component.scss']
 })
 export class FinalizarPedidoComponent implements OnInit {
-  clienteInfo: any; 
-  funcionarioInfo: any;
-  endereco: any;
-  produtos: any[] = []; 
+  submit() {
+    throw new Error('Method not implemented.');
+  }
+  clienteInfo: Cliente = new Cliente('', '', '', '', [], []);
+  funcionarioInfo: Usuario = new Usuario('', '', '', Role.FUNCIONARIO, '', 0, []);
+  endereco: Endereco = new Endereco('', 0, '', '', '', '','', '');
+  produtos: PedidoProduto[] = [];
   pizzas: PedidoPizza[] = [];
   pedidoId: number = 0;
   formaDePagamento = Object.values(FormaDePagamento);
@@ -26,7 +33,7 @@ export class FinalizarPedidoComponent implements OnInit {
   @Input() isErro: boolean = true;
   @Input() mensagem: string = '';
 
-  constructor(private http: HttpClient,private route:ActivatedRoute,private ps:PedidoService,private cs:ClienteService,private en:EnderecoService,private router:Router) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute, private ps: PedidoService, private cs: ClienteService, private en: EnderecoService, private router: Router) { }
 
   ngOnInit() {
     this.fetchData();
@@ -53,13 +60,13 @@ export class FinalizarPedidoComponent implements OnInit {
     });
   }
 
-  enableAddressFields(){
+  enableAddressFields() {
     this.isAddressDisabled = false;
   }
 
   fetchAddressDetails(cep: string) {
     const apiUrl = `https://viacep.com.br/ws/${cep}/json/`;
-  
+
     this.http.get(apiUrl).subscribe((data: any) => {
       this.endereco.rua = data.rua;
       this.endereco.bairro = data.bairro;
@@ -69,11 +76,11 @@ export class FinalizarPedidoComponent implements OnInit {
       this.endereco.pais = 'Brasil';
     });
   }
-  
-  
-  disableAddressFields(){
+
+
+  disableAddressFields() {
     this.isAddressDisabled = true;
-  
+
     const updatedEndereco = new Endereco(
       this.endereco.rua,
       this.endereco.numero,
@@ -83,37 +90,38 @@ export class FinalizarPedidoComponent implements OnInit {
       this.endereco.estado,
       this.endereco.pais,
       this.endereco.cep,
-);
+    );
 
-      if(this.endereco.rua == undefined){
-        this.endereco.rua = null;
+    if (this.endereco != null)
+      if (this.endereco.rua == undefined) {
+       // this.endereco.rua = null;
       }
 
-          this.clienteInfo.enderecos.push(updatedEndereco);
-  
-          // Update the Cliente with the new Endereco
-          this.cs.editarCliente(this.clienteInfo.id, this.clienteInfo).subscribe({
-            next: (cliente) => {
-              console.log('Cliente updated:', cliente);
-            },
-            error: (error) => {
-              console.log('Error updating Cliente:', error);
-            },
-          });
+    this.clienteInfo.enderecos.push(updatedEndereco);
+
+    // Update the Cliente with the new Endereco
+    this.cs.editarCliente(this.clienteInfo.id, this.clienteInfo).subscribe({
+      next: (cliente) => {
+        console.log('Cliente updated:', cliente);
+      },
+      error: (error) => {
+        console.log('Error updating Cliente:', error);
+      },
+    });
   }
-  
-  finalizarPedido(){
+
+  finalizarPedido() {
     this.ps.finalizarPedido(this.pedidoId, this.selectedFormaDePagamento).subscribe({
       next: (pedido) => {
         console.log('Pedido finalizado:', pedido);
         this.router.navigate(['/pedidos/listar-pedido']);
-        
+
       },
       error: (error) => {
-        if(error.status == 404){
+        if (error.status == 404) {
           this.mensagem = 'Preencha a forma de pagamento';
           this.isErro = true;
-        }else{
+        } else {
           this.mensagem = 'Pedido não finalizado , tente novamente';
           this.isErro = true;
         }
@@ -122,4 +130,4 @@ export class FinalizarPedidoComponent implements OnInit {
   }
 
 }
-  
+

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from '../usario';
+import { Usuario } from '../usuario';
 import { UsuarioService } from '../service/usuario.service';
 import { Role } from 'src/app/shared/models/enums/role';
 

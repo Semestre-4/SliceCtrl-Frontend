@@ -4,6 +4,7 @@ import { Produtos } from '../produto';
 import { ProdutosService } from '../service/produtos.service';
 import { Categoria } from 'src/app/shared/models/enums/categoria';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/core/login/login-services/login.service';
 
 @Component({
   selector: 'app-edit-produto',
@@ -21,7 +22,7 @@ export class EditProdutoComponent {
 
   categoriaOption = Object.values(Categoria);
 
-  constructor(private location: Location, private service: ProdutosService, private router: Router) {
+  constructor(private location: Location, private service: ProdutosService, private router: Router, private loginService: LoginService) {
     const path = location.path();
     const parts = path.split('/');
     this.id = parts[parts.length - 1];
@@ -40,7 +41,10 @@ export class EditProdutoComponent {
   }
 
   submit(){
-
+    let permission: boolean = this.loginService.hasPermission('ADMIN')
+    let permission2: boolean = this.loginService.hasPermission('FUNCIONARIO_CHEF');
+  
+    if(permission || permission2){
     this.service.edit(this.produto).subscribe({
       next: (pedido) => {
         this.mensagem = 'Editado com sucesso!';
@@ -75,7 +79,11 @@ export class EditProdutoComponent {
           this.type = 'danger';
           }
         }
-    });
+    });}
+    else{
+      this.type = 'danger';
+      this.mensagem = 'ACESSO NEGADO! Você não tem permissão para realizar essa ação.'
+    }
   }
 
 }

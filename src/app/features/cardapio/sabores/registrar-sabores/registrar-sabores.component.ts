@@ -1,10 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Sabores } from '../sabor';
 import { Ingredientes } from '../../ingredientes/ingrediente';
 import { IngredientesService } from '../../ingredientes/service/ingredientes.service';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SaboresService } from '../service/sabores.service';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/core/login/login-services/login.service';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class RegistrarSaboresComponent implements OnInit{
 
   ingredienteSelecionado!: Ingredientes[]
 
-  constructor(private ingredientesService: IngredientesService, private service: SaboresService, private router: Router){
+  constructor(private ingredientesService: IngredientesService, private service: SaboresService, public router: Router, public loginService: LoginService){
   } 
 
   ngOnInit(){
@@ -35,6 +36,8 @@ export class RegistrarSaboresComponent implements OnInit{
   }
   
 findIngredientes(){
+
+  
 
   this.ingredientesService.getAll().subscribe({
     next: i => { 
@@ -47,6 +50,11 @@ findIngredientes(){
 }
 
 submit(){
+
+  let permission: boolean = this.loginService.hasPermission('ADMIN')
+  let permission2: boolean = this.loginService.hasPermission('FUNCIONARIO_CHEF');
+
+  if(permission || permission2){
   this.sabor.ingredientesDTOS = this.ingredienteSelecionado;
   console.log("Submit: ", this.sabor.ingredientesDTOS)
   this.service.save(this.sabor).subscribe(
@@ -80,6 +88,10 @@ submit(){
           this.type = 'danger';
         }
     }
-    });
+    });}
+    else{
+      this.type = 'danger';
+      this.mensagem = 'ACESSO NEGADO! Você não tem permissão para realizar essa ação.'
+    }
 }
 }

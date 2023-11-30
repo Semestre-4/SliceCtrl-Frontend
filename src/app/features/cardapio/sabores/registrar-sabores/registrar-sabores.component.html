@@ -8,7 +8,7 @@
 
     <form class="needs-validation">
       <div class="aviso d-flex align-items-center ms-4" id="alert" [ngClass]="{'alert alert-success': type === 'success', 'alert alert-danger': type === 'danger' }">
-        <p>{{mensagem}}</p>
+        <p name="mensagem">{{mensagem}}</p>
     </div>
 
       <div class="row g-3 ms-3">
@@ -27,7 +27,7 @@
             <div class="col-md-3">
               <label for="ingredientes" class="form-label marginleft margintop">Ingredientes</label>
                 
-                <mat-select [formControl]="toppings" multiple [(ngModel)]="ingredienteSelecionado" class="form-control marginleft inputs">
+                <mat-select [formControl]="toppings" multiple name="ingredientesSabor" [(ngModel)]="ingredienteSelecionado" class="form-control marginleft inputs">
                     <mat-select-trigger>
                       {{ingredienteSelecionado?.[0]?.nomeIngrediente || ''}}
                       <span *ngIf="(ingredienteSelecionado?.length || 0) > 1" class="example-additional-selection">

@@ -13,6 +13,7 @@ export class SidebarComponent {
   isAdmin: boolean;
   isUsarioTecnico: boolean;
   isFuncionario: boolean;
+  isFuncionarioChef: boolean;
 
   router = inject(Router);
 
@@ -21,6 +22,7 @@ export class SidebarComponent {
     this.isAdmin = this.login.hasPermission('ADMIN');
     this.isUsarioTecnico = this.login.hasPermission('USUARIO_TECNICO');
     this.isFuncionario = this.login.hasPermission('FUNCIONARIO');
+    this.isFuncionarioChef = this.login.hasPermission('FUNCIONARIO_CHEF');
   }
 
   toggleSidebar(): void {
